@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mukul | Security Engineer & Developer</title>
+  <meta name="description"
+    content="Security-first developer. SIH winner, ICYS CTF podium finisher. Building secure systems and breaking them better." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- xterm.js: real terminal emulator -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
+  <!-- Chart.js: skills radar chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+<!--
+  +-----------------------------------------------------------------+
+  |  Hey there, fellow dev! You found the page source.             |
+  |  Mukul Suryawanshi  |  Security Engineer & CTF Player          |
+  |  msuryawanshi.1945@gmail.com                                   |
+  |  github.com/msuryawanshi05                                     |
+  |  Type 'help' in the terminal below -- it works.               |
+  +-----------------------------------------------------------------+
+-->
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+
+      <ul class="nav-links">
+        <li><a href="#terminal-section" id="nav-terminal-btn">Terminal</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire
+        Me</button>
+    </div>
+  </nav>
+
+  <!-- popup terminal removed: nav Terminal link scrolls to inline terminal section -->
+  <!-- PARTICLE CANVAS -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <!-- SCROLL PROGRESS -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+  <!-- COPY TOAST -->
+  <div id="copy-toast" role="status">Email copied!</div>
+
+  <!-- BG MESH -->
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="mesh-orb orb-1"></div>
+    <div class="mesh-orb orb-2"></div>
+    <div class="mesh-orb orb-3"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-status" aria-label="Status: available for hire">
+        <span class="hs-prompt">mukul@portfolio:~$</span><span class="hs-cmd"> status</span>
+        <div class="hs-output">
+          <span class="hs-key">availability</span><span class="hs-sep">:</span><span class="hs-val"> available_for_hire</span><span class="hs-cursor"></span>
+        </div>
+      </div>
+      <h1 class="hero-name">Mukul<span class="accent">.S</span></h1>
+      <p class="hero-tagline">I break things to build them better.</p>
+      <p class="hero-sub">Security Engineer &middot; Full-Stack Developer &middot; CTF Player</p>
+      <div class="hero-btns">
+        <a id="btn-github" class="btn btn-outline" href="https://github.com/msuryawanshi05" target="_blank"
+          rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+          </svg>
+          GitHub
+        </a>
+        <a id="btn-linkedin" class="btn btn-outline" href="https://linkedin.com/in/msuryawanshi05" target="_blank"
+          rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+          LinkedIn
+        </a>
+        <a id="btn-resume" class="btn btn-primary" href="Mukul_Resume.pdf" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+          </svg>
+          Resume
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">About <span class="accent">Me</span></h2>
+      <div class="about-grid">
+        <div class="about-text glass-card">
+          <p>B.Tech CSE (Cybersecurity) undergraduate at St. Vincent Pallotti College, Nagpur, pursuing the field deliberately &mdash; through certifications, CTFs, conferences, and tools that solve real problems.</p>
+          <p>Awarded <strong>2nd Prize at the Engineers Day Project Showcase</strong> for a USB-deployable forensic tool built for air-gapped networks. Secured <strong>3rd Place at the ICYS National CTF</strong>. The kind of wins that come from understanding systems deeply, not just following playbooks.</p>
+          <p>Comfortable across offensive and defensive work, from exploiting controlled lab environments and assessing OWASP Top 10 vulnerabilities to building tamper-evident logging infrastructure and security tooling that runs in production.</p>
+          <p>The best defenders think like attackers. That principle drives everything I build.</p>
+        </div>
+        <div class="about-stats">
+
+          <div class="stat-card glass-card">
+            <span class="stat-num accent" id="stat-ctf">#3</span>
+            <span class="stat-label">ICYS CTF</span>
+          </div>
+          <div class="stat-card glass-card">
+            <span class="stat-num accent" id="stat-machines">22</span>
+            <span class="stat-label">Machines Pwned</span>
+          </div>
+          <a class="stat-card glass-card" id="stat-lc-card"
+            href="https://leetcode.com/u/msuryawanshi05/" target="_blank" rel="noopener"
+            title="View LeetCode profile" style="text-decoration:none;cursor:pointer">
+            <span class="stat-num accent" id="stat-leetcode">150</span>
+            <span class="stat-label">LeetCode Solved</span>
+            <span class="stat-sub">&#8599; profile</span>
+          </a>
+          <div class="stat-card glass-card">
+            <span class="stat-num accent" id="stat-certs">4+</span>
+            <span class="stat-label">Certifications</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="section-title">Skills <span class="accent">&</span> Toolkit</h2>
+      <!-- Radar chart — data from PORTFOLIO_CONFIG.skills.radar -->
+      <div class="skills-radar-wrapper glass-card reveal">
+        <div class="radar-label">Proficiency Radar</div>
+        <canvas id="skills-radar" aria-label="Skills proficiency radar chart" role="img"></canvas>
+      </div>
+      <div class="skills-grid">
+        <div class="skills-col glass-card">
+          <div class="skills-col-header">
+            <div class="skills-icon security-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h3>Security</h3>
+          </div>
+          <div class="skills-tags">
+            <span class="skill-tag sec">Vulnerability Assessment</span>
+            <span class="skill-tag sec">Penetration Testing</span>
+            <span class="skill-tag sec">Log Analysis</span>
+            <span class="skill-tag sec">OWASP Top 10</span>
+            <span class="skill-tag sec">SOC L1</span>
+            <span class="skill-tag sec">Incident Response</span>
+            <span class="skill-tag sec">Threat Analysis</span>
+            <span class="skill-tag sec">SIEM</span>
+            <span class="skill-tag sec">Burp Suite</span>
+            <span class="skill-tag sec">Metasploit</span>
+            <span class="skill-tag sec">Nmap</span>
+            <span class="skill-tag sec">Wireshark</span>
+            <span class="skill-tag sec">Nessus</span>
+            <span class="skill-tag sec">Wazuh</span>
+            <span class="skill-tag sec">OWASP ZAP</span>
+            <span class="skill-tag sec">IDS/IPS</span>
+            <span class="skill-tag sec">Traffic Analysis</span>
+          </div>
+        </div>
+        <div class="skills-col glass-card">
+          <div class="skills-col-header">
+            <div class="skills-icon dev-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            </div>
+            <h3>Development</h3>
+          </div>
+          <div class="skills-tags">
+            <span class="skill-tag dev">Python</span>
+            <span class="skill-tag dev">C</span>
+            <span class="skill-tag dev">Java</span>
+            <span class="skill-tag dev">JavaScript</span>
+            <span class="skill-tag dev">HTML / CSS</span>
+            <span class="skill-tag dev">SQL</span>
+            <span class="skill-tag dev">Bash</span>
+            <span class="skill-tag dev">Git & GitHub</span>
+            <span class="skill-tag dev">Kali Linux</span>
+            <span class="skill-tag dev">Parrot OS</span>
+            <span class="skill-tag dev">Linux</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
+      <div class="projects-grid">
+
+        <div class="project-card glass-card featured">
+          <div class="project-featured-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--gold)"
+              style="display:inline;vertical-align:middle;margin-right:4px">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            Featured
+          </div>
+          <div class="project-card-header">
+            <h3 class="project-name">Portable Log Analysis Tool for Isolated Networks</h3>
+            <span class="gh-badge gh-active" id="badge-log">Checking...</span>
+          </div>
+          <p class="project-desc">USB-deployable offline forensic tool for log analysis in air-gapped environments.
+            Enables incident investigation across 3+ isolated systems without network connectivity. Tamper-resistant log
+            handling for restricted operational settings. <strong>Top 2 at Smart India Internal Hackathon &middot; 2nd
+              Prize, Engineers Day Showcase.</strong></p>
+          <div class="project-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Log Forensics</span>
+            <span class="tech-tag">Air-gap</span>
+            <span class="tech-tag">Portable / USB</span>
+          </div>
+          <div class="project-links">
+            <a id="proj-log-gh" class="project-link" href="https://github.com/msuryawanshi05/Portable-Log-Analysis-Tool"
+              target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              GitHub
+            </a>
+            <a id="proj-log-live" class="project-link project-link-live" href="" target="_blank" rel="noopener" style="display:none">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              Live
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card glass-card">
+          <div class="project-card-header">
+            <h3 class="project-name">StoryShip - IP Leak Defense System</h3>
+            <span class="gh-badge gh-active" id="badge-ship">Checking...</span>
+          </div>
+          <p class="project-desc">Content-integrity platform tracking creative asset versions via cryptographic hashing
+            and IPFS, maintaining a tamper-evident audit trail. Automated similarity detection across 3+ contributor
+            workflows to flag potential IP leaks.</p>
+          <div class="project-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">IPFS</span>
+            <span class="tech-tag">Cryptographic Hashing</span>
+            <span class="tech-tag">Web3</span>
+          </div>
+          <div class="project-links">
+            <a id="proj-ship-gh" class="project-link"
+              href="https://github.com/msuryawanshi05/IP-Leak-Defense-System-StoryShip" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              GitHub
+            </a>
+            <a id="proj-ship-live" class="project-link project-link-live" href="" target="_blank" rel="noopener" style="display:none">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              Live
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card glass-card">
+          <div class="project-card-header">
+            <h3 class="project-name">Project F1 - Formula 1 Data Intelligence</h3>
+            <span class="gh-badge gh-active" id="badge-f1">Checking...</span>
+          </div>
+          <p class="project-desc">Data analysis and visualization project built around Formula 1 race datasets. Extracts
+            performance insights, driver and constructor standings, and lap-time trends. Applied data engineering meets
+            motorsport.</p>
+          <div class="project-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">Data Analysis</span>
+            <span class="tech-tag">Visualization</span>
+          </div>
+          <div class="project-links">
+            <a id="proj-f1-gh" class="project-link" href="https://github.com/msuryawanshi05/Project-f1" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              GitHub
+            </a>
+            <a id="proj-f1-live" class="project-link project-link-live" href="" target="_blank" rel="noopener" style="display:none">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              Live
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMINAL -->
+  <section id="terminal-section">
+    <div class="container">
+      <h2 class="section-title">Interactive <span class="accent">Terminal</span></h2>
+      <p style="color:var(--text-muted);text-align:center;margin-bottom:1.5rem;font-size:0.9rem">
+        Type <code style="color:var(--cyan-l);background:rgba(6,182,212,0.1);padding:0.1rem 0.4rem;border-radius:4px">help</code> for available commands &nbsp;&middot;&nbsp; Tab to autocomplete
+      </p>
+      <div id="terminal-widget" role="application" aria-label="Interactive terminal">
+        <div class="terminal-topbar">
+          <span class="tb-dot tb-red"></span>
+          <span class="tb-dot tb-yellow"></span>
+          <span class="tb-dot tb-green"></span>
+          <span class="terminal-title">mukul@portfolio:~ - bash</span>
+        </div>
+        <!-- xterm.js mounts here; old term-output/term-input removed -->
+        <div id="xterm-container" aria-label="Terminal emulator"></div>
+      </div>
+
+      <!-- CTF ACTIVITY FEED -->
+      <div class="ctf-feed-wrapper">
+        <div class="ctf-feed-header">
+          <span class="feed-pulse"></span>
+          LIVE ACTIVITY FEED - Lab &amp; CTF Environment
+        </div>
+        <div id="ctf-feed"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="section">
+    <div class="container">
+      <h2 class="section-title">Incident <span class="accent">Timeline</span></h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-header">
+              <div>
+                <span class="soc-tag">[INTERNSHIP]</span>
+                <h3 class="timeline-role">Cybersecurity Intern</h3>
+                <span class="timeline-company">ShadowFox</span>
+              </div>
+              <span class="timeline-date">2025-07 / 2025-08</span>
+            </div>
+            <ul class="timeline-points">
+              <li>Exploited 10+ vulnerabilities across Metasploitable 2 and TryHackMe using Metasploit, Wireshark, and
+                custom wordlists; executed privilege escalation and Wi-Fi attack workflows</li>
+              <li>Conducted 5+ network security assessments with Nmap and Wireshark; delivered structured vulnerability
+                reports with prioritized remediation steps</li>
+              <li>Improved threat visibility across assessed systems through structured methodology and tooling</li>
+            </ul>
+            <div class="timeline-tags">
+              <span class="tech-tag">Metasploit</span>
+              <span class="tech-tag">Nmap</span>
+              <span class="tech-tag">Wireshark</span>
+              <span class="tech-tag">Pen Testing</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-header">
+              <div>
+                <span class="soc-tag">[INTERNSHIP]</span>
+                <h3 class="timeline-role">Cybersecurity Intern</h3>
+                <span class="timeline-company">Redynox</span>
+              </div>
+              <span class="timeline-date">2025-06 / 2025-07</span>
+            </div>
+            <ul class="timeline-points">
+              <li>Assessed 3+ web applications against OWASP Top 10 using Burp Suite and Nessus, uncovering 8+
+                injection, authentication, and misconfiguration findings with CVSS-referenced severity ratings</li>
+              <li>Documented vulnerabilities with structured severity ratings and actionable remediation guidance for
+                each finding</li>
+              <li>Applied OWASP ZAP and manual testing techniques to surface issues missed by automated scanners</li>
+            </ul>
+            <div class="timeline-tags">
+              <span class="tech-tag">Burp Suite</span>
+              <span class="tech-tag">Nessus</span>
+              <span class="tech-tag">OWASP Top 10</span>
+              <span class="tech-tag">OWASP ZAP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements" class="section">
+    <div class="container">
+      <h2 class="section-title">Achievements <span class="accent">&</span> Certs</h2>
+      <div class="badges-wall">
+
+        <div class="badge-card glass-card gold">
+          <div class="badge-icon">
+            <img src="assets/Logos/SIH_Logo.png" alt="SIH" class="org-logo-img">
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">2nd Prize - Engineers Day</span>
+            <span class="badge-sub">Smart India Internal Hackathon &middot; Oct 2025</span>
+            <div class="badge-proof-links">
+              <a class="proof-thumb-btn" onclick="openProof('sih')" href="#">View Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="badge-card glass-card cyan">
+          <div class="badge-icon">
+            <span class="badge-mono cyan-mono">ICYS<br>CTF</span>
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">ICYS CTF - 3rd Place</span>
+            <span class="badge-sub">International Cyber Youth Summit &middot; Oct 2025</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/ICYS.pdf','ICYS CTF Certificate')" href="#">Certificate</a>
+              <a class="proof-thumb-btn" onclick="openProof('icys')" href="#">View Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="badge-card glass-card purple">
+          <div class="badge-icon">
+            <img src="assets/Logos/APIsec_logo.png" alt="APISec University" class="org-logo-img">
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">CASA Certified</span>
+            <span class="badge-sub">APISec University &middot; Apr 2026</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/CASA_Exam.pdf','CASA Certificate')" href="#">Certificate</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="badge-card glass-card cyan">
+          <div class="badge-icon">
+            <img src="assets/Logos/ISC2_logo.png" alt="ISC2" class="org-logo-img">
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">CC - ISC&sup2;</span>
+            <span class="badge-sub">Certified in Cybersecurity &middot; May 2025</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/PECB_Certificate_of_Attestation.pdf','ISCÂ² CC Certificate')" href="#">Certificate</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="badge-card glass-card purple">
+          <div class="badge-icon">
+            <img src="assets/Logos/Nptel_logo.png" alt="NPTEL" class="org-logo-img">
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">NPTEL - Cryptography</span>
+            <span class="badge-sub">Network Security &middot; Apr 2025</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/Cryptography and Network Security.pdf','NPTEL Certificate')" href="#">Certificate</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="badge-card glass-card gold">
+          <div class="badge-icon">
+            <img src="assets/Logos/Isro_IIrs_logo.png" alt="ISRO IIRS" class="org-logo-img">
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">ISRO IIRS Program</span>
+            <span class="badge-sub">Geo-data &amp; Cybersecurity &middot; Dec 2024</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/IIRS GEOSAT.pdf','ISRO IIRS Certificate')" href="#">Certificate</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRACURRICULARS -->
+  <section id="extra" class="section">
+    <div class="container">
+      <h2 class="section-title">Beyond <span class="accent">Code</span></h2>
+      <div class="extra-grid">
+
+        <div class="extra-card glass-card">
+          <div class="extra-icon">
+            <img src="assets/Logos/Encipherx_logo.png" alt="EncipherX" class="extra-logo-img">
+          </div>
+          <h3>EncipherX 4.0</h3>
+          <p>Android Challenge Lead &amp; Media Head for a 24-hour national CTF that drew 150+ competing teams.
+            Architected Java-based Android exploitation challenges and drove end-to-end media operations.</p>
+          <div class="extra-actions">
+            <span class="extra-tag">Leadership</span>
+            <a class="proof-thumb-btn" onclick="openProof('encipherx')" href="#">View Photos</a>
+            <a class="cert-btn" onclick="openCert('assets/Certify/EncipherX.pdf','EncipherX Certificate')" href="#">Certificate</a>
+          </div>
+        </div>
+
+        <div class="extra-card glass-card">
+          <div class="extra-icon">
+            <img src="assets/Logos/Seasides_logo.webp" alt="Seasides" class="extra-logo-img">
+          </div>
+          <h3>Seasides InfoSec 2K26</h3>
+          <p>Attended Seasides Information Security Conference in Goa. Workshops covered exploit writing, AI agent &amp;
+            MCP server hacking, AD red teaming, and hardware security (Bluetooth, RF cloning, ATtiny85 badge).</p>
+          <div class="extra-actions">
+            <span class="extra-tag">Conference</span>
+            <a class="proof-thumb-btn" onclick="openProof('seasides')" href="#">View Photos</a>
+            <a class="cert-btn" onclick="openCert('assets/Certify/Seasides_Goa.pdf','Seasides Certificate')" href="#">Certificate</a>
+          </div>
+        </div>
+
+        <div class="extra-card glass-card">
+          <div class="extra-icon">
+            <img src="assets/Logos/Web3_logo.png" alt="Web3" class="extra-logo-img">
+          </div>
+          <h3>Web3 Hackathon 2025</h3>
+          <p>Led digital outreach and conducted a foundational blockchain workshop for a sustainability-themed hackathon
+            driving 100+ participant turnout. Coordinated event logistics and social media campaigns.</p>
+          <div class="extra-actions">
+            <span class="extra-tag">Hackathon</span>
+            <a class="proof-thumb-btn" onclick="openProof('web3')" href="#">View Photos</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
+      <div class="contact-wrapper glass-card">
+        <p class="contact-intro">Whether you're looking for a security engineer, want to collaborate on a project, or
+          just want to talk CTFs, my inbox is open.</p>
+        <a id="contact-email" class="contact-email" href="mailto:msuryawanshi.1945@gmail.com"
+          title="Click to copy email address">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <polyline points="2,4 12,13 22,4" />
+          </svg>
+          msuryawanshi.1945@gmail.com
+        </a>
+        <div class="contact-socials">
+          <a id="social-github" class="social-btn" href="https://github.com/msuryawanshi05" target="_blank"
+            rel="noopener" aria-label="GitHub">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a id="social-linkedin" class="social-btn" href="https://linkedin.com/in/msuryawanshi05" target="_blank"
+            rel="noopener" aria-label="LinkedIn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+          <a id="social-x" class="social-btn" href="https://x.com/msuryawanshi_05" target="_blank" rel="noopener"
+            aria-label="X (Twitter)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="container">
+      <p>Designed &amp; built by <span class="accent">Mukul Suryawanshi</span> &middot; <span class="mono">2026</span></p>
+      <p class="footer-location">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:4px;opacity:0.6">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        Nagpur, Maharashtra, India
+      </p>
+      <p class="footer-sub">Security-first. Always.</p>
+    </div>
+  </footer>
+
+  <!-- PROOF LIGHTBOX + CERT VIEWER + IMAGE ZOOM - unified popup system -->
+  <div id="proof-overlay" aria-hidden="true">
+    <div id="proof-modal">
+      <div id="proof-header">
+        <span id="proof-title">Photos</span>
+        <button id="proof-close" aria-label="Close">&times;</button>
+      </div>
+      <!-- PHOTO GRID view -->
+      <div id="proof-grid"></div>
+      <!-- IMAGE ZOOM view (hidden by default) -->
+      <div id="proof-zoom">
+        <button id="zoom-prev" aria-label="Previous">&lsaquo;</button>
+        <img id="zoom-img" src="" alt="" />
+        <button id="zoom-next" aria-label="Next">&rsaquo;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERT VIEWER POPUP -->
+  <div id="cert-overlay" aria-hidden="true">
+    <div id="cert-modal">
+      <div id="cert-header">
+        <span id="cert-title">Certificate</span>
+        <button id="cert-close" aria-label="Close">&times;</button>
+      </div>
+      <iframe id="cert-frame" src="" title="Certificate"></iframe>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.min.js"></script>
+  <script src="config.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

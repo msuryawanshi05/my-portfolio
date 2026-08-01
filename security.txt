@@ -1,0 +1,17 @@
+# Security Policy — Mukul Suryawanshi Portfolio
+# RFC 9116 compliant security.txt
+# See: https://securitytxt.org/
+
+Contact: mailto:msuryawanshi.1945@gmail.com
+Contact: https://linkedin.com/in/msuryawanshi05
+
+Preferred-Languages: en
+
+# This is a personal portfolio site. If you find something interesting,
+# I'd genuinely like to know — it's the security-engineer thing to do.
+Policy: https://github.com/msuryawanshi05
+
+Acknowledgments: https://github.com/msuryawanshi05
+
+# Expires 1 year from last update
+Expires: 2027-08-01T00:00:00.000Z
