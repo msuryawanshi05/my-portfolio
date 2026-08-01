@@ -316,17 +316,17 @@
   <section id="terminal-section">
     <div class="container">
       <h2 class="section-title">Interactive <span class="accent">Terminal</span></h2>
-      <p style="color:var(--text-muted);text-align:center;margin-bottom:1.5rem;font-size:0.9rem">
-        Type <code style="color:var(--cyan-l);background:rgba(6,182,212,0.1);padding:0.1rem 0.4rem;border-radius:4px">help</code> for available commands &nbsp;&middot;&nbsp; Tab to autocomplete
-      </p>
+      
       <div id="terminal-widget" role="application" aria-label="Interactive terminal">
         <div class="terminal-topbar">
-          <span class="tb-dot tb-red"></span>
-          <span class="tb-dot tb-yellow"></span>
-          <span class="tb-dot tb-green"></span>
-          <span class="terminal-title">mukul@portfolio:~ - bash</span>
+          <div class="terminal-label">
+            <span class="term-lbl-prompt">mukul@portfolio:~$</span> <span class="term-lbl-shell">bash</span>
+          </div>
+          <div class="terminal-hint">
+            type <code class="hint-code">help</code> &nbsp;&middot;&nbsp; Tab to autocomplete
+          </div>
         </div>
-        <!-- xterm.js mounts here; old term-output/term-input removed -->
+        <!-- xterm.js mounts here -->
         <div id="xterm-container" aria-label="Terminal emulator"></div>
       </div>
 
