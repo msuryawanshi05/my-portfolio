@@ -25,8 +25,8 @@ Modern, high-performance cybersecurity portfolio built with HTML5, CSS3, Vanilla
 ### 2. Installation
 ```bash
 # Clone repository
-git clone https://github.com/msuryawanshi05/portmy.git
-cd portmy
+git clone https://github.com/msuryawanshi05/my-portfolio.git
+cd my-portfolio
 
 # Create virtual environment
 python -m venv venv
