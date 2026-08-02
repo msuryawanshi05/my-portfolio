@@ -1,4 +1,4 @@
-# Mukul Suryawanshi — Cybersecurity Portfolio & Full-Stack Backend
+# Cybersecurity Portfolio & Full-Stack Backend
 
 Modern, high-performance cybersecurity portfolio built with HTML5, CSS3, Vanilla JavaScript, xterm.js, and Chart.js, backed by a FastAPI REST backend with Clerk authentication, PostgreSQL database, and single-admin CRUD interface.
 
