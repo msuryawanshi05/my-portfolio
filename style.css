@@ -1094,31 +1094,47 @@ a.stat-card:hover .stat-sub { opacity: 1; color: var(--cyan-l); }
    ============================================================ */
 @keyframes glitch-once {
   0%   { text-shadow: none; transform: none; }
-  12%  { text-shadow: 3px 0 0 rgba(255,50,50,0.6), -3px 0 0 rgba(6,182,212,0.6); transform: translateX(-3px); }
-  14%  { text-shadow: none; transform: none; }
-  38%  { text-shadow: -4px 0 0 rgba(255,50,50,0.5), 4px 0 0 rgba(124,58,237,0.5); transform: translateX(3px) skewX(1deg); }
-  40%  { text-shadow: none; transform: none; }
-  62%  { text-shadow: 2px 0 0 rgba(124,58,237,0.6); transform: none; }
-  64%  { text-shadow: none; transform: none; }
+  10%  { text-shadow: -4px 0 0 rgba(6,182,212,0.95), 4px 0 0 rgba(239,68,68,0.95); transform: translateX(-4px) skewX(-2deg); filter: blur(0.5px); }
+  15%  { text-shadow: 3px 0 0 rgba(168,85,247,0.9), -3px 0 0 rgba(6,182,212,0.9); transform: translateX(3px) skewX(2deg); }
+  20%  { text-shadow: none; transform: none; filter: none; }
+  45%  { text-shadow: -5px 0 0 rgba(239,68,68,0.9), 5px 0 0 rgba(6,182,212,0.9); transform: translateX(-5px); }
+  50%  { text-shadow: 4px 0 0 rgba(168,85,247,0.95); transform: translateX(4px) skewX(-1deg); }
+  55%  { text-shadow: none; transform: none; }
+  75%  { text-shadow: 3px 0 0 rgba(6,182,212,0.85), -3px 0 0 rgba(168,85,247,0.85); transform: translateX(2px); }
+  80%  { text-shadow: none; transform: none; }
   100% { text-shadow: none; transform: none; }
 }
+
 .hero-name.glitch-once {
-  animation: glitch-once 0.9s ease-out 0.4s 1 both;
+  animation: glitch-once 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.3s 1 both;
+}
+
+.hero-name:hover {
+  animation: glitch-once 0.8s ease-out 1;
+  cursor: pointer;
 }
 
 @keyframes scanline-sweep {
-  0%   { transform: translateY(-100%); opacity: 0.8; }
-  70%  { opacity: 0.4; }
+  0%   { transform: translateY(-100%); opacity: 0.95; }
+  60%  { opacity: 0.75; }
   100% { transform: translateY(200vh); opacity: 0; }
 }
 .scanline-sweep {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 35vh;
-  background: linear-gradient(to bottom, transparent 0%, rgba(6,182,212,0.04) 40%, rgba(124,58,237,0.04) 60%, transparent 100%);
+  height: 40vh;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 182, 212, 0.12) 30%,
+    rgba(168, 85, 247, 0.18) 60%,
+    rgba(6, 182, 212, 0.35) 98%,
+    transparent 100%
+  );
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
   pointer-events: none;
   z-index: 9999;
-  animation: scanline-sweep 1.4s ease-in 0.1s 1 both;
+  animation: scanline-sweep 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s 1 both;
 }
 
 /* ============================================================

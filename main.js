@@ -654,15 +654,21 @@ initSkillsRadar();
 
 // -- ONE-TIME HERO GLITCH + SCANLINE ON PAGE LOAD ----------------------------
 (function heroEntrance() {
-  // Glitch: apply class to hero name, animation plays once via CSS
-  const heroName = document.querySelector('.hero-name');
-  if (heroName) heroName.classList.add('glitch-once');
+  const startEffects = () => {
+    const heroName = document.querySelector('.hero-name');
+    if (heroName) heroName.classList.add('glitch-once');
 
-  // Scanline: inject a div, CSS animates it sweeping down once, then remove it
-  const scanline = document.createElement('div');
-  scanline.className = 'scanline-sweep';
-  document.body.appendChild(scanline);
-  setTimeout(() => scanline.remove(), 2000);
+    const scanline = document.createElement('div');
+    scanline.className = 'scanline-sweep';
+    document.body.appendChild(scanline);
+    setTimeout(() => scanline.remove(), 2600);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(startEffects, 150));
+  } else {
+    setTimeout(startEffects, 150);
+  }
 })();
 
 // -- CURSOR GLOW --------------------------------------------------------------
