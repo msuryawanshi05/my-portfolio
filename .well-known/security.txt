@@ -1,0 +1,17 @@
+# Security Policy — Mukul Suryawanshi Portfolio
+# RFC 9116 compliant security disclosure file
+# Canonical Location: https://msuryawanshi.dev/.well-known/security.txt
+
+Contact: mailto:msuryawanshi.1945@gmail.com
+Contact: https://linkedin.com/in/msuryawanshi05
+
+Preferred-Languages: en
+
+# Security philosophy & research policy
+Policy: https://github.com/msuryawanshi05
+Acknowledgments: https://github.com/msuryawanshi05
+
+# PGP Public Key for encrypted security advisories
+Encryption: https://msuryawanshi.dev/pgp-key.txt
+
+Expires: 2027-08-01T00:00:00.000Z

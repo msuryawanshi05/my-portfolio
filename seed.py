@@ -178,7 +178,7 @@ def seed_database():
             print(f"[+] Seeded {len(PORTFOLIO_CONFIG_SEED['experiences'])} experience entries")
 
         db.commit()
-        print("[✓] Database seeding completed successfully!")
+        print("[+] Database seeding completed successfully!")
     except Exception as e:
         db.rollback()
         print(f"[!] Database seeding failed: {e}")

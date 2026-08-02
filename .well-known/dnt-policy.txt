@@ -1,0 +1,10 @@
+# Do Not Track (DNT) Policy Statement
+# See: https://www.w3.org/TR/tracking-dnt/
+
+This website respects Do Not Track (DNT) header signals sent by user web browsers.
+
+1. No Third-Party Tracking Cookies: This site does not set or sell user data to third-party tracking networks.
+2. No Behavioral Tracking: We do not perform cross-site tracking or profiling.
+3. Minimal Telemetry: Any telemetry collected is strictly operational (server response status codes) and contains no PII.
+
+Policy-Location: https://msuryawanshi.dev/.well-known/dnt-policy.txt

@@ -94,6 +94,39 @@ def get_full_portfolio_config(db: Session = Depends(get_db)):
         experience=[schemas.ExperienceResponse.model_validate(e) for e in db_experience]
     )
 
-# Mount root directory to serve HTML/CSS/JS assets
+# --- SECURITY & WEB STANDARDS FILE ROUTES ---
+from fastapi.responses import FileResponse
+
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+@app.get("/robots.txt", include_in_schema=False)
+def get_robots_txt():
+    return FileResponse(os.path.join(current_dir, "robots.txt"), media_type="text/plain")
+
+@app.get("/sitemap.xml", include_in_schema=False)
+def get_sitemap_xml():
+    return FileResponse(os.path.join(current_dir, "sitemap.xml"), media_type="application/xml")
+
+@app.get("/humans.txt", include_in_schema=False)
+def get_humans_txt():
+    return FileResponse(os.path.join(current_dir, "humans.txt"), media_type="text/plain")
+
+@app.get("/security.txt", include_in_schema=False)
+def get_security_txt():
+    return FileResponse(os.path.join(current_dir, "security.txt"), media_type="text/plain")
+
+@app.get("/.well-known/security.txt", include_in_schema=False)
+def get_well_known_security_txt():
+    return FileResponse(os.path.join(current_dir, ".well-known", "security.txt"), media_type="text/plain")
+
+@app.get("/.well-known/dnt-policy.txt", include_in_schema=False)
+def get_well_known_dnt_txt():
+    return FileResponse(os.path.join(current_dir, ".well-known", "dnt-policy.txt"), media_type="text/plain")
+
+@app.get("/pgp-key.txt", include_in_schema=False)
+def get_pgp_key_txt():
+    return FileResponse(os.path.join(current_dir, "pgp-key.txt"), media_type="text/plain")
+
+# Mount root directory to serve HTML/CSS/JS assets
 app.mount("/", StaticFiles(directory=current_dir, html=True), name="static")
+

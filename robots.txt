@@ -1,0 +1,28 @@
+# =============================================================================
+# Mukul Suryawanshi — Cybersecurity Portfolio & Labs
+# Crawler Directives & Recon Instructions
+# =============================================================================
+
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /security.txt
+Allow: /.well-known/security.txt
+Allow: /humans.txt
+
+# Disallow administrative and private API endpoints
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /scratch/
+Disallow: /.git/
+Disallow: /.env
+
+# XML Sitemap Location
+Sitemap: https://msuryawanshi.dev/sitemap.xml
+
+# -----------------------------------------------------------------------------
+# CTF EASTER EGG & SECURITY NOTICE:
+# If you're inspecting robots.txt, you've got the right mindset.
+# Flag{r0b0ts_txt_4r3_n0t_4n_4cc3ss_c0ntr0l_m3ch4n1sm}
+# -----------------------------------------------------------------------------
