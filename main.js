@@ -652,22 +652,44 @@ function initSkillsRadar() {
 
 initSkillsRadar();
 
-// -- ONE-TIME HERO GLITCH + SCANLINE ON PAGE LOAD ----------------------------
+// -- TERMINAL BOOT ENTRANCE & PAGE DATA REVEAL ----------------------------
 (function heroEntrance() {
-  const startEffects = () => {
-    const heroName = document.querySelector('.hero-name');
-    if (heroName) heroName.classList.add('glitch-once');
+  const bootScreen = document.getElementById('boot-screen');
+  const fillBar = document.querySelector('.boot-bar-fill');
+  const statusText = document.getElementById('boot-status-text');
 
-    const scanline = document.createElement('div');
-    scanline.className = 'scanline-sweep';
-    document.body.appendChild(scanline);
-    setTimeout(() => scanline.remove(), 2600);
+  const runBootSequence = () => {
+    // Step 1: Fill loading progress bar
+    if (fillBar) fillBar.style.width = '100%';
+
+    // Step 2: Update status to Access Granted
+    setTimeout(() => {
+      if (statusText) statusText.textContent = 'SYSTEM_READY · ACCESS GRANTED';
+    }, 450);
+
+    // Step 3: Fade out boot screen, trigger CRT scanline & hero text glitch reveal
+    setTimeout(() => {
+      if (bootScreen) bootScreen.classList.add('fade-out');
+
+      const heroName = document.querySelector('.hero-name');
+      if (heroName) heroName.classList.add('glitch-once');
+
+      const scanline = document.createElement('div');
+      scanline.className = 'scanline-sweep';
+      document.body.appendChild(scanline);
+      setTimeout(() => scanline.remove(), 2600);
+    }, 700);
+
+    // Step 4: Remove boot screen from DOM
+    setTimeout(() => {
+      if (bootScreen) bootScreen.remove();
+    }, 1300);
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(startEffects, 150));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(runBootSequence, 100));
   } else {
-    setTimeout(startEffects, 150);
+    setTimeout(runBootSequence, 100);
   }
 })();
 

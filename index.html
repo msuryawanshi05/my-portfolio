@@ -20,6 +20,22 @@
 </head>
 
 <body>
+  <!-- TERMINAL BOOT ENTRANCE SCREEN -->
+  <div id="boot-screen" aria-hidden="true">
+    <div class="boot-container">
+      <div class="boot-header">
+        <span class="boot-prompt">mukul@portfolio:~$</span> system_init --verbose
+      </div>
+      <div class="boot-bar-wrapper">
+        <div class="boot-bar-fill"></div>
+      </div>
+      <div class="boot-status">
+        <span class="boot-pulse"></span>
+        <span id="boot-status-text">INITIALIZING CORE SECURITY MODULES...</span>
+      </div>
+    </div>
+  </div>
+
 <!--
   +-----------------------------------------------------------------+
   |  Hey there, fellow dev! You found the page source.             |
