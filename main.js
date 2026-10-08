@@ -1,19 +1,51 @@
 
 let CFG = (typeof PORTFOLIO_CONFIG !== 'undefined') ? PORTFOLIO_CONFIG : {};
-let STATS    = CFG.stats    || { ctfRank: '#3', machines: 22, certifications: 4, leetcodeSolved: 150 };
-let LEETCODE = CFG.leetcode || { profileUrl: 'https://leetcode.com/u/msuryawanshi05/' };
+let STATS    = CFG.stats    || { ctfRank: '#3', machines: 22, certifications: 4, leetcodeSolved: 150, thmRank: 'Top 20%', htbStatus: 'Labs' };
+let PROFILES = CFG.profiles || {
+  leetcode: 'https://leetcode.com/u/msuryawanshi05/',
+  tryhackme: 'https://tryhackme.com/p/msuryawanshi05',
+  hackthebox: 'https://profile.hackthebox.com/profile/019fe6cd-1983-7008-9b4c-52c9297028e7?utm_medium=copy_url',
+};
+let LEETCODE = CFG.leetcode || { profileUrl: PROFILES.leetcode };
 let RESUME   = CFG.resume   || { file: 'assets/Mukul_Resume.pdf' };
+
+// Force scroll to top on every refresh
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+window.addEventListener('beforeunload', () => {
+  window.scrollTo(0, 0);
+});
+document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
+});
+
+// Prevent double-click text selection across document
+document.addEventListener('mousedown', (e) => {
+  if (e.detail > 1) {
+    e.preventDefault();
+  }
+});
 
 const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
 
 function applyConfigData() {
   setEl('stat-ctf',      STATS.ctfRank);
-  setEl('stat-machines', STATS.machines);
-  setEl('stat-leetcode', STATS.leetcodeSolved);
   setEl('stat-certs',    STATS.certifications + '+');
+  setEl('stat-thm',      STATS.thmRank || 'Top 20%');
+  setEl('stat-machines', STATS.machines);
+  setEl('stat-htb',      STATS.htbStatus || 'Labs');
+  setEl('stat-leetcode', STATS.leetcodeSolved);
+
+  const thmCard = document.getElementById('stat-thm-card');
+  if (thmCard && PROFILES.tryhackme) thmCard.href = PROFILES.tryhackme;
+
+  const htbCard = document.getElementById('stat-htb-card');
+  if (htbCard && PROFILES.hackthebox) htbCard.href = PROFILES.hackthebox;
 
   const lcCard = document.getElementById('stat-lc-card');
-  if (lcCard && LEETCODE.profileUrl) lcCard.href = LEETCODE.profileUrl;
+  if (lcCard && (PROFILES.leetcode || LEETCODE.profileUrl)) lcCard.href = PROFILES.leetcode || LEETCODE.profileUrl;
 
   const resumeBtn = document.getElementById('btn-resume');
   if (resumeBtn && RESUME.file) resumeBtn.href = RESUME.file;
@@ -29,75 +61,38 @@ function applyConfigData() {
 
 applyConfigData();
 
-function renderTimeline(items) {
-  const container = document.querySelector('#experience .timeline');
-  if (!container || !items || !items.length) return;
-
-  container.innerHTML = '';
-  items.forEach(exp => {
-    const item = document.createElement('div');
-    item.className = 'timeline-item';
-    const dateStr = exp.date_end ? `${exp.date_start} / ${exp.date_end}` : `${exp.date_start} / Present`;
-    const bulletList = exp.description
-      .split('\n')
-      .filter(b => b.trim())
-      .map(b => `<li>${b.replace(/^[•\-*]\s*/, '')}</li>`)
-      .join('');
-
-    item.innerHTML = `
-      <div class="timeline-dot"></div>
-      <div class="timeline-card glass-card reveal">
-        <div class="timeline-header">
-          <div>
-            <span class="soc-tag">[${exp.tag || 'INTERNSHIP'}]</span>
-            <h3 class="timeline-role">${exp.title}</h3>
-            <span class="timeline-company">${exp.organization}</span>
-          </div>
-          <span class="timeline-date">${dateStr}</span>
-        </div>
-        <ul class="timeline-points">
-          ${bulletList}
-        </ul>
-      </div>
-    `;
-    container.appendChild(item);
-  });
-}
-
-// --- FETCH LIVE BACKEND DATA WITH FALLBACK TO CONFIG.JS ---
-(async function loadLiveBackendData() {
-  try {
-    const res = await fetch('/api/config');
-    if (!res.ok) return; // Keep config.js fallback
-    const liveData = await res.json();
-    if (liveData && liveData.stats) {
-      CFG = liveData;
-      STATS = {
-        ctfRank: liveData.stats.ctf_rank,
-        machines: liveData.stats.machines,
-        certifications: liveData.stats.certifications,
-        leetcodeSolved: liveData.stats.leetcode_solved
-      };
-      LEETCODE = { profileUrl: liveData.leetcode.profileUrl };
-      RESUME = { file: liveData.resume.file };
-      applyConfigData();
-
-      if (liveData.experience && liveData.experience.length) {
-        renderTimeline(liveData.experience);
-      }
-    }
-  } catch (err) {
-    // API not reachable or static server mode — silent fallback to config.js / HTML
-  }
-})();
-
-
-
-
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 20);
 }, { passive: true });
+
+// Mobile navigation drawer toggle
+const navToggle = document.getElementById('nav-toggle');
+const navLinksEl = document.getElementById('nav-links');
+if (navToggle && navLinksEl) {
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = navLinksEl.classList.toggle('mobile-open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navLinksEl.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinksEl.classList.remove('mobile-open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#navbar')) {
+      navLinksEl.classList.remove('mobile-open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
 
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
@@ -129,7 +124,10 @@ document.querySelectorAll('.skill-tag').forEach((tag, i) => {
   tag.classList.add('float-tag');
   tag.addEventListener('mouseenter', () => {
     tag.style.boxShadow = tag.classList.contains('sec')
-      ? '0 0 18px rgba(124,58,237,0.5)' : '0 0 18px rgba(6,182,212,0.5)';
+      ? '0 0 18px rgba(239,68,68,0.5)'
+      : tag.classList.contains('def')
+      ? '0 0 18px rgba(6,182,212,0.5)'
+      : '0 0 18px rgba(255,255,255,0.2)';
   });
   tag.addEventListener('mouseleave', () => { tag.style.boxShadow = ''; });
 });
@@ -153,29 +151,66 @@ document.querySelectorAll('.badge-card, .project-card').forEach(card => {
 
   const resize = () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; };
 
-  const Particle = () => ({
-    x: Math.random() * W, y: Math.random() * H,
-    vx: (Math.random() - 0.5) * SPEED,
-    vy: (Math.random() - 0.5) * SPEED,
+  const Particle = (x, y, vx, vy, isSpawned = false) => ({
+    x: x !== undefined ? x : Math.random() * W,
+    y: y !== undefined ? y : Math.random() * H,
+    vx: vx !== undefined ? vx : (Math.random() - 0.5) * SPEED,
+    vy: vy !== undefined ? vy : (Math.random() - 0.5) * SPEED,
+    spawned: isSpawned,
+    life: 1.0,
   });
 
-  const init = () => { resize(); particles = Array.from({ length: COUNT }, Particle); };
+  const init = () => { resize(); particles = Array.from({ length: COUNT }, () => Particle()); };
+
+  // On background click, spawn 2-3 network nodes that connect with lines
+  window.addEventListener('click', (e) => {
+    if (e.target.closest('input, textarea, select, button, a')) return;
+    const numToSpawn = 3;
+    for (let k = 0; k < numToSpawn; k++) {
+      const angle = (Math.PI * 2 * k) / numToSpawn + (Math.random() - 0.5) * 0.6;
+      const speed = SPEED * (0.28 + Math.random() * 0.28);
+      particles.push(Particle(
+        e.clientX,
+        e.clientY,
+        Math.cos(angle) * speed,
+        Math.sin(angle) * speed,
+        true
+      ));
+    }
+    if (particles.length > COUNT + 30) {
+      particles.splice(COUNT, 3);
+    }
+  });
 
   const draw = () => {
     ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
       if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-    });
+      if (p.spawned) {
+        p.life -= 0.002;
+        if (p.life <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+      }
+    }
+
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < MAX_DIST) {
-          ctx.strokeStyle = `rgba(6,182,212,${(1 - dist / MAX_DIST) * 0.15})`;
-          ctx.lineWidth = 0.6;
+          const fade = (particles[i].life ?? 1) * (particles[j].life ?? 1);
+          const isSpawnedLink = particles[i].spawned || particles[j].spawned;
+          ctx.strokeStyle = isSpawnedLink
+            ? `rgba(34,197,94,${(1 - dist / MAX_DIST) * 0.4 * fade})`
+            : `rgba(148,163,184,${(1 - dist / MAX_DIST) * 0.1 * fade})`;
+          ctx.lineWidth = isSpawnedLink ? 1.0 : 0.5;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
@@ -183,10 +218,16 @@ document.querySelectorAll('.badge-card, .project-card').forEach(card => {
         }
       }
     }
+
     particles.forEach(p => {
-      ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(124,58,237,0.45)'; ctx.fill();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.spawned ? 2.0 : 1.4, 0, Math.PI * 2);
+      ctx.fillStyle = p.spawned
+        ? `rgba(34,197,94,${0.85 * (p.life ?? 1)})`
+        : 'rgba(148,163,184,0.3)';
+      ctx.fill();
     });
+
     requestAnimationFrame(draw);
   };
 
@@ -197,8 +238,8 @@ document.querySelectorAll('.badge-card, .project-card').forEach(card => {
 const tagline = document.querySelector('.hero-tagline');
 if (tagline) {
   const texts = [
-    'I break things to build them better.',
     'Offensive mindset. Defensive build.',
+    'I break things to build them better.',
     'CTF player. Security engineer. Builder.',
     'From exploits to infrastructure.',
     'Security-first. Always.',
@@ -265,8 +306,7 @@ document.querySelectorAll('.stat-num').forEach(el => {
     { type: 'alert',   time: '12:19:02', msg: 'EncipherX CTF: Android APK reverse engineered' },
   ];
   let idx = 0;
-  const addLine = () => {
-    const entry = ENTRIES[idx % ENTRIES.length]; idx++;
+  const pushLine = (entry) => {
     const line = document.createElement('div');
     line.className = `feed-line feed-${entry.type}`;
     line.innerHTML = `<span class="feed-time">${entry.time}</span><span class="feed-type">${entry.type.toUpperCase()}</span><span class="feed-msg">${entry.msg}</span>`;
@@ -275,11 +315,28 @@ document.querySelectorAll('.stat-num').forEach(el => {
     feed.scrollTop = feed.scrollHeight;
     requestAnimationFrame(() => line.classList.add('visible'));
   };
+
+  const addLine = () => {
+    const entry = ENTRIES[idx % ENTRIES.length]; idx++;
+    pushLine(entry);
+  };
+
+  window.pushFeedAlert = (msg, type = 'alert') => {
+    const now = new Date();
+    const time = [
+      String(now.getHours()).padStart(2, '0'),
+      String(now.getMinutes()).padStart(2, '0'),
+      String(now.getSeconds()).padStart(2, '0'),
+    ].join(':');
+    pushLine({ type, time, msg });
+  };
+
   for (let i = 0; i < 4; i++) addLine();
   setInterval(addLine, 3200);
 })();
 
 const REPOS = [
+  { repo: 'SOC-for-Lab-',                     badgeId: 'badge-soc'  },
   { repo: 'Portable-Log-Analysis-Tool',       badgeId: 'badge-log'  },
   { repo: 'IP-Leak-Defense-System-StoryShip', badgeId: 'badge-ship' },
   { repo: 'Project-f1',                       badgeId: 'badge-f1'   },
@@ -362,16 +419,16 @@ function initXterm() {
     theme: {
       background:          '#0a0a0f',
       foreground:          '#e2e8f0',
-      cursor:              '#06b6d4',
+      cursor:              '#22c55e',
       cursorAccent:        '#0a0a0f',
-      selectionBackground: 'rgba(124,58,237,0.3)',
+      selectionBackground: 'rgba(34, 197, 94, 0.25)',
       black:    '#0a0a0f', brightBlack:   '#475569',
       red:      '#ef4444', brightRed:     '#f87171',
       green:    '#22c55e', brightGreen:   '#4ade80',
       yellow:   '#f59e0b', brightYellow:  '#fbbf24',
-      blue:     '#7c3aed', brightBlue:    '#a855f7',
-      magenta:  '#ec4899', brightMagenta: '#f472b6',
-      cyan:     '#06b6d4', brightCyan:    '#22d3ee',
+      blue:     '#38bdf8', brightBlue:    '#7dd3fc',
+      magenta:  '#f43f5e', brightMagenta: '#fb7185',
+      cyan:     '#38bdf8', brightCyan:    '#7dd3fc',
       white:    '#e2e8f0', brightWhite:   '#f8fafc',
     },
   });
@@ -379,25 +436,38 @@ function initXterm() {
   const fitAddon = new FitAddon.FitAddon();
   term.loadAddon(fitAddon);
   term.open(container);
-  fitAddon.fit();
-  window.addEventListener('resize', () => fitAddon.fit(), { passive: true });
+  
+  const safeFit = () => {
+    try {
+      if (container && container.clientHeight > 0) {
+        fitAddon.fit();
+      }
+    } catch (e) {}
+  };
+  safeFit();
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(safeFit, 120);
+  }, { passive: true });
 
   // ANSI escape helpers
   const R  = '\x1b[0m';
   const B  = '\x1b[1m';
   const DM = '\x1b[2m';
-  const PU = '\x1b[38;2;168;85;247m';    // purple-l
-  const CY = '\x1b[38;2;34;211;238m';    // cyan-l
-  const GR = '\x1b[38;2;74;222;128m';    // green
+  const WH = '\x1b[38;2;248;250;252m';   // crisp white
+  const GR = '\x1b[38;2;34;197;94m';     // terminal green
   const YL = '\x1b[38;2;251;191;36m';    // yellow/gold
   const RE = '\x1b[38;2;248;113;113m';   // red
-  const MT = '\x1b[38;2;148;163;184m';   // muted
+  const MT = '\x1b[38;2;148;163;184m';   // muted slate
+  const CY = GR;                          // green fallback
+  const PU = WH;                          // white fallback
 
-  const a = (t) => `${B}${PU}${t}${R}`;  // accent (purple bold)
+  const a = (t) => `${B}${WH}${t}${R}`;  // bold crisp white
   const g = (t) => `${B}${YL}${t}${R}`;  // gold bold
-  const l = (t) => `${CY}${t}${R}`;      // link (cyan)
+  const l = (t) => `${GR}${t}${R}`;      // link (terminal green)
   const d = (t) => `${DM}${MT}${t}${R}`; // dim/muted
-  const hdr = (t) => `\r\n${B}${CY} ${t} ${R}`;  // section header
+  const hdr = (t) => `\r\n${B}${WH}--- ${t.toUpperCase()} ---${R}`;  // section header
 
   // Command definitions - all data sourced from PORTFOLIO_CONFIG (config.js)
   const CMDS = {
@@ -405,11 +475,15 @@ function initXterm() {
       hdr('available commands'),
       `  ${a('whoami')}     identity & role`,
       `  ${a('about')}      background & story`,
-      `  ${a('skills')}     full skills list`,
+      `  ${a('skills')}     full skills list (Wazuh, Splunk, RHEL, etc.)`,
       `  ${a('projects')}   projects + GitHub links`,
       `  ${a('certs')}      certifications`,
       `  ${a('ctf')}        CTF wins & platforms`,
+      `  ${a('tryhackme')}  TryHackMe profile & rank`,
+      `  ${a('hackthebox')} HackTheBox profile`,
       `  ${a('leetcode')}   LeetCode stats`,
+      `  ${a('matrix')}     stream digital green rain`,
+      `  ${a('flag')}       CTF flag challenge`,
       `  ${a('experience')} internship history`,
       `  ${a('contact')}    links & email`,
       `  ${a('clear')}      clear screen`,
@@ -417,7 +491,7 @@ function initXterm() {
     whoami: () => [
       hdr('whoami'),
       `  ${a('Mukul Suryawanshi')}`,
-      `  Role    : Cybersecurity Engineer & Developer`,
+      `  Role    : Cybersecurity Engineer & Tool Builder`,
       `  College : St. Vincent Pallotti College, Nagpur MH`,
       `  Focus   : Offensive security  .  SOC tooling  .  CTFs`,
       `  Email   : ${l('msuryawanshi.1945@gmail.com')}`,
@@ -441,22 +515,27 @@ function initXterm() {
         `  ${a('[Security]')}`,
         `  ${sec}`,
         ``,
-        `  ${a('[Development]')}`,
+        `  ${a('[Development & Systems]')}`,
         `  ${dev}`,
       ];
     },
     projects: () => [
       hdr('projects'),
-      `  ${a('[1]')} Portable Log Analysis Tool`,
+      `  ${a('[1]')} Distributed SOC for Lab ${g('[FEATURED]')}`,
+      `      Multi-node lab SOC (Windows · Linux · macOS) . Wazuh SIEM telemetry`,
+      `      ${l('github.com/msuryawanshi05/SOC-for-Lab-')}`,
+      ``,
+      `  ${a('[2]')} Portable Log Analysis Tool`,
       `      USB forensic tool for air-gapped networks`,
       `      ${l('github.com/msuryawanshi05/Portable-Log-Analysis-Tool')}`,
+      `      ${g('[Video Demo]')} ${l('youtube.com/watch?v=0CafFNWY91Q')}`,
       ``,
-      `  ${a('[2]')} StoryShip — IP Leak Defense`,
+      `  ${a('[3]')} StoryShip — IP Leak Defense`,
       `      IPFS + cryptographic hashing for asset integrity`,
       `      ${l('github.com/msuryawanshi05/IP-Leak-Defense-System-StoryShip')}`,
       ``,
-      `  ${a('[3]')} Project F1 — Formula 1 Data Intelligence`,
-      `      Race data analysis . Python . Pandas`,
+      `  ${a('[4]')} Project F1 — Formula 1 Data Intelligence`,
+      `      Real-time telemetry dashboard . FastAPI WebSockets . React`,
       `      ${l('github.com/msuryawanshi05/Project-f1')}`,
     ],
     certs: () => {
@@ -466,25 +545,52 @@ function initXterm() {
       return lines;
     },
     ctf: () => [
-      hdr('ctf & competitions'),
+      hdr('ctf & platforms'),
       `  ${g('[3rd]')} ICYS CTF — International Cyber Youth Summit (Oct 2025)`,
       `  ${g('[2nd]')} Engineers Day Showcase (Oct 2025)`,
       `  ${a('Top 2')} Smart India Internal Hackathon 2025`,
       ``,
-      `  ${d('Platforms:')} TryHackMe . HackTheBox . VulnHub`,
-      `  ${a(STATS.machines + '+')} machines pwned`,
+      `  ${d('Platforms & Rankings:')}`,
+      `  ${a('TryHackMe')} : ${l('tryhackme.com/p/msuryawanshi05')}  ${g('[Top 20%]')}`,
+      `  ${a('HackTheBox')} : ${l('profile.hackthebox.com/profile/019fe6cd-1983-7008-9b4c-52c9297028e7')}`,
+      `  ${a('Machines')}   : ${STATS.machines + '+'} VulnHub / labs pwned`,
+    ],
+    tryhackme: () => [
+      hdr('tryhackme'),
+      `  Rank    : ${g('Top 20%')}`,
+      `  Profile : ${l(PROFILES.tryhackme || 'https://tryhackme.com/p/msuryawanshi05')}`,
+    ],
+    hackthebox: () => [
+      hdr('hackthebox'),
+      `  Status  : ${a('Active Labs')}`,
+      `  Profile : ${l(PROFILES.hackthebox || 'https://profile.hackthebox.com/profile/019fe6cd-1983-7008-9b4c-52c9297028e7?utm_medium=copy_url')}`,
     ],
     leetcode: () => [
       hdr('leetcode'),
       `  Problems Solved : ${a(String(STATS.leetcodeSolved))}`,
-      `  Profile         : ${l(LEETCODE.profileUrl)}`,
+      `  Profile         : ${l(PROFILES.leetcode || LEETCODE.profileUrl)}`,
+    ],
+    sudo: () => {
+      if (typeof window.pushFeedAlert === 'function') {
+        window.pushFeedAlert('SECURITY ALERT: Unauthorized sudo attempt — This incident will be reported.', 'alert');
+      }
+      return [
+        `\r\n  ${RE}Nice try! He is not in the sudoers file. This incident will be reported.${R}`,
+      ];
+    },
+    flag: () => [
+      hdr('flag.txt'),
+      `  ${GR}Flag{s3cur1ty_thr0ugh_d3f3ns1v3_bu1ld_2k26}${R}`,
+      `  ${d('[+] Location : /.hidden/flag.txt (chmod 0400)')}`,
+      `  ${d('[+] SHA-256  : 4a9d70e4e20b0ec8ef25e0c6eb2d69f0237e1b72e90c64be7fe9d9e6e873b9e1')}`,
+      `  ${d('[+] Status   : Solved & Authenticated')}`,
     ],
     experience: () => [
       hdr('incident timeline — experience'),
-      `  ${a('ShadowFox')}   ${CY}[INTERNSHIP]${R}   2025-07 / 2025-08`,
+      `  ${a('ShadowFox')}   ${GR}[INTERNSHIP]${R}   2025-07 / 2025-08`,
       `  ${d('  Pen testing . Metasploitable . Wireshark . privesc')}`,
       ``,
-      `  ${a('Redynox')}     ${CY}[INTERNSHIP]${R}   2025-06 / 2025-07`,
+      `  ${a('Redynox')}     ${GR}[INTERNSHIP]${R}   2025-06 / 2025-07`,
       `  ${d('  Web VAPT . Burp Suite . Nessus . OWASP ZAP')}`,
     ],
     contact: () => [
@@ -500,7 +606,7 @@ function initXterm() {
   const CMD_NAMES = Object.keys(CMDS);
   let inputBuf = '', history = [], hIdx = -1;
 
-  const PROMPT = `\r\n${B}${PU}mukul@portfolio${R}${MT}:~${R}${CY}$${R} `;
+  const PROMPT = `\r\n${B}${GR}mukul@portfolio${R}${MT}:~${R}${GR}$${R} `;
 
   const showPrompt = () => { term.write(PROMPT); inputBuf = ''; };
 
@@ -510,6 +616,58 @@ function initXterm() {
     if (raw.trim()) { history.unshift(raw.trim()); hIdx = -1; }
 
     if (cmd === 'clear') { term.clear(); showPrompt(); return; }
+
+    if (cmd.startsWith('sudo')) {
+      term.writeln(`\r\n  ${RE}Nice try! He is not in the sudoers file. This incident will be reported.${R}`);
+      if (typeof window.pushFeedAlert === 'function') {
+        window.pushFeedAlert('SECURITY ALERT: Unauthorized sudo attempt — This incident will be reported.', 'alert');
+      }
+      showPrompt();
+      return;
+    }
+
+    if (cmd === 'flag' || cmd === 'cat flag.txt' || cmd === 'cat flag') {
+      const lines = CMDS.flag();
+      (lines || []).forEach(ln => term.writeln(ln ?? ''));
+      showPrompt();
+      return;
+    }
+
+    if (cmd === 'matrix') {
+      term.writeln(`\r\n${GR}[*] Initializing digital rain stream... (Press any key to stop)${R}`);
+      const matrixChars = '01ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾗﾘﾙﾚﾛﾜ0123456789ABCDEF!@#$%^&*()_+-=~';
+      let count = 0;
+      let active = true;
+
+      const timer = setInterval(() => {
+        if (!active) return;
+        let line = '';
+        for (let col = 0; col < 62; col++) {
+          const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+          const bright = Math.random() > 0.88;
+          line += bright ? `\x1b[1;32m${char}\x1b[0m` : `\x1b[32m${char}\x1b[0m`;
+        }
+        term.writeln(line);
+        count++;
+        if (count >= 30) {
+          clearInterval(timer);
+          active = false;
+          term.writeln(`\r\n${GR}[+] Digital rain sequence complete. Access maintained.${R}`);
+          showPrompt();
+        }
+      }, 55);
+
+      const cancelSub = term.onData(() => {
+        if (active) {
+          clearInterval(timer);
+          active = false;
+          term.writeln(`\r\n${YL}[!] Digital rain interrupted by operator.${R}`);
+          showPrompt();
+        }
+        cancelSub.dispose();
+      });
+      return;
+    }
 
     if (CMDS[cmd] && typeof CMDS[cmd] === 'function') {
       const lines = CMDS[cmd]();
@@ -568,7 +726,7 @@ function initXterm() {
   });
 
   // Boot message
-  term.writeln(`${B}${CY}Portfolio Terminal v2.0${R}  ${DM}${MT}powered by xterm.js${R}`);
+  term.writeln(`${B}${WH}Portfolio Terminal v2.0${R}  ${DM}${MT}powered by xterm.js${R}`);
   term.writeln(`${MT}type ${R}${a('help')}${MT} to see all commands  |  Tab to autocomplete${R}`);
   showPrompt();
 
@@ -580,7 +738,11 @@ function initXterm() {
   });
 }
 
-initXterm();
+try {
+  initXterm();
+} catch (err) {
+  console.warn('initXterm error:', err);
+}
 
 // -- SKILLS RADAR CHART (Chart.js) -------------------------------------------
 // Data from PORTFOLIO_CONFIG.skills.radar in config.js
@@ -591,6 +753,8 @@ function initSkillsRadar() {
   const radarData = CFG.skills?.radar || [];
   if (!radarData.length) { canvas.closest('.skills-radar-wrapper')?.remove(); return; }
 
+  const isMobile = window.innerWidth < 640;
+
   new Chart(canvas, {
     type: 'radar',
     data: {
@@ -598,23 +762,22 @@ function initSkillsRadar() {
       datasets: [{
         label: 'Proficiency',
         data:   radarData.map(d => d.value),
-        backgroundColor:     'rgba(124, 58, 237, 0.12)',
-        borderColor:         'rgba(168, 85, 247, 0.85)',
+        backgroundColor:     'rgba(34, 197, 94, 0.1)',
+        borderColor:         'rgba(34, 197, 94, 0.75)',
         borderWidth:          2,
-        pointBackgroundColor: '#22d3ee',
-        pointBorderColor:     '#22d3ee',
-        pointHoverBackgroundColor: '#a855f7',
-        pointRadius:          4,
-        pointHoverRadius:     6,
+        pointBackgroundColor: '#22c55e',
+        pointBorderColor:     '#22c55e',
+        pointHoverBackgroundColor: '#4ade80',
+        pointRadius:          isMobile ? 3 : 4,
+        pointHoverRadius:     isMobile ? 5 : 6,
       }],
     },
     options: {
       responsive: true,
       maintainAspectRatio: true,
-      aspectRatio: 1.8,
+      aspectRatio: isMobile ? 1.25 : 1.8,
       animation: { duration: 1200, easing: 'easeInOutQuart' },
-      // Padding keeps side labels (Exploitation, SIEM) fully visible
-      layout: { padding: { left: 65, right: 65, top: 10, bottom: 10 } },
+      layout: { padding: { left: isMobile ? 24 : 65, right: isMobile ? 24 : 65, top: 10, bottom: 10 } },
       scales: {
         r: {
           min: 0, max: 100,
@@ -623,13 +786,13 @@ function initSkillsRadar() {
           angleLines: { color: 'rgba(255,255,255,0.06)' },
           pointLabels: {
             color: '#94a3b8',
-            font:  { family: 'monospace', size: 10 },
+            font:  { family: 'monospace', size: isMobile ? 8.5 : 10 },
           },
           ticks: {
             color:           'rgba(255,255,255,0.25)',
             backdropColor:   'transparent',
             stepSize:         25,
-            font:            { size: 9 },
+            font:            { size: isMobile ? 8 : 9 },
           },
         },
       },
@@ -638,9 +801,9 @@ function initSkillsRadar() {
         tooltip: {
           callbacks: { label: ctx => ` ${ctx.raw}% proficiency` },
           backgroundColor: 'rgba(10,10,15,0.95)',
-          borderColor:     'rgba(124,58,237,0.4)',
+          borderColor:     'rgba(34,197,94,0.4)',
           borderWidth:      1,
-          titleColor:       '#22d3ee',
+          titleColor:       '#4ade80',
           bodyColor:        '#e2e8f0',
           padding:          10,
         },
@@ -650,53 +813,78 @@ function initSkillsRadar() {
   });
 }
 
-initSkillsRadar();
+try {
+  initSkillsRadar();
+} catch (err) {
+  console.warn('initSkillsRadar error:', err);
+}
 
 // -- TERMINAL BOOT ENTRANCE & PAGE DATA REVEAL ----------------------------
 (function heroEntrance() {
   const bootScreen = document.getElementById('boot-screen');
+  if (!bootScreen) return;
   const fillBar = document.querySelector('.boot-bar-fill');
   const statusText = document.getElementById('boot-status-text');
 
+  let finished = false;
+  const finishBoot = () => {
+    if (finished) return;
+    finished = true;
+    bootScreen.classList.add('fade-out');
+
+    const heroName = document.querySelector('.hero-name');
+    if (heroName) heroName.classList.add('glitch-once');
+
+    const scanline = document.createElement('div');
+    scanline.className = 'scanline-sweep';
+    document.body.appendChild(scanline);
+    setTimeout(() => scanline.remove(), 2600);
+
+    setTimeout(() => {
+      if (bootScreen && bootScreen.parentNode) bootScreen.remove();
+    }, 600);
+  };
+
   const runBootSequence = () => {
-    // Step 1: Fill loading progress bar
-    if (fillBar) fillBar.style.width = '100%';
+    // Step 1: Start loading progress bar
+    if (fillBar) fillBar.style.width = '35%';
 
-    // Step 2: Update status to Access Granted
+    // Step 2: Initialize defensive modules
     setTimeout(() => {
+      if (fillBar) fillBar.style.width = '68%';
+      if (statusText) statusText.textContent = 'INITIALIZING SIEM & SOC TELEMETRY...';
+    }, 500);
+
+    // Step 3: Security integrity verification
+    setTimeout(() => {
+      if (fillBar) fillBar.style.width = '92%';
+      if (statusText) statusText.textContent = 'VERIFYING SECURITY INTEGRITY...';
+    }, 1050);
+
+    // Step 4: Access granted
+    setTimeout(() => {
+      if (fillBar) fillBar.style.width = '100%';
       if (statusText) statusText.textContent = 'SYSTEM_READY · ACCESS GRANTED';
-    }, 450);
+    }, 1500);
 
-    // Step 3: Fade out boot screen, trigger CRT scanline & hero text glitch reveal
-    setTimeout(() => {
-      if (bootScreen) bootScreen.classList.add('fade-out');
-
-      const heroName = document.querySelector('.hero-name');
-      if (heroName) heroName.classList.add('glitch-once');
-
-      const scanline = document.createElement('div');
-      scanline.className = 'scanline-sweep';
-      document.body.appendChild(scanline);
-      setTimeout(() => scanline.remove(), 2600);
-    }, 700);
-
-    // Step 4: Remove boot screen from DOM
-    setTimeout(() => {
-      if (bootScreen) bootScreen.remove();
-    }, 1300);
+    // Step 5: Fade out boot screen
+    setTimeout(finishBoot, 1850);
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(runBootSequence, 100));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(runBootSequence, 50));
   } else {
-    setTimeout(runBootSequence, 100);
+    setTimeout(runBootSequence, 50);
   }
+
+  // Safety fallback: dismiss boot screen after 3s maximum
+  setTimeout(finishBoot, 3000);
 })();
 
 // -- CURSOR GLOW --------------------------------------------------------------
 const glow = document.createElement('div');
 glow.style.cssText = `position:fixed;width:260px;height:260px;border-radius:50%;
-  background:radial-gradient(circle,rgba(124,58,237,0.05) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(255,255,255,0.02) 0%,transparent 70%);
   pointer-events:none;z-index:0;transform:translate(-50%,-50%);
   transition:left 0.1s ease,top 0.1s ease;`;
 document.body.appendChild(glow);
@@ -708,11 +896,11 @@ console.log(
   '%c  __ _  __ _\n' +
   ' /  ` |/  ` |\n' +
   ' \\__, |\\__, |\n',
-  'color:#7c3aed; font-family: monospace; font-size: 12px;'
+  'color:#22c55e; font-family: monospace; font-size: 12px;'
 );
 console.log(
-  '%cMukul Suryawanshi%c  |  Security Engineer & CTF Player',
-  'color:#22d3ee; font-size:14px; font-weight:bold;',
+  '%cMukul Suryawanshi%c  |  Security Engineer · Tool Builder · CTF Player',
+  'color:#f8fafc; font-size:14px; font-weight:bold;',
   'color:#94a3b8; font-size:12px;'
 );
 console.log(
@@ -720,7 +908,7 @@ console.log(
   '  github.com/msuryawanshi05\n' +
   '  linkedin.com/in/msuryawanshi05\n\n' +
   '  Type help in the terminal above -- it actually works.',
-  'color:#06b6d4; font-size:12px; line-height:1.8;'
+  'color:#38bdf8; font-size:12px; line-height:1.8;'
 );
 console.log('%c[security.txt available at /security.txt per RFC 9116]', 'color:#475569; font-size:11px;');
 
@@ -744,7 +932,6 @@ const PROOF_DATA = {
   encipherx: {
     title: 'EncipherX 4.0 - Event Photos',
     images: [
-      // Image1.jpeg removed - file is corrupt (not a valid JPEG). Replace the file to re-add.
       'assets/Proof_images/EncipherX 4.0 CTF/Inauguration.jpeg',
       'assets/Proof_images/EncipherX 4.0 CTF/Organising_Team.jpeg',
     ],

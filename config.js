@@ -7,127 +7,149 @@ const PORTFOLIO_CONFIG = {
 
   // -- STATS (shown in About section) -----------------------------------------
   stats: {
-    ctfRank:          '#3',    // ICYS CTF placement
-    machines:          22,     // VulnHub / TryHackMe machines total
-    certifications:     4,     // Number of certs
-    leetcodeSolved:   10,     // Your current LeetCode solved count - update freely
+    ctfRank:          '#3',       // ICYS CTF placement
+    certifications:    14,        // Number of certs
+    thmRank:          'Top 20%',  // TryHackMe rank
+    machines:          22,        // VulnHub / TryHackMe machines total
+    htbStatus:        'Labs',     // HackTheBox active labs
+    leetcodeSolved:   150,        // LeetCode solved count
   },
 
-  // -- LEETCODE ----------------------------------------------------------------
+  // -- PLATFORM PROFILES ------------------------------------------------------
+  profiles: {
+    tryhackme: 'https://tryhackme.com/p/msuryawanshi05',
+    hackthebox: 'https://profile.hackthebox.com/profile/019fe6cd-1983-7008-9b4c-52c9297028e7?utm_medium=copy_url',
+    leetcode:   'https://leetcode.com/u/msuryawanshi05/',
+  },
+
+  // -- LEETCODE (backwards compatibility) -------------------------------------
   leetcode: {
     profileUrl: 'https://leetcode.com/u/msuryawanshi05/',
-    // LeetCode doesn't provide an open CORS API, so we use the count above.
-    // To update: change stats.leetcodeSolved above and refresh.
   },
 
   // -- RESUME ------------------------------------------------------------------
-  // To update resume: just replace the PDF file in D:\Projs\portmy\assets\
+  // To update resume: just replace the PDF file in assets/
   // with the same filename below. The site picks it up automatically.
   resume: {
     file: 'assets/Mukul_Resume.pdf',  // Security-focused resume
     swefile: 'assets/Swe Resume.pdf', // SWE resume (optional second)
   },
 
-  // -- PROJECTS (add live URL if deployed, leave '' to hide Live button) ------
+  // -- PROJECTS (add live/demo URL, leave '' to hide Demo button) -------------
   projects: [
     {
-      id:      'f1',
-      name:    'PITWALL',
-      github:  'https://github.com/msuryawanshi05/Project-f1',
-      live:    '',
-      show:    true,
+      id:          'soc',
+      name:        'Distributed SOC for Lab',
+      github:      'https://github.com/msuryawanshi05/SOC-for-Lab-',
+      live:        '#', // Update with your SOC demo link
+      show:        true,
+      featured:    true,
+      description: 'Distributed Security Operations Center (SOC) designed for isolated and multi-node lab environments with unified endpoint telemetry across Windows, Linux, and macOS. Ingests and normalizes 50,000+ daily security events using Wazuh SIEM and Syslog. Features custom Suricata detection rules, maintaining 98%+ alert fidelity across simulated multi-stage attacks.',
     },
     {
-      id:      'log',
-      name:    'Portable Log Analysis Tool for Isolated Networks',
-      github:  'https://github.com/msuryawanshi05/Portable-Log-Analysis-Tool',
-      live:    '',
-      show:    true,
+      id:          'log',
+      name:        'Portable Log Analysis Tool for Isolated Networks',
+      github:      'https://github.com/msuryawanshi05/Portable-Log-Analysis-Tool',
+      live:        'https://www.youtube.com/watch?v=0CafFNWY91Q',
+      show:        true,
+      description: 'USB-deployable offline forensic analysis suite built for strictly air-gapped systems with zero network dependency. Engineered for the National Technical Research Organisation (NTRO) SIH problem statement, integrating rule-based threat signatures with statistical behavioral baselines to generate tamper-evident forensic audit reports. Automates EVTX and Syslog parsing, timeline reconstruction, and anomaly correlation while enforcing cryptographic SHA-256 evidence integrity.',
     },
     {
-      id:      'soc',
-      name:    'Distributed SOC Platform',
-      github:  'https://github.com/msuryawanshi05/Distributed-SOC-Platform',
-      live:    '',
-      show:    true,
+      id:          'ship',
+      name:        'StoryShip - IP Leak Defense System',
+      github:      'https://github.com/msuryawanshi05/IP-Leak-Defense-System-StoryShip',
+      live:        '#', // Update with your StoryShip demo link
+      show:        true,
+      description: 'Decentralized content integrity and asset leak defense system. Utilizes perceptual hashing and IPFS content-addressed storage to enforce immutable audit trails and ownership provenance.',
     },
     {
-      id:      'rxrewards',
-      name:    'RxRewards',
-      github:  'https://github.com/msuryawanshi05/RxRewards',
-      live:    '',
-      show:    true,
-    },
-    {
-      id:      'ship',
-      name:    'StoryShip - IP Leak Defense System',
-      github:  'https://github.com/msuryawanshi05/IP-Leak-Defense-System-StoryShip',
-      live:    '',
-      show:    false, // Hidden until demo video added
+      id:          'f1',
+      name:        'Project F1 - Formula 1 Data Intelligence',
+      github:      'https://github.com/msuryawanshi05/Project-f1',
+      live:        '#', // Update with your Project F1 demo link
+      show:        true,
+      description: 'Engineer-grade Formula 1 timing and real-time telemetry dashboard. Bridges live Grand Prix sector delta timing, speed/throttle/braking comparison curves, and interactive GeoJSON canvas circuit maps. Features a dual-ingestion architecture streaming OpenF1 telemetry via FastAPI WebSockets into Zustand transient state.',
     },
   ],
 
-  // -- CERTIFICATES (only substantive ones shown - skip participation certs) --
-  // Shown in Achievements section. Set show:true to display.
+  // -- CERTIFICATES (substantive certs shown on frontend) ---------------------
   certs: [
-    { file: 'assets/Certify/CASA_Exam.pdf',                       label: 'CASA',          show: true  },
-    { file: 'assets/Certify/ICYS.pdf',                            label: 'ICYS CTF',      show: true  },
-    { file: 'assets/Certify/Cryptography and Network Security.pdf',label: 'NPTEL Crypto',  show: true  },
-    { file: 'assets/Certify/IIRS GEOSAT.pdf',                     label: 'ISRO IIRS',     show: true  },
-    { file: 'assets/Certify/Shadowfox_.pdf',                      label: 'ShadowFox',     show: true  },
-    { file: 'assets/Certify/EncipherX.pdf',                       label: 'EncipherX',     show: true  },
-    { file: 'assets/Certify/Crest Ctf.pdf',                       label: 'CREST CTF',     show: true  },
-    { file: 'assets/Certify/Seasides_Goa.pdf',                    label: 'Seasides 2K26', show: true  },
-    { file: 'assets/Certify/Unstop ehax ctf.pdf',                 label: 'eHax CTF',      show: true  },
-    { file: 'assets/Certify/YCCE ctf.png',                        label: 'YCCE CTF',      show: true  },
-    { file: 'assets/Certify/PECB_Certificate_of_Attestation.pdf', label: 'PECB',          show: true  },
-    // Participation / minor certs - hidden:
-    { file: 'assets/Certify/be10x.pdf',            label: 'Be10x',         show: false },
-    { file: 'assets/Certify/codetantra.pdf',        label: 'CodeTantra',    show: false },
-    { file: 'assets/Certify/HWI_volunter.pdf',      label: 'HWI Volunteer', show: false },
-    { file: 'assets/Certify/Nikistain.pdf',         label: 'Nikistain',     show: false },
-    { file: 'assets/Certify/TCS microintern.pdf',   label: 'TCS',           show: false },
+    { file: 'assets/Certify/CASA_Exam.pdf',                       label: 'CASA',          show: true },
+    { file: 'assets/Certify/ICYS.pdf',                            label: 'ICYS CTF',      show: true },
+    { file: 'assets/Certify/Cryptography and Network Security.pdf',label: 'NPTEL Crypto',  show: true },
+    { file: 'assets/Certify/IIRS GEOSAT.pdf',                     label: 'ISRO IIRS',     show: true },
+    { file: 'assets/Certify/Shadowfox_.pdf',                      label: 'ShadowFox',     show: true },
+    { file: 'assets/Certify/EncipherX.pdf',                       label: 'EncipherX',     show: true },
+    { file: 'assets/Certify/Crest Ctf.pdf',                       label: 'CREST CTF',     show: true },
+    { file: 'assets/Certify/Seasides_Goa.pdf',                    label: 'Seasides 2K26', show: true },
+    { file: 'assets/Certify/Unstop ehax ctf.pdf',                 label: 'eHax CTF',      show: true },
+    { file: 'assets/Certify/YCCE ctf.png',                        label: 'YCCE CTF',      show: true },
+    { file: 'assets/Certify/PECB_Certificate_of_Attestation.pdf', label: 'PECB',          show: true },
   ],
 
-  // -- SKILLS ------------------------------------------------------------------
-  // Add or remove items freely. The page rebuilds on refresh.
+  // -- SKILLS CATEGORIZATION --------------------------------------------------
   skills: {
-    security: [
-      'Vulnerability Assessment',
-      'Penetration Testing',
-      'Log Analysis',
-      'OWASP Top 10',
-      'SOC L1',
-      'Incident Response',
-      'Threat Analysis',
-      'SIEM',
+    // 1. Offensive / VAPT
+    offensive: [
       'Burp Suite',
       'Metasploit',
       'Nmap',
       'Wireshark',
+      'OWASP Top 10',
+      'Vulnerability Assessment',
+      'Penetration Testing',
       'Nessus',
-      'Wazuh',
       'OWASP ZAP',
+    ],
+
+    // 2. Defensive / SOC & SIEM
+    defensive: [
+      'Wazuh',
+      'Splunk',
+      'SIEM',
       'IDS/IPS',
       'Traffic Analysis',
+      'Incident Response',
+      'Log Analysis',
+      'Threat Analysis',
+      'SOC L1',
     ],
+
+    // 3. Platforms & Systems / Dev
     development: [
-      'Python',
-      'C',
-      'Java',
-      'JavaScript',
-      'HTML / CSS',
-      'SQL',
-      'Bash',
-      'Git & GitHub',
+      'RHEL',
+      'Linux',
       'Kali Linux',
       'Parrot OS',
-      'Linux',
+      'Python',
+      'FastAPI',
+      'Flask',
+      'Bash',
+      'SQL',
+      'Git & GitHub',
+      'C',
+      'Java',
+    ],
+
+    // Combined security list for terminal backwards compatibility
+    security: [
+      'Burp Suite',
+      'Metasploit',
+      'Nmap',
+      'Wireshark',
+      'OWASP Top 10',
+      'Wazuh',
+      'Splunk',
+      'SIEM',
+      'IDS/IPS',
+      'Vulnerability Assessment',
+      'Penetration Testing',
+      'Incident Response',
+      'Log Analysis',
+      'Traffic Analysis',
     ],
 
     // -- RADAR CHART DATA -------------------------------------------------------
-    // Tune these 0-100 values freely — the radar chart reads from here.
-    // Labels are the 5 domain categories shown on the chart axes.
     radar: [
       { label: 'Web Security',      value: 83 },
       { label: 'Scripting & Dev',   value: 79 },
@@ -136,6 +158,5 @@ const PORTFOLIO_CONFIG = {
       { label: 'Recon & OSINT',     value: 57 },
     ],
   },
-
 
 };

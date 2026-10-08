@@ -1,5 +1,5 @@
 /* TEAM */
-  Security Engineer & Developer: Mukul Suryawanshi
+  Security Engineer & Tool Builder: Mukul Suryawanshi
   Contact: msuryawanshi.1945@gmail.com
   GitHub: msuryawanshi05
   LinkedIn: msuryawanshi05
@@ -9,11 +9,8 @@
   Standards: HTML5, CSS3, ES2022 JavaScript
   UI Framework: Vanilla CSS (Custom Glassmorphism, CSS Variables)
   Components: xterm.js (Terminal Emulator), Chart.js (Radar Visualization)
-  Backend: FastAPI (Python 3.11), SQLAlchemy ORM, Pydantic v2
-  Authentication: Clerk (JWKS RS256 JWT Verification)
-  Database: Azure Database for PostgreSQL Flexible Server / SQLite
-  Hosting: Azure App Service (Linux runtime)
+  Architecture: Pure Static Web Application (Zero-Backend)
 
 /* PHILOSOPHY */
   "The best defenders think like attackers."
-  Security at inception — built with defensive integrity, offensive mindset, and no bloatware.
+  Security at inception — built with defensive integrity, offensive mindset, and zero bloatware.

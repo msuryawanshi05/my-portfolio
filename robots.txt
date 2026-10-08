@@ -10,13 +10,8 @@ Allow: /security.txt
 Allow: /.well-known/security.txt
 Allow: /humans.txt
 
-# Disallow administrative and private API endpoints
-Disallow: /admin
-Disallow: /admin.html
-Disallow: /api/
-Disallow: /scratch/
+# Disallow private and hidden resources
 Disallow: /.git/
-Disallow: /.env
 
 # XML Sitemap Location
 Sitemap: https://msuryawanshi.dev/sitemap.xml

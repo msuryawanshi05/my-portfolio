@@ -4,9 +4,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mukul | Security Engineer & Developer</title>
+  <title>Mukul Suryawanshi | Security Engineer · Tool Builder · CTF Player</title>
   <meta name="description"
-    content="Security-first developer. SIH winner, ICYS CTF podium finisher. Building secure systems and breaking them better." />
+    content="Offensive mindset. Defensive build. Portfolio of Mukul Suryawanshi — Security Engineer, Tool Builder, and CTF Player. Specialized in SIEM, SOC tooling, air-gapped forensics, and vulnerability analysis." />
+  <meta name="author" content="Mukul Suryawanshi" />
+  <meta name="theme-color" content="#0a0a0f" />
+
+  <!-- OpenGraph / Facebook / LinkedIn / Discord -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://msuryawanshi.dev/" />
+  <meta property="og:title" content="Mukul Suryawanshi | Security Engineer · Tool Builder · CTF Player" />
+  <meta property="og:description"
+    content="Offensive mindset. Defensive build. Security tooling, SIEM/SOC engineering, CTF writeups, and forensics." />
+  <meta property="og:image" content="assets/avatar.png" />
+  <meta property="og:site_name" content="Mukul Suryawanshi Portfolio" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@msuryawanshi_05" />
+  <meta name="twitter:creator" content="@msuryawanshi_05" />
+  <meta name="twitter:title" content="Mukul Suryawanshi | Security Engineer · Tool Builder · CTF Player" />
+  <meta name="twitter:description"
+    content="Offensive mindset. Defensive build. Security tooling, SIEM/SOC engineering, CTF writeups, and forensics." />
+  <meta name="twitter:image" content="assets/avatar.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%2306b6d4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -35,6 +59,15 @@
       </div>
     </div>
   </div>
+  <script>
+    setTimeout(function() {
+      var bs = document.getElementById('boot-screen');
+      if (bs) {
+        bs.classList.add('fade-out');
+        setTimeout(function() { if (bs && bs.parentNode) bs.remove(); }, 600);
+      }
+    }, 3200);
+  </script>
 
 <!--
   +-----------------------------------------------------------------+
@@ -49,8 +82,7 @@
   <!-- NAV -->
   <nav id="navbar">
     <div class="nav-inner">
-
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="#terminal-section" id="nav-terminal-btn">Terminal</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
@@ -59,8 +91,15 @@
         <li><a href="#achievements">Achievements</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire
-        Me</button>
+
+      <div class="nav-actions">
+        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -89,9 +128,9 @@
           <span class="hs-key">availability</span><span class="hs-sep">:</span><span class="hs-val"> available_for_hire</span><span class="hs-cursor"></span>
         </div>
       </div>
-      <h1 class="hero-name">Mukul<span class="accent">.S</span></h1>
-      <p class="hero-tagline">I break things to build them better.</p>
-      <p class="hero-sub">Security Engineer &middot; Full-Stack Developer &middot; CTF Player</p>
+      <h1 class="hero-name">Mukul.S</h1>
+      <p class="hero-tagline">Offensive mindset. Defensive build.</p>
+      <p class="hero-sub">Security Engineer &middot; Tool Builder &middot; CTF Player</p>
       <div class="hero-btns">
         <a id="btn-github" class="btn btn-outline" href="https://github.com/msuryawanshi05" target="_blank"
           rel="noopener">
@@ -109,7 +148,7 @@
           </svg>
           LinkedIn
         </a>
-        <a id="btn-resume" class="btn btn-primary" href="Mukul_Resume.pdf" target="_blank" rel="noopener">
+        <a id="btn-resume" class="btn btn-primary" href="assets/Mukul_Resume.pdf" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
             <polyline points="14 2 14 8 20 8" />
@@ -129,7 +168,7 @@
   <!-- ABOUT -->
   <section id="about" class="section">
     <div class="container">
-      <h2 class="section-title">About <span class="accent">Me</span></h2>
+      <h2 class="section-title">About Me</h2>
       <div class="about-grid">
         <div class="about-text glass-card">
           <p>B.Tech CSE (Cybersecurity) undergraduate at St. Vincent Pallotti College, Nagpur, pursuing the field deliberately &mdash; through certifications, CTFs, conferences, and tools that solve real problems.</p>
@@ -140,24 +179,41 @@
         <div class="about-stats">
 
           <div class="stat-card glass-card">
-            <span class="stat-num accent" id="stat-ctf">#3</span>
+            <span class="stat-num" id="stat-ctf">#3</span>
             <span class="stat-label">ICYS CTF</span>
+            <span class="stat-sub">National Placement</span>
           </div>
           <div class="stat-card glass-card">
-            <span class="stat-num accent" id="stat-machines">22</span>
-            <span class="stat-label">Machines Pwned</span>
+            <span class="stat-num" id="stat-certs">14+</span>
+            <span class="stat-label">Certifications</span>
+            <span class="stat-sub">Security &amp; Infra</span>
           </div>
-          <a class="stat-card glass-card" id="stat-lc-card"
-            href="https://leetcode.com/u/msuryawanshi05/" target="_blank" rel="noopener"
-            title="View LeetCode profile" style="text-decoration:none;cursor:pointer">
-            <span class="stat-num accent" id="stat-leetcode">150</span>
-            <span class="stat-label">LeetCode Solved</span>
+          <a class="stat-card glass-card" id="stat-thm-card"
+            href="https://tryhackme.com/p/msuryawanshi05" target="_blank" rel="noopener"
+            title="View TryHackMe profile" style="text-decoration:none;cursor:pointer">
+            <span class="stat-num" id="stat-thm">Top 20%</span>
+            <span class="stat-label">TryHackMe</span>
             <span class="stat-sub">&#8599; profile</span>
           </a>
           <div class="stat-card glass-card">
-            <span class="stat-num accent" id="stat-certs">4+</span>
-            <span class="stat-label">Certifications</span>
+            <span class="stat-num" id="stat-machines">22</span>
+            <span class="stat-label">Machines Pwned</span>
+            <span class="stat-sub">VulnHub &amp; Labs</span>
           </div>
+          <a class="stat-card glass-card" id="stat-htb-card"
+            href="https://profile.hackthebox.com/profile/019fe6cd-1983-7008-9b4c-52c9297028e7?utm_medium=copy_url" target="_blank" rel="noopener"
+            title="View HackTheBox profile" style="text-decoration:none;cursor:pointer">
+            <span class="stat-num" id="stat-htb">Labs</span>
+            <span class="stat-label">HackTheBox</span>
+            <span class="stat-sub">&#8599; profile</span>
+          </a>
+          <a class="stat-card glass-card" id="stat-lc-card"
+            href="https://leetcode.com/u/msuryawanshi05/" target="_blank" rel="noopener"
+            title="View LeetCode profile" style="text-decoration:none;cursor:pointer">
+            <span class="stat-num" id="stat-leetcode">150</span>
+            <span class="stat-label">LeetCode Solved</span>
+            <span class="stat-sub">&#8599; profile</span>
+          </a>
         </div>
       </div>
     </div>
@@ -166,42 +222,64 @@
   <!-- SKILLS -->
   <section id="skills" class="section">
     <div class="container">
-      <h2 class="section-title">Skills <span class="accent">&</span> Toolkit</h2>
+      <h2 class="section-title">Skills &amp; Toolkit</h2>
       <!-- Radar chart — data from PORTFOLIO_CONFIG.skills.radar -->
       <div class="skills-radar-wrapper glass-card reveal">
         <div class="radar-label">Proficiency Radar</div>
         <canvas id="skills-radar" aria-label="Skills proficiency radar chart" role="img"></canvas>
       </div>
       <div class="skills-grid">
+        <!-- 1. OFFENSIVE / VAPT -->
         <div class="skills-col glass-card">
           <div class="skills-col-header">
             <div class="skills-icon security-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="22" y1="12" x2="18" y2="12" />
+                <line x1="6" y1="12" x2="2" y2="12" />
+                <line x1="12" y1="6" x2="12" y2="2" />
+                <line x1="12" y1="22" x2="12" y2="18" />
+              </svg>
+            </div>
+            <h3>Offensive / VAPT</h3>
+          </div>
+          <div class="skills-tags">
+            <span class="skill-tag sec" title="Offensive Security">Burp Suite</span>
+            <span class="skill-tag sec" title="Offensive Security">Metasploit</span>
+            <span class="skill-tag sec" title="Offensive Security">Nmap</span>
+            <span class="skill-tag sec" title="Offensive Security">Wireshark</span>
+            <span class="skill-tag sec" title="Offensive Security">OWASP Top 10</span>
+            <span class="skill-tag sec" title="Offensive Security">Vulnerability Assessment</span>
+            <span class="skill-tag sec" title="Offensive Security">Penetration Testing</span>
+            <span class="skill-tag sec" title="Offensive Security">Nessus</span>
+            <span class="skill-tag sec" title="Offensive Security">OWASP ZAP</span>
+          </div>
+        </div>
+
+        <!-- 2. DEFENSIVE / SOC -->
+        <div class="skills-col glass-card">
+          <div class="skills-col-header">
+            <div class="skills-icon defensive-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
-            <h3>Security</h3>
+            <h3>Defensive / SOC</h3>
           </div>
           <div class="skills-tags">
-            <span class="skill-tag sec">Vulnerability Assessment</span>
-            <span class="skill-tag sec">Penetration Testing</span>
-            <span class="skill-tag sec">Log Analysis</span>
-            <span class="skill-tag sec">OWASP Top 10</span>
-            <span class="skill-tag sec">SOC L1</span>
-            <span class="skill-tag sec">Incident Response</span>
-            <span class="skill-tag sec">Threat Analysis</span>
-            <span class="skill-tag sec">SIEM</span>
-            <span class="skill-tag sec">Burp Suite</span>
-            <span class="skill-tag sec">Metasploit</span>
-            <span class="skill-tag sec">Nmap</span>
-            <span class="skill-tag sec">Wireshark</span>
-            <span class="skill-tag sec">Nessus</span>
-            <span class="skill-tag sec">Wazuh</span>
-            <span class="skill-tag sec">OWASP ZAP</span>
-            <span class="skill-tag sec">IDS/IPS</span>
-            <span class="skill-tag sec">Traffic Analysis</span>
+            <span class="skill-tag def" title="Defensive Security / SIEM">Wazuh</span>
+            <span class="skill-tag def" title="Defensive Security / SIEM">Splunk</span>
+            <span class="skill-tag def" title="Defensive Security / SIEM">SIEM</span>
+            <span class="skill-tag def" title="Defensive Security / SIEM">IDS/IPS</span>
+            <span class="skill-tag def" title="Defensive Security / SIEM">Traffic Analysis</span>
+            <span class="skill-tag def" title="Defensive Security / SIEM">Incident Response</span>
+            <span class="skill-tag def" title="Defensive Security / SIEM">Log Analysis</span>
+            <span class="skill-tag def" title="Defensive Security / SIEM">Threat Analysis</span>
+            <span class="skill-tag def" title="Defensive Security / SIEM">SOC L1</span>
           </div>
         </div>
+
+        <!-- 3. PLATFORMS & SYSTEMS -->
         <div class="skills-col glass-card">
           <div class="skills-col-header">
             <div class="skills-icon dev-icon">
@@ -210,20 +288,21 @@
                 <polyline points="8 6 2 12 8 18" />
               </svg>
             </div>
-            <h3>Development</h3>
+            <h3>Platforms &amp; Systems</h3>
           </div>
           <div class="skills-tags">
-            <span class="skill-tag dev">Python</span>
-            <span class="skill-tag dev">C</span>
-            <span class="skill-tag dev">Java</span>
-            <span class="skill-tag dev">JavaScript</span>
-            <span class="skill-tag dev">HTML / CSS</span>
-            <span class="skill-tag dev">SQL</span>
-            <span class="skill-tag dev">Bash</span>
-            <span class="skill-tag dev">Git & GitHub</span>
-            <span class="skill-tag dev">Kali Linux</span>
-            <span class="skill-tag dev">Parrot OS</span>
-            <span class="skill-tag dev">Linux</span>
+            <span class="skill-tag dev" title="Platforms & Systems">RHEL</span>
+            <span class="skill-tag dev" title="Platforms & Systems">Linux</span>
+            <span class="skill-tag dev" title="Platforms & Systems">Kali Linux</span>
+            <span class="skill-tag dev" title="Platforms & Systems">Parrot OS</span>
+            <span class="skill-tag dev" title="Platforms & Systems">Python</span>
+            <span class="skill-tag dev" title="Platforms & Systems">FastAPI</span>
+            <span class="skill-tag dev" title="Platforms & Systems">Flask</span>
+            <span class="skill-tag dev" title="Platforms & Systems">Bash</span>
+            <span class="skill-tag dev" title="Platforms & Systems">SQL</span>
+            <span class="skill-tag dev" title="Platforms & Systems">Git &amp; GitHub</span>
+            <span class="skill-tag dev" title="Platforms & Systems">C</span>
+            <span class="skill-tag dev" title="Platforms & Systems">Java</span>
           </div>
         </div>
       </div>
@@ -233,10 +312,10 @@
   <!-- PROJECTS -->
   <section id="projects" class="section">
     <div class="container">
-      <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
+      <h2 class="section-title">Featured Projects</h2>
       <div class="projects-grid">
 
-        <div class="project-card glass-card featured">
+        <div class="project-card glass-card featured full-width">
           <div class="project-featured-badge">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--gold)"
               style="display:inline;vertical-align:middle;margin-right:4px">
@@ -245,18 +324,42 @@
             Featured
           </div>
           <div class="project-card-header">
+            <h3 class="project-name">Distributed SOC for Lab</h3>
+            <span class="gh-badge gh-active" id="badge-soc">Checking...</span>
+          </div>
+          <p class="project-desc">Distributed Security Operations Center (SOC) designed for isolated and multi-node lab environments with unified endpoint telemetry across <strong>Windows</strong>, <strong>Linux</strong>, and <strong>macOS</strong>. Ingests and normalizes 50,000+ daily security events using Wazuh SIEM and Syslog. Features custom Suricata detection rules, maintaining 98%+ alert fidelity across simulated multi-stage attacks including privilege escalation, credential dumping, and lateral movement.</p>
+          <div class="project-tags">
+            <span class="tech-tag">Wazuh SIEM</span>
+            <span class="tech-tag">Distributed SOC</span>
+            <span class="tech-tag">Windows &middot; Linux &middot; macOS</span>
+            <span class="tech-tag">Suricata &amp; Syslog</span>
+            <span class="tech-tag">Detection Engineering</span>
+          </div>
+          <div class="project-links">
+            <a id="proj-soc-gh" class="project-link" href="https://github.com/msuryawanshi05/SOC-for-Lab-"
+              target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              GitHub
+            </a>
+            <a id="proj-soc-live" class="project-link project-link-live" href="#" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              Demo
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card glass-card full-width">
+          <div class="project-card-header">
             <h3 class="project-name">Portable Log Analysis Tool for Isolated Networks</h3>
             <span class="gh-badge gh-active" id="badge-log">Checking...</span>
           </div>
-          <p class="project-desc">USB-deployable offline forensic tool for log analysis in air-gapped environments.
-            Enables incident investigation across 3+ isolated systems without network connectivity. Tamper-resistant log
-            handling for restricted operational settings. <strong>Top 2 at Smart India Internal Hackathon &middot; 2nd
-              Prize, Engineers Day Showcase.</strong></p>
+          <p class="project-desc">USB-deployable offline forensic analysis suite built for strictly air-gapped systems with zero network dependency. Engineered for the National Technical Research Organisation (NTRO) SIH problem statement, integrating rule-based threat signatures with statistical behavioral baselines to generate tamper-evident forensic audit reports. Automates EVTX and Syslog parsing, timeline reconstruction, and anomaly correlation while enforcing cryptographic SHA-256 evidence integrity and zero-disk-write volatile memory triage. <strong>Top 2 at Smart India Internal Hackathon &middot; 2nd Prize, Engineers Day Showcase.</strong></p>
           <div class="project-tags">
             <span class="tech-tag">Python</span>
-            <span class="tech-tag">Log Forensics</span>
-            <span class="tech-tag">Air-gap</span>
-            <span class="tech-tag">Portable / USB</span>
+            <span class="tech-tag">Air-Gapped Forensics</span>
+            <span class="tech-tag">SHA-256 Evidence Integrity</span>
+            <span class="tech-tag">Zero-Network Ops</span>
+            <span class="tech-tag">EVTX &amp; Syslog</span>
           </div>
           <div class="project-links">
             <a id="proj-log-gh" class="project-link" href="https://github.com/msuryawanshi05/Portable-Log-Analysis-Tool"
@@ -264,9 +367,9 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               GitHub
             </a>
-            <a id="proj-log-live" class="project-link project-link-live" href="" target="_blank" rel="noopener" style="display:none">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-              Live
+            <a id="proj-log-live" class="project-link project-link-live" href="https://www.youtube.com/watch?v=0CafFNWY91Q" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Demo Video
             </a>
           </div>
         </div>
@@ -276,14 +379,13 @@
             <h3 class="project-name">StoryShip - IP Leak Defense System</h3>
             <span class="gh-badge gh-active" id="badge-ship">Checking...</span>
           </div>
-          <p class="project-desc">Content-integrity platform tracking creative asset versions via cryptographic hashing
-            and IPFS, maintaining a tamper-evident audit trail. Automated similarity detection across 3+ contributor
-            workflows to flag potential IP leaks.</p>
+          <p class="project-desc">Decentralized content integrity and asset leak defense system. Utilizes perceptual hashing and IPFS content-addressed storage to enforce immutable audit trails and cryptographic ownership provenance for creative media. Automated similarity detection flags unauthorized IP redistribution across contributor workflows.</p>
           <div class="project-tags">
             <span class="tech-tag">Python</span>
             <span class="tech-tag">IPFS</span>
             <span class="tech-tag">Cryptographic Hashing</span>
-            <span class="tech-tag">Web3</span>
+            <span class="tech-tag">Asset Provenance</span>
+            <span class="tech-tag">Tamper-Evident</span>
           </div>
           <div class="project-links">
             <a id="proj-ship-gh" class="project-link"
@@ -291,9 +393,9 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               GitHub
             </a>
-            <a id="proj-ship-live" class="project-link project-link-live" href="" target="_blank" rel="noopener" style="display:none">
+            <a id="proj-ship-live" class="project-link project-link-live" href="#" target="_blank" rel="noopener">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-              Live
+              Demo
             </a>
           </div>
         </div>
@@ -303,23 +405,22 @@
             <h3 class="project-name">Project F1 - Formula 1 Data Intelligence</h3>
             <span class="gh-badge gh-active" id="badge-f1">Checking...</span>
           </div>
-          <p class="project-desc">Data analysis and visualization project built around Formula 1 race datasets. Extracts
-            performance insights, driver and constructor standings, and lap-time trends. Applied data engineering meets
-            motorsport.</p>
+          <p class="project-desc">Engineer-grade Formula 1 timing and real-time telemetry dashboard. Bridges live Grand Prix sector delta timing, speed/throttle/braking comparison curves, and interactive GeoJSON canvas circuit maps. Features a dual-ingestion architecture streaming OpenF1 telemetry via FastAPI WebSockets into Zustand transient state to eliminate rendering lag.</p>
           <div class="project-tags">
             <span class="tech-tag">Python</span>
-            <span class="tech-tag">Pandas</span>
-            <span class="tech-tag">Data Analysis</span>
-            <span class="tech-tag">Visualization</span>
+            <span class="tech-tag">FastAPI</span>
+            <span class="tech-tag">WebSockets</span>
+            <span class="tech-tag">Telemetry Engine</span>
+            <span class="tech-tag">React &amp; Zustand</span>
           </div>
           <div class="project-links">
             <a id="proj-f1-gh" class="project-link" href="https://github.com/msuryawanshi05/Project-f1" target="_blank" rel="noopener">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               GitHub
             </a>
-            <a id="proj-f1-live" class="project-link project-link-live" href="" target="_blank" rel="noopener" style="display:none">
+            <a id="proj-f1-live" class="project-link project-link-live" href="#" target="_blank" rel="noopener">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-              Live
+              Demo
             </a>
           </div>
         </div>
@@ -331,7 +432,7 @@
   <!-- TERMINAL -->
   <section id="terminal-section">
     <div class="container">
-      <h2 class="section-title">Interactive <span class="accent">Terminal</span></h2>
+      <h2 class="section-title">Interactive Terminal</h2>
       
       <div id="terminal-widget" role="application" aria-label="Interactive terminal">
         <div class="terminal-topbar">
@@ -360,7 +461,7 @@
   <!-- EXPERIENCE -->
   <section id="experience" class="section">
     <div class="container">
-      <h2 class="section-title">Incident <span class="accent">Timeline</span></h2>
+      <h2 class="section-title">Security Experience</h2>
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-dot"></div>
@@ -422,7 +523,7 @@
   <!-- ACHIEVEMENTS -->
   <section id="achievements" class="section">
     <div class="container">
-      <h2 class="section-title">Achievements <span class="accent">&</span> Certs</h2>
+      <h2 class="section-title">Achievements &amp; Certs</h2>
       <div class="badges-wall">
 
         <div class="badge-card glass-card gold">
@@ -452,7 +553,7 @@
           </div>
         </div>
 
-        <div class="badge-card glass-card purple">
+        <div class="badge-card glass-card">
           <div class="badge-icon">
             <img src="assets/Logos/APIsec_logo.png" alt="APISec University" class="org-logo-img">
           </div>
@@ -465,7 +566,7 @@
           </div>
         </div>
 
-        <div class="badge-card glass-card cyan">
+        <div class="badge-card glass-card">
           <div class="badge-icon">
             <img src="assets/Logos/ISC2_logo.png" alt="ISC2" class="org-logo-img">
           </div>
@@ -473,12 +574,12 @@
             <span class="badge-title">CC - ISC&sup2;</span>
             <span class="badge-sub">Certified in Cybersecurity &middot; May 2025</span>
             <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/PECB_Certificate_of_Attestation.pdf','ISCÂ² CC Certificate')" href="#">Certificate</a>
+              <a class="cert-btn" onclick="openCert('assets/Certify/PECB_Certificate_of_Attestation.pdf','ISC2 CC Certificate')" href="#">Certificate</a>
             </div>
           </div>
         </div>
 
-        <div class="badge-card glass-card purple">
+        <div class="badge-card glass-card">
           <div class="badge-icon">
             <img src="assets/Logos/Nptel_logo.png" alt="NPTEL" class="org-logo-img">
           </div>
@@ -511,7 +612,7 @@
   <!-- EXTRACURRICULARS -->
   <section id="extra" class="section">
     <div class="container">
-      <h2 class="section-title">Beyond <span class="accent">Code</span></h2>
+      <h2 class="section-title">Beyond Code</h2>
       <div class="extra-grid">
 
         <div class="extra-card glass-card">
@@ -562,7 +663,7 @@
   <!-- CONTACT -->
   <section id="contact" class="section">
     <div class="container">
-      <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
+      <h2 class="section-title">Get In Touch</h2>
       <div class="contact-wrapper glass-card">
         <p class="contact-intro">Whether you're looking for a security engineer, want to collaborate on a project, or
           just want to talk CTFs, my inbox is open.</p>
@@ -604,7 +705,7 @@
   <!-- FOOTER -->
   <footer id="footer">
     <div class="container">
-      <p>Designed &amp; built by <span class="accent">Mukul Suryawanshi</span> &middot; <span class="mono">2026</span></p>
+      <p>Designed &amp; built by Mukul Suryawanshi &middot; <span class="mono">2026</span></p>
       <p class="footer-location">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:4px;opacity:0.6">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
