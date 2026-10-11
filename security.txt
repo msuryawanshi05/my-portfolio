@@ -1,4 +1,4 @@
-# Security Policy — Mukul Suryawanshi Portfolio
+# Security Policy | Mukul Suryawanshi Portfolio
 # RFC 9116 compliant security.txt
 # See: https://securitytxt.org/
 
@@ -8,7 +8,7 @@ Contact: https://linkedin.com/in/msuryawanshi05
 Preferred-Languages: en
 
 # This is a personal portfolio site. If you find something interesting,
-# I'd genuinely like to know — it's the security-engineer thing to do.
+# I'd genuinely like to know, it's the security-engineer thing to do.
 Policy: https://github.com/msuryawanshi05
 
 Acknowledgments: https://github.com/msuryawanshi05

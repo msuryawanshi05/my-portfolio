@@ -1,4 +1,4 @@
-# Security Policy — Mukul Suryawanshi Portfolio
+# Security Policy | Mukul Suryawanshi Portfolio
 # RFC 9116 compliant security disclosure file
 # Canonical Location: https://msuryawanshi.dev/.well-known/security.txt
 

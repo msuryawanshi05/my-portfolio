@@ -13,4 +13,4 @@
 
 /* PHILOSOPHY */
   "The best defenders think like attackers."
-  Security at inception — built with defensive integrity, offensive mindset, and zero bloatware.
+  Security at inception: built with defensive integrity, offensive mindset, and zero bloatware.

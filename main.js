@@ -530,12 +530,12 @@ function initXterm() {
       `      ${l('github.com/msuryawanshi05/Portable-Log-Analysis-Tool')}`,
       `      ${g('[Video Demo]')} ${l('youtube.com/watch?v=0CafFNWY91Q')}`,
       ``,
-      `  ${a('[3]')} StoryShip — IP Leak Defense`,
+      `  ${a('[3]')} StoryShip - IP Leak Defense`,
       `      IPFS + cryptographic hashing for asset integrity`,
       `      ${l('github.com/msuryawanshi05/IP-Leak-Defense-System-StoryShip')}`,
       `      ${g('[Live Demo]')} ${l('https://storyship.antideploy.app')}`,
       ``,
-      `  ${a('[4]')} Project F1 — Formula 1 Data Intelligence`,
+      `  ${a('[4]')} Project F1 - Formula 1 Data Intelligence`,
       `      Real-time telemetry dashboard . FastAPI WebSockets . React`,
       `      ${l('github.com/msuryawanshi05/Project-f1')}`,
     ],
@@ -547,7 +547,7 @@ function initXterm() {
     },
     ctf: () => [
       hdr('ctf & platforms'),
-      `  ${g('[3rd]')} ICYS CTF — International Cyber Youth Summit (Oct 2025)`,
+      `  ${g('[3rd]')} ICYS CTF - International Cyber Youth Summit (Oct 2025)`,
       `  ${g('[2nd]')} Engineers Day Showcase (Oct 2025)`,
       `  ${a('Top 2')} Smart India Internal Hackathon 2025`,
       ``,
@@ -573,7 +573,7 @@ function initXterm() {
     ],
     sudo: () => {
       if (typeof window.pushFeedAlert === 'function') {
-        window.pushFeedAlert('SECURITY ALERT: Unauthorized sudo attempt — This incident will be reported.', 'alert');
+        window.pushFeedAlert('SECURITY ALERT: Unauthorized sudo attempt. This incident will be reported.', 'alert');
       }
       return [
         `\r\n  ${RE}Nice try! He is not in the sudoers file. This incident will be reported.${R}`,
@@ -587,7 +587,7 @@ function initXterm() {
       `  ${d('[+] Status   : Solved & Authenticated')}`,
     ],
     experience: () => [
-      hdr('incident timeline — experience'),
+      hdr('incident timeline: experience'),
       `  ${a('ShadowFox')}   ${GR}[INTERNSHIP]${R}   2025-07 / 2025-08`,
       `  ${d('  Pen testing . Metasploitable . Wireshark . privesc')}`,
       ``,
@@ -621,7 +621,7 @@ function initXterm() {
     if (cmd.startsWith('sudo')) {
       term.writeln(`\r\n  ${RE}Nice try! He is not in the sudoers file. This incident will be reported.${R}`);
       if (typeof window.pushFeedAlert === 'function') {
-        window.pushFeedAlert('SECURITY ALERT: Unauthorized sudo attempt — This incident will be reported.', 'alert');
+        window.pushFeedAlert('SECURITY ALERT: Unauthorized sudo attempt. This incident will be reported.', 'alert');
       }
       showPrompt();
       return;
@@ -1078,7 +1078,7 @@ if (toggleCertsBtn && moreCertsContainer) {
       if (toggleCertsText) toggleCertsText.textContent = 'Show Less';
       if (toggleCertsIcon) toggleCertsIcon.style.transform = 'rotate(180deg)';
     } else {
-      if (toggleCertsText) toggleCertsText.textContent = 'View More Credentials & Achievements (9+)';
+      if (toggleCertsText) toggleCertsText.textContent = 'View More Credentials & Achievements (4+)';
       if (toggleCertsIcon) toggleCertsIcon.style.transform = 'rotate(0deg)';
       document.getElementById('achievements')?.scrollIntoView({ behavior: 'smooth' });
     }

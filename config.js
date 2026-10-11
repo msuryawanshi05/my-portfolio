@@ -60,7 +60,7 @@ const PORTFOLIO_CONFIG = {
       github:      'https://github.com/msuryawanshi05/IP-Leak-Defense-System-StoryShip',
       live:        'https://storyship.antideploy.app',
       show:        true,
-      description: 'Decentralized content integrity and asset leak defense system. Utilizes perceptual hashing and IPFS content-addressed storage to enforce immutable audit trails and ownership provenance.',
+      description: 'Decentralized content integrity and asset leak defense system. Uses perceptual hashing and IPFS content-addressed storage to enforce immutable audit trails and ownership provenance.',
     },
     {
       id:          'f1',
@@ -76,18 +76,13 @@ const PORTFOLIO_CONFIG = {
   certs: [
     { file: 'https://www.credly.com/badges/20f94722-b475-4928-a122-042f3cbdfe3f/public_url', label: 'ISC2 CC',         show: true },
     { file: 'https://www.credly.com/badges/cbdcc142-d067-4aaf-9c5e-f409172a5cc8/public_url', label: 'Red Hat RH134',   show: true },
-    { file: 'https://www.credly.com/badges/1a32036b-df35-4726-b047-eaade6d2c31a/public_url', label: 'OpenShift DO180', show: true },
+    { file: 'assets/Certify/ICYS.pdf',                            label: 'ICYS CTF',      show: true },
     { file: 'assets/Certify/CASA_Exam.pdf',                       label: 'CASA',          show: true },
     { file: 'assets/Certify/Cryptography and Network Security.pdf',label: 'NPTEL Crypto',  show: true },
     { file: 'assets/Certify/IIRS GEOSAT.pdf',                     label: 'ISRO IIRS',     show: true },
-    { file: 'assets/Certify/ICYS.pdf',                            label: 'ICYS CTF',      show: true },
-    { file: 'assets/Certify/Crest Ctf.pdf',                       label: 'CREST CTF',     show: true },
+    { file: 'https://www.credly.com/badges/1a32036b-df35-4726-b047-eaade6d2c31a/public_url', label: 'OpenShift DO180', show: true },
     { file: 'assets/Certify/Seasides_Goa.pdf',                    label: 'Seasides 2K26', show: true },
     { file: 'assets/Certify/EncipherX.pdf',                       label: 'EncipherX',     show: true },
-    { file: 'assets/Certify/Shadowfox_.pdf',                      label: 'ShadowFox',     show: true },
-    { file: 'assets/Certify/Unstop ehax ctf.pdf',                 label: 'eHax CTF',      show: true },
-    { file: 'assets/Certify/YCCE ctf.png',                        label: 'YCCE CTF',      show: true },
-    { file: 'assets/Certify/codetantra.pdf',                      label: 'CodeTantra',    show: true },
   ],
 
   // -- SKILLS CATEGORIZATION --------------------------------------------------

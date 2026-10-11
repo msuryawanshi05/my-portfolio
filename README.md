@@ -3,13 +3,13 @@
 # 🛡️ Cybersecurity Portfolio & Terminal Experience
 ### Glassmorphic interactive portfolio with xterm.js terminal emulator and Chart.js proficiency radar
 
-<!-- BADGE ROW 1 — Context & Status -->
+<!-- BADGE ROW 1: Context & Status -->
 [![Domain](https://img.shields.io/badge/Domain-Cybersecurity%20%26%20Engineering-orange?style=for-the-badge)](#)
 [![Built For](https://img.shields.io/badge/Built%20For-Personal%20Portfolio-blue?style=for-the-badge)](#)
 [![Architecture](https://img.shields.io/badge/Architecture-Pure%20Static%20Jamstack-purple?style=for-the-badge)](#)
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-green?style=for-the-badge)](#)
 
-<!-- BADGE ROW 2 — Tech Stack -->
+<!-- BADGE ROW 2: Tech Stack -->
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3_Glassmorphism-1572B6?style=flat&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript_ES6+-F7DF1E?style=flat&logo=javascript&logoColor=black)
@@ -28,12 +28,12 @@ A high-performance cybersecurity portfolio and interactive experience built with
 
 ## ✨ Key Features
 
-- **Interactive Terminal Shell** — Embedded `xterm.js` terminal emulator allowing visitors to run commands (`help`, `whoami`, `skills`, `projects`, `certs`, `ctf`, `leetcode`, `experience`, `contact`) with keyboard navigation and autocomplete.
-- **Skills Radar Chart** — Interactive Chart.js radar graph visualizing core competencies across Web Security, Scripting, Exploitation, SIEM / Monitoring, and Recon.
-- **Pure Static Architecture** — Zero-backend, zero-database setup with near-instant load times and zero attack surface.
-- **Centralized Configuration** — Edit `config.js` to modify statistics, project listings, skills, certificates, and radar charts instantly without touching the HTML markup.
-- **Photo & Certificate Modals** — Lightweight client-side lightbox and PDF preview modal for hackathon proof photos and certifications.
-- **Interactive Background** — Custom HTML5 canvas particle network and cursor-tracking lighting effects.
+- **Interactive Terminal Shell**: Embedded `xterm.js` terminal emulator allowing visitors to run commands (`help`, `whoami`, `skills`, `projects`, `certs`, `ctf`, `leetcode`, `experience`, `contact`) with keyboard navigation and autocomplete.
+- **Skills Radar Chart**: Interactive Chart.js radar graph visualizing core competencies across Web Security, Scripting, Exploitation, SIEM / Monitoring, and Recon.
+- **Pure Static Architecture**: Zero-backend, zero-database setup with near-instant load times and zero attack surface.
+- **Centralized Configuration**: Edit `config.js` to modify statistics, project listings, skills, certificates, and radar charts instantly without touching the HTML markup.
+- **Photo & Certificate Modals**: Lightweight client-side lightbox and PDF preview modal for hackathon proof photos and certifications.
+- **Interactive Background**: Custom HTML5 canvas particle network and cursor-tracking lighting effects.
 
 ## 📁 Project Structure
 
@@ -88,8 +88,8 @@ const PORTFOLIO_CONFIG = {
 
 ## 📎 Docs & Resources
 
-- 🔑 [Public PGP Key](./pgp-key.txt) — Security contact verification key
-- 📜 [Security Policy](./security.txt) — RFC 9116 security disclosure policy
+- 🔑 [Public PGP Key](./pgp-key.txt) - Security contact verification key
+- 📜 [Security Policy](./security.txt) - RFC 9116 security disclosure policy
 
 ---
 

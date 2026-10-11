@@ -1,5 +1,5 @@
 # =============================================================================
-# Mukul Suryawanshi — Cybersecurity Portfolio & Labs
+# Mukul Suryawanshi | Cybersecurity Portfolio & Labs
 # Crawler Directives & Recon Instructions
 # =============================================================================
 
