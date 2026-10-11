@@ -41,7 +41,7 @@ const PORTFOLIO_CONFIG = {
       id:          'soc',
       name:        'Distributed SOC for Lab',
       github:      'https://github.com/msuryawanshi05/SOC-for-Lab-',
-      live:        '#', // Update with your SOC demo link
+      live:        'https://soc-lab.antideploy.app',
       show:        true,
       featured:    true,
       description: 'Distributed Security Operations Center (SOC) designed for isolated and multi-node lab environments with unified endpoint telemetry across Windows, Linux, and macOS. Ingests and normalizes 50,000+ daily security events using Wazuh SIEM and Syslog. Features custom Suricata detection rules, maintaining 98%+ alert fidelity across simulated multi-stage attacks.',
@@ -58,7 +58,7 @@ const PORTFOLIO_CONFIG = {
       id:          'ship',
       name:        'StoryShip - IP Leak Defense System',
       github:      'https://github.com/msuryawanshi05/IP-Leak-Defense-System-StoryShip',
-      live:        '#', // Update with your StoryShip demo link
+      live:        'https://storyship.antideploy.app',
       show:        true,
       description: 'Decentralized content integrity and asset leak defense system. Utilizes perceptual hashing and IPFS content-addressed storage to enforce immutable audit trails and ownership provenance.',
     },
