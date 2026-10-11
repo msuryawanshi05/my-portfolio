@@ -171,10 +171,10 @@
       <h2 class="section-title">About Me</h2>
       <div class="about-grid">
         <div class="about-text glass-card">
-          <p>B.Tech CSE (Cybersecurity) undergraduate at St. Vincent Pallotti College, Nagpur, pursuing the field deliberately &mdash; through certifications, CTFs, conferences, and tools that solve real problems.</p>
-          <p>Awarded <strong>2nd Prize at the Engineers Day Project Showcase</strong> for a USB-deployable forensic tool built for air-gapped networks. Secured <strong>3rd Place at the ICYS National CTF</strong>. The kind of wins that come from understanding systems deeply, not just following playbooks.</p>
-          <p>Comfortable across offensive and defensive work, from exploiting controlled lab environments and assessing OWASP Top 10 vulnerabilities to building tamper-evident logging infrastructure and security tooling that runs in production.</p>
-          <p>The best defenders think like attackers. That principle drives everything I build.</p>
+          <p>B.Tech Computer Science (Cybersecurity) undergraduate at St. Vincent Pallotti College, Nagpur. I build security tooling, analyze systems at the OS and protocol level, and break environments to understand how to defend them properly.</p>
+          <p>Awarded <strong>2nd Prize at the Engineers Day Project Showcase</strong> for engineering an air-gapped, USB-deployable forensic log analysis tool with cryptographic integrity checks.</p>
+          <p>Comfortable across both offensive and defensive disciplines&mdash;from auditing web apps against the OWASP Top 10 and escalating privileges in active lab networks, to architecting CTF infrastructure and building distributed telemetry pipelines.</p>
+          <p style="margin-top: 0.5rem; color: var(--cyan-l); font-style: italic;">&ldquo;The best defenders think like attackers.&rdquo; That principle drives everything I build.</p>
         </div>
         <div class="about-stats">
 
@@ -184,19 +184,19 @@
             <span class="stat-sub">National Placement</span>
           </div>
           <div class="stat-card glass-card">
-            <span class="stat-num" id="stat-certs">14+</span>
-            <span class="stat-label">Certifications</span>
-            <span class="stat-sub">Security &amp; Infra</span>
+            <span class="stat-num" id="stat-certs">6+</span>
+            <span class="stat-label">Core Credentials</span>
+            <span class="stat-sub">ISC2 &middot; Red Hat &middot; CASA</span>
           </div>
           <a class="stat-card glass-card" id="stat-thm-card"
             href="https://tryhackme.com/p/msuryawanshi05" target="_blank" rel="noopener"
             title="View TryHackMe profile" style="text-decoration:none;cursor:pointer">
-            <span class="stat-num" id="stat-thm">Top 20%</span>
+            <span class="stat-num" id="stat-thm">Top 10%</span>
             <span class="stat-label">TryHackMe</span>
             <span class="stat-sub">&#8599; profile</span>
           </a>
           <div class="stat-card glass-card">
-            <span class="stat-num" id="stat-machines">22</span>
+            <span class="stat-num" id="stat-machines">25+</span>
             <span class="stat-label">Machines Pwned</span>
             <span class="stat-sub">VulnHub &amp; Labs</span>
           </div>
@@ -526,85 +526,234 @@
       <h2 class="section-title">Achievements &amp; Certs</h2>
       <div class="badges-wall">
 
-        <div class="badge-card glass-card gold">
-          <div class="badge-icon">
-            <img src="assets/Logos/SIH_Logo.png" alt="SIH" class="org-logo-img">
-          </div>
-          <div class="badge-content">
-            <span class="badge-title">2nd Prize - Engineers Day</span>
-            <span class="badge-sub">Smart India Internal Hackathon &middot; Oct 2025</span>
-            <div class="badge-proof-links">
-              <a class="proof-thumb-btn" onclick="openProof('sih')" href="#">View Photos</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="badge-card glass-card cyan">
-          <div class="badge-icon">
-            <span class="badge-mono cyan-mono">ICYS<br>CTF</span>
-          </div>
-          <div class="badge-content">
-            <span class="badge-title">ICYS CTF - 3rd Place</span>
-            <span class="badge-sub">International Cyber Youth Summit &middot; Oct 2025</span>
-            <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/ICYS.pdf','ICYS CTF Certificate')" href="#">Certificate</a>
-              <a class="proof-thumb-btn" onclick="openProof('icys')" href="#">View Photos</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="badge-card glass-card">
-          <div class="badge-icon">
-            <img src="assets/Logos/APIsec_logo.png" alt="APISec University" class="org-logo-img">
-          </div>
-          <div class="badge-content">
-            <span class="badge-title">CASA Certified</span>
-            <span class="badge-sub">APISec University &middot; Apr 2026</span>
-            <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/CASA_Exam.pdf','CASA Certificate')" href="#">Certificate</a>
-            </div>
-          </div>
-        </div>
-
+        <!-- 1. Certified in Cybersecurity (CC) - ISC2 -->
         <div class="badge-card glass-card">
           <div class="badge-icon">
             <img src="assets/Logos/ISC2_logo.png" alt="ISC2" class="org-logo-img">
           </div>
           <div class="badge-content">
-            <span class="badge-title">CC - ISC&sup2;</span>
-            <span class="badge-sub">Certified in Cybersecurity &middot; May 2025</span>
+            <span class="badge-title">Certified in Cybersecurity (CC)</span>
+            <span class="badge-sub">ISC2 &middot; May 2025</span>
             <div class="badge-proof-links">
-              <a class="cert-btn" href="javascript:void(0)">Certificate</a>
+              <a class="cert-btn" href="https://www.credly.com/badges/20f94722-b475-4928-a122-042f3cbdfe3f/public_url" target="_blank" rel="noopener">Credly Badge</a>
             </div>
           </div>
         </div>
 
+        <!-- 2. Red Hat System Administration II (RH134) - Red Hat Academy -->
+        <div class="badge-card glass-card red">
+          <div class="badge-icon">
+            <span class="badge-mono red-mono">RED<br>HAT</span>
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">Red Hat System Admin II (RH134)</span>
+            <span class="badge-sub">Red Hat Academy &middot; Feb 2026</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" href="https://www.credly.com/badges/cbdcc142-d067-4aaf-9c5e-f409172a5cc8/public_url" target="_blank" rel="noopener">Credly Badge</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Red Hat OpenShift Administration I (DO180) - Red Hat Academy -->
+        <div class="badge-card glass-card red">
+          <div class="badge-icon">
+            <span class="badge-mono red-mono">OPEN<br>SHIFT</span>
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">OpenShift Admin I (DO180)</span>
+            <span class="badge-sub">Red Hat Academy &middot; Mar 2026</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" href="https://www.credly.com/badges/1a32036b-df35-4726-b047-eaade6d2c31a/public_url" target="_blank" rel="noopener">Credly Badge</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Certified API Security Analyst (CASA) - APISec University -->
+        <div class="badge-card glass-card purple">
+          <div class="badge-icon">
+            <img src="assets/Logos/APIsec_logo.png" alt="APISec University" class="org-logo-img">
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">Certified API Security Analyst (CASA)</span>
+            <span class="badge-sub">APISec University &middot; Apr 2026</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/CASA_Exam.pdf','CASA Certificate')" href="javascript:void(0)">Certificate</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Cryptography & Network Security (CNS) - NPTEL -->
         <div class="badge-card glass-card">
           <div class="badge-icon">
             <img src="assets/Logos/Nptel_logo.png" alt="NPTEL" class="org-logo-img">
           </div>
           <div class="badge-content">
-            <span class="badge-title">NPTEL - Cryptography</span>
-            <span class="badge-sub">Network Security &middot; Apr 2025</span>
+            <span class="badge-title">Cryptography &amp; Network Security</span>
+            <span class="badge-sub">NPTEL &middot; Apr 2025</span>
             <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/Cryptography and Network Security.pdf','NPTEL Certificate')" href="#">Certificate</a>
+              <a class="cert-btn" onclick="openCert('assets/Certify/Cryptography and Network Security.pdf','NPTEL Certificate')" href="javascript:void(0)">Certificate</a>
             </div>
           </div>
         </div>
 
+        <!-- 6. Geo-data Sharing & Cybersecurity - ISRO IIRS -->
         <div class="badge-card glass-card gold">
           <div class="badge-icon">
             <img src="assets/Logos/Isro_IIrs_logo.png" alt="ISRO IIRS" class="org-logo-img">
           </div>
           <div class="badge-content">
-            <span class="badge-title">ISRO IIRS Program</span>
-            <span class="badge-sub">Geo-data &amp; Cybersecurity &middot; Dec 2024</span>
+            <span class="badge-title">Geo-data Sharing &amp; Cybersecurity</span>
+            <span class="badge-sub">ISRO &ndash; IIRS Outreach &middot; Dec 2024</span>
             <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/IIRS GEOSAT.pdf','ISRO IIRS Certificate')" href="#">Certificate</a>
+              <a class="cert-btn" onclick="openCert('assets/Certify/IIRS GEOSAT.pdf','ISRO IIRS Certificate')" href="javascript:void(0)">Certificate</a>
             </div>
           </div>
         </div>
 
+      </div>
+
+      <!-- EXPANDABLE REMAINING CERTS & ACHIEVEMENTS -->
+      <div id="more-certs" class="more-certs-container badges-wall">
+
+        <!-- 7. ICYS CTF - 3rd Place -->
+        <div class="badge-card glass-card cyan">
+          <div class="badge-icon">
+            <span class="badge-mono cyan-mono">ICYS<br>CTF</span>
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">ICYS CTF &ndash; 3rd Place</span>
+            <span class="badge-sub">International Cyber Youth Summit &middot; Oct 2025</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/ICYS.pdf','ICYS CTF Certificate')" href="javascript:void(0)">Certificate</a>
+              <a class="proof-thumb-btn" onclick="openProof('icys')" href="javascript:void(0)">View Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. 2nd Prize - Engineers Day Showcase -->
+        <div class="badge-card glass-card gold">
+          <div class="badge-icon">
+            <img src="assets/Logos/SIH_Logo.png" alt="SIH" class="org-logo-img">
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">2nd Prize &ndash; Engineers Day</span>
+            <span class="badge-sub">Project Showcase (50+ Entries) &middot; Oct 2025</span>
+            <div class="badge-proof-links">
+              <a class="proof-thumb-btn" onclick="openProof('sih')" href="javascript:void(0)">View Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. CREST CTF Challenge -->
+        <div class="badge-card glass-card cyan">
+          <div class="badge-icon">
+            <span class="badge-mono cyan-mono">CREST<br>CTF</span>
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">CREST CTF Challenge</span>
+            <span class="badge-sub">CREST Con Platform &middot; 2025</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/Crest Ctf.pdf','CREST CTF Certificate')" href="javascript:void(0)">Certificate</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Seasides InfoSec 2K26 Conference -->
+        <div class="badge-card glass-card">
+          <div class="badge-icon">
+            <img src="assets/Logos/Seasides_logo.webp" alt="Seasides Goa" class="org-logo-img">
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">Seasides InfoSec 2K26</span>
+            <span class="badge-sub">16+ Hours Advanced Workshops &middot; Feb 2026</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/Seasides_Goa.pdf','Seasides Certificate')" href="javascript:void(0)">Certificate</a>
+              <a class="proof-thumb-btn" onclick="openProof('seasides')" href="javascript:void(0)">View Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. EncipherX 4.0 Challenge Lead -->
+        <div class="badge-card glass-card">
+          <div class="badge-icon">
+            <img src="assets/Logos/Encipherx_logo.png" alt="EncipherX" class="extra-logo-img">
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">EncipherX 4.0 Author &amp; Lead</span>
+            <span class="badge-sub">24-Hr National CTF (150+ Teams) &middot; 2025</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/EncipherX.pdf','EncipherX Certificate')" href="javascript:void(0)">Certificate</a>
+              <a class="proof-thumb-btn" onclick="openProof('encipherx')" href="javascript:void(0)">View Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. ShadowFox Security Analyst -->
+        <div class="badge-card glass-card">
+          <div class="badge-icon">
+            <span class="badge-mono slate-mono">SHADOW<br>FOX</span>
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">ShadowFox Security Analyst</span>
+            <span class="badge-sub">Cybersecurity Virtual Internship &middot; Nov 2024</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/Shadowfox_.pdf','ShadowFox Certificate')" href="javascript:void(0)">Certificate</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. eHax CTF Competition -->
+        <div class="badge-card glass-card cyan">
+          <div class="badge-icon">
+            <span class="badge-mono cyan-mono">eHax<br>CTF</span>
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">eHax CTF Competition</span>
+            <span class="badge-sub">Unstop Platform CTF &middot; 2025</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/Unstop ehax ctf.pdf','eHax CTF Certificate')" href="javascript:void(0)">Certificate</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14. YCCE National CTF -->
+        <div class="badge-card glass-card cyan">
+          <div class="badge-icon">
+            <span class="badge-mono cyan-mono">YCCE<br>CTF</span>
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">YCCE National CTF</span>
+            <span class="badge-sub">Cybersecurity Competition &middot; 2025</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/YCCE ctf.png','YCCE CTF Certificate')" href="javascript:void(0)">Certificate</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15. CodeTantra Cyber Labs -->
+        <div class="badge-card glass-card">
+          <div class="badge-icon">
+            <span class="badge-mono slate-mono">CODE<br>TAN</span>
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">CodeTantra Cyber Labs</span>
+            <span class="badge-sub">Systems &amp; Network Security &middot; 2024</span>
+            <div class="badge-proof-links">
+              <a class="cert-btn" onclick="openCert('assets/Certify/codetantra.pdf','CodeTantra Certificate')" href="javascript:void(0)">Certificate</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VIEW MORE BUTTON -->
+      <div class="view-more-certs-wrapper">
+        <button id="btn-toggle-certs" class="btn btn-outline" type="button">
+          <span id="toggle-certs-text">View More Credentials &amp; Achievements (9+)</span>
+          <svg id="toggle-certs-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
       </div>
     </div>
   </section>

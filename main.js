@@ -1,6 +1,6 @@
 
 let CFG = (typeof PORTFOLIO_CONFIG !== 'undefined') ? PORTFOLIO_CONFIG : {};
-let STATS    = CFG.stats    || { ctfRank: '#3', machines: 22, certifications: 4, leetcodeSolved: 150, thmRank: 'Top 20%', htbStatus: 'Labs' };
+let STATS    = CFG.stats    || { ctfRank: '#3', machines: '25+', certifications: '6', leetcodeSolved: 150, thmRank: 'Top 10%', htbStatus: 'Labs' };
 let PROFILES = CFG.profiles || {
   leetcode: 'https://leetcode.com/u/msuryawanshi05/',
   tryhackme: 'https://tryhackme.com/p/msuryawanshi05',
@@ -32,9 +32,9 @@ const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.
 
 function applyConfigData() {
   setEl('stat-ctf',      STATS.ctfRank);
-  setEl('stat-certs',    STATS.certifications + '+');
-  setEl('stat-thm',      STATS.thmRank || 'Top 20%');
-  setEl('stat-machines', STATS.machines);
+  setEl('stat-certs',    (STATS.certifications || '6') + '+');
+  setEl('stat-thm',      STATS.thmRank || 'Top 10%');
+  setEl('stat-machines', STATS.machines || '25+');
   setEl('stat-htb',      STATS.htbStatus || 'Labs');
   setEl('stat-leetcode', STATS.leetcodeSolved);
 
@@ -498,12 +498,11 @@ function initXterm() {
     ],
     about: () => [
       hdr('about'),
-      `  B.Tech CSE (Cybersecurity) — deliberate practitioner.`,
-      `  Builds real security tools through CTFs, internships`,
-      `  and conferences rather than coursework alone.`,
+      `  B.Tech Computer Science (Cybersecurity) undergraduate at St. Vincent Pallotti College, Nagpur.`,
+      `  Focused on systems internals, red teaming, and defensive tooling.`,
       ``,
-      `  ${g('[3rd]')} ICYS National CTF  ${g('[2nd]')} Engineers Day Showcase`,
-      `  Exploiting controlled lab environments -> production security tooling.`,
+      `  ${g('[2nd]')} Engineers Day Project Showcase (Air-gapped forensic log tool)`,
+      `  ${g('[3rd]')} ICYS National CTF Podium Finisher`,
       ``,
       `  ${d('-- "The best defenders think like attackers." --')}`,
     ],
@@ -553,13 +552,13 @@ function initXterm() {
       `  ${a('Top 2')} Smart India Internal Hackathon 2025`,
       ``,
       `  ${d('Platforms & Rankings:')}`,
-      `  ${a('TryHackMe')} : ${l('tryhackme.com/p/msuryawanshi05')}  ${g('[Top 20%]')}`,
+      `  ${a('TryHackMe')} : ${l('tryhackme.com/p/msuryawanshi05')}  ${g('[Top 10%]')}`,
       `  ${a('HackTheBox')} : ${l('profile.hackthebox.com/profile/019fe6cd-1983-7008-9b4c-52c9297028e7')}`,
-      `  ${a('Machines')}   : ${STATS.machines + '+'} VulnHub / labs pwned`,
+      `  ${a('Machines')}   : 25+ VulnHub / labs pwned`,
     ],
     tryhackme: () => [
       hdr('tryhackme'),
-      `  Rank    : ${g('Top 20%')}`,
+      `  Rank    : ${g('Top 10%')}`,
       `  Profile : ${l(PROFILES.tryhackme || 'https://tryhackme.com/p/msuryawanshi05')}`,
     ],
     hackthebox: () => [
@@ -1065,3 +1064,23 @@ document.addEventListener('keydown', e => {
   else if (proofZoom?.style.display === 'flex') backToGrid();
   else if (proofOverlay?.classList.contains('active')) closeProof();
 });
+
+// -- TOGGLE MORE CERTS ------------------------------------------------------
+const toggleCertsBtn = document.getElementById('btn-toggle-certs');
+const moreCertsContainer = document.getElementById('more-certs');
+const toggleCertsText = document.getElementById('toggle-certs-text');
+const toggleCertsIcon = document.getElementById('toggle-certs-icon');
+
+if (toggleCertsBtn && moreCertsContainer) {
+  toggleCertsBtn.addEventListener('click', () => {
+    const isExpanded = moreCertsContainer.classList.toggle('expanded');
+    if (isExpanded) {
+      if (toggleCertsText) toggleCertsText.textContent = 'Show Less';
+      if (toggleCertsIcon) toggleCertsIcon.style.transform = 'rotate(180deg)';
+    } else {
+      if (toggleCertsText) toggleCertsText.textContent = 'View More Credentials & Achievements (9+)';
+      if (toggleCertsIcon) toggleCertsIcon.style.transform = 'rotate(0deg)';
+      document.getElementById('achievements')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+}

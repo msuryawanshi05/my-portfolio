@@ -648,10 +648,43 @@ body {
 }
 .gold-mono  { background: rgba(245,158,11,0.15); color: var(--gold);     border: 1px solid rgba(245,158,11,0.35); }
 .cyan-mono  { background: rgba(56,189,248,0.1);  color: #38bdf8;         border: 1px solid rgba(56,189,248,0.3);  }
+.red-mono   { background: rgba(239,68,68,0.12);  color: #f87171;         border: 1px solid rgba(239,68,68,0.35);  }
 .purple-mono, .slate-mono { background: rgba(255,255,255,0.05); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.12); }
+.badge-card.red { border-color: rgba(239, 68, 68, 0.25); }
+.badge-card.red:hover { border-color: rgba(239, 68, 68, 0.5); box-shadow: 0 8px 30px rgba(239, 68, 68, 0.12); }
+
 .badge-content { display: flex; flex-direction: column; gap: 0.15rem; }
 .badge-title { font-size: 0.95rem; font-weight: 700; }
 .badge-sub { font-size: 0.78rem; color: var(--text-muted); }
+
+/* View More Certs */
+.view-more-certs-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.75rem;
+}
+#btn-toggle-certs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+#toggle-certs-icon {
+  transition: transform 0.3s ease;
+}
+.more-certs-container {
+  display: none;
+  margin-top: 1rem;
+}
+.more-certs-container.expanded {
+  display: grid;
+  animation: fadeIn 0.4s ease forwards;
+}
 
 /* -- EXTRAS --------------------------------------------------- */
 .extra-grid {
