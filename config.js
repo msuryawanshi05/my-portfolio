@@ -84,7 +84,7 @@ const PORTFOLIO_CONFIG = {
     { file: 'assets/Certify/Seasides_Goa.pdf',                    label: 'Seasides 2K26', show: true },
     { file: 'assets/Certify/Unstop ehax ctf.pdf',                 label: 'eHax CTF',      show: true },
     { file: 'assets/Certify/YCCE ctf.png',                        label: 'YCCE CTF',      show: true },
-    { file: 'assets/Certify/PECB_Certificate_of_Attestation.pdf', label: 'PECB',          show: true },
+    { file: 'assets/Certify/PECB_Certificate_of_Attestation.pdf', label: 'PECB',          show: false },
   ],
 
   // -- SKILLS CATEGORIZATION --------------------------------------------------
