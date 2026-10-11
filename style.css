@@ -605,11 +605,11 @@ body {
 .badges-wall {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  gap: 0.85rem;
 }
 .badge-card {
-  padding: 1.5rem;
-  display: flex; align-items: center; gap: 1rem;
+  padding: 0.85rem 1.05rem;
+  display: flex; align-items: center; gap: 0.85rem;
 }
 .badge-card.gold { border-color: rgba(245,158,11,0.3); }
 .badge-card.gold:hover { border-color: rgba(245,158,11,0.5); }
@@ -619,31 +619,31 @@ body {
 .badge-card.purple:hover, .badge-card.slate:hover { border-color: rgba(255, 255, 255, 0.25); }
 
 .badge-icon {
-  width: 44px; height: 44px;
+  width: 38px; height: 38px;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 10px;
+  border-radius: 8px;
   flex-shrink: 0;
   overflow: hidden;
 }
 .org-logo-img {
-  width: 34px; height: 34px;
+  width: 28px; height: 28px;
   object-fit: contain;
-  border-radius: 6px;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+  border-radius: 5px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
 }
 .extra-logo-img {
-  width: 30px; height: 30px;
+  width: 26px; height: 26px;
   object-fit: contain;
-  border-radius: 6px;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+  border-radius: 5px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
 }
 .badge-mono {
-  font-size: 0.6rem; font-weight: 800;
+  font-size: 0.55rem; font-weight: 800;
   font-family: 'JetBrains Mono', monospace;
-  width: 36px; height: 36px;
+  width: 32px; height: 32px;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 8px;
-  text-align: center; line-height: 1.2;
+  border-radius: 6px;
+  text-align: center; line-height: 1.15;
   letter-spacing: -0.3px;
 }
 .gold-mono  { background: rgba(245,158,11,0.15); color: var(--gold);     border: 1px solid rgba(245,158,11,0.35); }
@@ -653,11 +653,11 @@ body {
 .badge-card.red { border-color: rgba(239, 68, 68, 0.25); }
 .badge-card.red:hover { border-color: rgba(239, 68, 68, 0.5); box-shadow: 0 8px 30px rgba(239, 68, 68, 0.12); }
 
-.badge-content { display: flex; flex-direction: column; gap: 0.15rem; }
-.badge-title { font-size: 0.95rem; font-weight: 700; }
-.badge-sub { font-size: 0.78rem; color: var(--text-muted); }
+.badge-content { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.badge-title { font-size: 0.88rem; font-weight: 600; line-height: 1.25; color: #f1f5f9; }
+.badge-sub { font-size: 0.72rem; color: var(--text-muted); }
 
-/* View More Certs */
+/* View More Certs - Modern Interactive Pill */
 .view-more-certs-wrapper {
   display: flex;
   justify-content: center;
@@ -668,22 +668,54 @@ body {
   align-items: center;
   gap: 0.5rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  padding: 0.65rem 1.4rem;
-  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 0.55rem 1.35rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+#btn-toggle-certs:hover {
+  background: rgba(6, 182, 212, 0.08);
+  border-color: rgba(6, 182, 212, 0.45);
+  color: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.18);
+}
+#btn-toggle-certs:active {
+  transform: translateY(0);
 }
 #toggle-certs-icon {
-  transition: transform 0.3s ease;
+  width: 14px;
+  height: 14px;
+  color: var(--cyan);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .more-certs-container {
   display: none;
-  margin-top: 1rem;
+  margin-top: 0.85rem;
 }
 .more-certs-container.expanded {
   display: grid;
-  animation: fadeIn 0.4s ease forwards;
+  animation: expandCerts 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes expandCerts {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* -- EXTRAS --------------------------------------------------- */
@@ -939,7 +971,9 @@ body {
   position: relative; z-index: 1;
 }
 #terminal-widget {
-  max-width: 860px; margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   border-radius: var(--radius);
   border: 1px solid rgba(6, 182, 212, 0.18);
   background: rgba(10, 10, 15, 0.75);
@@ -1046,7 +1080,9 @@ body {
 
 /* -- CTF ACTIVITY FEED ----------------------------------------- */
 .ctf-feed-wrapper {
-  max-width: 860px; margin: 2rem auto 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 2rem auto 0;
   border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(10,10,15,0.8);
@@ -1202,12 +1238,12 @@ a.stat-card:hover .stat-sub { opacity: 1; color: #cbd5e1; }
 .project-link-live:hover { color: #22c55e; border-color: rgba(34,197,94,0.5); background: rgba(34,197,94,0.08); }
 
 /* -- BADGE PROOF & CERT LINKS ---------------------------------- */
-.badge-proof-links { display: flex; gap: 0.5rem; flex-wrap: nowrap; align-items: center; margin-top: 0.5rem; }
+.badge-proof-links { display: flex; gap: 0.35rem; flex-wrap: wrap; align-items: center; margin-top: 0.35rem; }
 .proof-thumb-btn, .cert-btn {
-  display: inline-flex; align-items: center; gap: 0.3rem;
+  display: inline-flex; align-items: center; gap: 0.25rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem; font-weight: 600;
-  padding: 0.22rem 0.65rem; border-radius: 99px;
+  font-size: 0.65rem; font-weight: 600;
+  padding: 0.16rem 0.55rem; border-radius: 99px;
   text-decoration: none; cursor: pointer; border: 1px solid;
   transition: all 0.2s;
 }

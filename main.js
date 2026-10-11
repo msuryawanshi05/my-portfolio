@@ -1074,11 +1074,13 @@ const toggleCertsIcon = document.getElementById('toggle-certs-icon');
 if (toggleCertsBtn && moreCertsContainer) {
   toggleCertsBtn.addEventListener('click', () => {
     const isExpanded = moreCertsContainer.classList.toggle('expanded');
+    toggleCertsBtn.classList.toggle('expanded', isExpanded);
+    toggleCertsBtn.setAttribute('aria-expanded', String(isExpanded));
     if (isExpanded) {
       if (toggleCertsText) toggleCertsText.textContent = 'Show Less';
       if (toggleCertsIcon) toggleCertsIcon.style.transform = 'rotate(180deg)';
     } else {
-      if (toggleCertsText) toggleCertsText.textContent = 'View More Credentials & Achievements (4+)';
+      if (toggleCertsText) toggleCertsText.textContent = 'View More';
       if (toggleCertsIcon) toggleCertsIcon.style.transform = 'rotate(0deg)';
       document.getElementById('achievements')?.scrollIntoView({ behavior: 'smooth' });
     }
