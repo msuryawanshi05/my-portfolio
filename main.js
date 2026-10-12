@@ -21,13 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.scrollTo(0, 0);
 });
 
-// Prevent double-click text selection across document
-document.addEventListener('mousedown', (e) => {
-  if (e.detail > 1) {
-    e.preventDefault();
-  }
-});
-
 const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
 
 function applyConfigData() {
@@ -77,19 +70,23 @@ if (navToggle && navLinksEl) {
     navToggle.setAttribute('aria-expanded', String(isOpen));
   });
 
+  const closeMenu = () => {
+    navLinksEl.classList.remove('mobile-open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  };
+
   navLinksEl.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      navLinksEl.classList.remove('mobile-open');
-      navToggle.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
+    a.addEventListener('click', closeMenu);
+  });
+
+  document.querySelectorAll('.nav-cta, .nav-brand').forEach(el => {
+    el.addEventListener('click', closeMenu);
   });
 
   document.addEventListener('click', (e) => {
     if (!e.target.closest('#navbar')) {
-      navLinksEl.classList.remove('mobile-open');
-      navToggle.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
+      closeMenu();
     }
   });
 }
@@ -382,12 +379,13 @@ if (progressBar) {
 const emailLink = document.getElementById('contact-email');
 const toast     = document.getElementById('copy-toast');
 if (emailLink && toast) {
-  emailLink.addEventListener('click', e => {
-    e.preventDefault();
-    navigator.clipboard.writeText('msuryawanshi.1945@gmail.com').then(() => {
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2200);
-    });
+  emailLink.addEventListener('click', () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText('msuryawanshi.1945@gmail.com').then(() => {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2200);
+      }).catch(() => {});
+    }
   });
 }
 
@@ -541,6 +539,7 @@ function initXterm() {
       `  ${a('[4]')} Project F1 - Formula 1 Data Intelligence`,
       `      Real-time telemetry dashboard . FastAPI WebSockets . React`,
       `      ${l('github.com/msuryawanshi05/Project-f1')}`,
+      `      ${g('[Live Demo]')} ${l('https://project-f1.antideploy.app')}`,
     ],
     certs: () => {
       const shown = (CFG.certs || []).filter(c => c.show);
@@ -1087,5 +1086,19 @@ if (toggleCertsBtn && moreCertsContainer) {
       if (toggleCertsIcon) toggleCertsIcon.style.transform = 'rotate(0deg)';
       document.getElementById('achievements')?.scrollIntoView({ behavior: 'smooth' });
     }
+  });
+}
+
+// -- DYNAMIC YEAR & BACK TO TOP ---------------------------------------------
+const currentYearEl = document.getElementById('current-year');
+if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
+
+const backToTopBtn = document.getElementById('back-to-top');
+if (backToTopBtn) {
+  window.addEventListener('scroll', () => {
+    backToTopBtn.classList.toggle('visible', window.scrollY > 450);
+  }, { passive: true });
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }

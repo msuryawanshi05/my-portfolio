@@ -66,9 +66,9 @@ const PORTFOLIO_CONFIG = {
       id:          'f1',
       name:        'Project F1 - Formula 1 Data Intelligence',
       github:      'https://github.com/msuryawanshi05/Project-f1',
-      live:        '#', // Update with your Project F1 demo link
+      live:        'https://project-f1.antideploy.app',
       show:        true,
-      description: 'Engineer-grade Formula 1 timing and real-time telemetry dashboard. Bridges live Grand Prix sector delta timing, speed/throttle/braking comparison curves, and interactive GeoJSON canvas circuit maps. Features a dual-ingestion architecture streaming OpenF1 telemetry via FastAPI WebSockets into Zustand transient state.',
+      description: 'Real-time Formula 1 timing and telemetry dashboard. Bridges live Grand Prix sector delta timing, speed/throttle/braking comparison curves, and interactive GeoJSON canvas circuit maps. Features a dual-ingestion architecture streaming OpenF1 telemetry via FastAPI WebSockets into Zustand transient state.',
     },
   ],
 
