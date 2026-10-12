@@ -11,8 +11,8 @@ const PORTFOLIO_CONFIG = {
     certifications:    '6',       // Number of core credentials
     thmRank:          'Top 10%',  // TryHackMe rank
     machines:          '25+',     // VulnHub / TryHackMe machines total
-    htbStatus:        'Labs',     // HackTheBox active labs
-    leetcodeSolved:   150,        // LeetCode solved count
+    htbStatus:        'Active',   // HackTheBox active labs
+    leetcodeSolved:   '150+',     // LeetCode solved count
   },
 
   // -- PLATFORM PROFILES ------------------------------------------------------

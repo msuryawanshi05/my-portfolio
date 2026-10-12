@@ -35,8 +35,8 @@ function applyConfigData() {
   setEl('stat-certs',    (STATS.certifications || '6') + '+');
   setEl('stat-thm',      STATS.thmRank || 'Top 10%');
   setEl('stat-machines', STATS.machines || '25+');
-  setEl('stat-htb',      STATS.htbStatus || 'Labs');
-  setEl('stat-leetcode', STATS.leetcodeSolved);
+  setEl('stat-htb',      STATS.htbStatus || 'Active');
+  setEl('stat-leetcode', STATS.leetcodeSolved || '150+');
 
   const thmCard = document.getElementById('stat-thm-card');
   if (thmCard && PROFILES.tryhackme) thmCard.href = PROFILES.tryhackme;
@@ -349,9 +349,12 @@ REPOS.forEach(({ repo, badgeId }) => {
     .then(data => {
       if (!data.pushed_at) { badge.style.display = 'none'; return; }
       const days = (Date.now() - new Date(data.pushed_at)) / 86400000;
-      const [label, cls] = days < 30 ? ['[LIVE] Active', 'active']
+      let [label, cls] = days < 30 ? ['[LIVE] Active', 'active']
                          : days < 90 ? ['Maintained', 'maintained']
                          : ['Archived', 'archived'];
+      if (repo === 'Project-f1' && label === '[LIVE] Active') {
+        label = 'Active Dev';
+      }
       badge.textContent = label;
       badge.className = `gh-badge gh-${cls}`;
     })
@@ -492,13 +495,13 @@ function initXterm() {
       hdr('whoami'),
       `  ${a('Mukul Suryawanshi')}`,
       `  Role    : Cybersecurity Engineer & Tool Builder`,
-      `  College : St. Vincent Pallotti College, Nagpur MH`,
+      `  College : St. Vincent Pallotti College of Engineering and Technology, Nagpur`,
       `  Focus   : Offensive security  .  SOC tooling  .  CTFs`,
       `  Email   : ${l('msuryawanshi.1945@gmail.com')}`,
     ],
     about: () => [
       hdr('about'),
-      `  B.Tech Computer Science (Cybersecurity) undergraduate at St. Vincent Pallotti College, Nagpur.`,
+      `  B.Tech Computer Science (Cybersecurity) undergraduate at St. Vincent Pallotti College of Engineering and Technology, Nagpur.`,
       `  Focused on systems internals, red teaming, and defensive tooling.`,
       ``,
       `  ${g('[2nd]')} Engineers Day Project Showcase (Air-gapped forensic log tool)`,
