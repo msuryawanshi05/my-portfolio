@@ -7,4 +7,4 @@ This website respects Do Not Track (DNT) header signals sent by user web browser
 2. No Behavioral Tracking: We do not perform cross-site tracking or profiling.
 3. Minimal Telemetry: Any telemetry collected is strictly operational (server response status codes) and contains no PII.
 
-Policy-Location: https://msuryawanshi.dev/.well-known/dnt-policy.txt
+Policy-Location: https://msuryawanshi05.antideploy.app/.well-known/dnt-policy.txt

@@ -80,7 +80,7 @@ if (navToggle && navLinksEl) {
     a.addEventListener('click', closeMenu);
   });
 
-  document.querySelectorAll('.nav-cta, .nav-brand').forEach(el => {
+  document.querySelectorAll('.nav-cta').forEach(el => {
     el.addEventListener('click', closeMenu);
   });
 
@@ -306,16 +306,28 @@ document.querySelectorAll('.stat-num').forEach(el => {
   const pushLine = (entry) => {
     const line = document.createElement('div');
     line.className = `feed-line feed-${entry.type}`;
-    line.innerHTML = `<span class="feed-time">${entry.time}</span><span class="feed-type">${entry.type.toUpperCase()}</span><span class="feed-msg">${entry.msg}</span>`;
+    // textContent, not innerHTML: messages include GitHub API data
+    for (const [cls, text] of [['feed-time', entry.time], ['feed-type', entry.type.toUpperCase()], ['feed-msg', entry.msg]]) {
+      const span = document.createElement('span');
+      span.className = cls;
+      span.textContent = text;
+      line.appendChild(span);
+    }
     feed.appendChild(line);
     while (feed.children.length > 7) feed.removeChild(feed.firstChild);
     feed.scrollTop = feed.scrollHeight;
     requestAnimationFrame(() => line.classList.add('visible'));
   };
 
-  const addLine = () => {
-    const entry = ENTRIES[idx % ENTRIES.length]; idx++;
-    pushLine(entry);
+  const formatEvent = (e) => {
+    const repo = e.repo.name;
+    switch (e.type) {
+      case 'PushEvent':   return `Pushed to ${repo}`;
+      case 'CreateEvent': return `Created ${e.payload.ref_type} in ${repo}`;
+      case 'WatchEvent':  return `Starred ${repo}`;
+      case 'ForkEvent':   return `Forked ${repo}`;
+      default:            return `Activity on ${repo}`;
+    }
   };
 
   window.pushFeedAlert = (msg, type = 'alert') => {
@@ -328,12 +340,42 @@ document.querySelectorAll('.stat-num').forEach(el => {
     pushLine({ type, time, msg });
   };
 
+  const addLine = () => pushLine(ENTRIES[idx++ % ENTRIES.length]);
+
+  const mergeGitHub = (gh) => {
+    // Interleave: one GitHub event after each hardcoded entry, leftovers at the end
+    const hard = ENTRIES.splice(0);
+    for (let i = 0; i < Math.max(hard.length, gh.length); i++) {
+      if (hard[i]) ENTRIES.push(hard[i]);
+      if (gh[i]) ENTRIES.push(gh[i]);
+    }
+    // Continue right after the last line already shown, not at the old index
+    if (idx) idx = ENTRIES.indexOf(hard[(idx - 1) % hard.length]) + 1;
+  };
+
+  // Cache per tab session: saves a GitHub API call (60/hour limit) on every refresh
+  let cached = null;
+  try { cached = JSON.parse(sessionStorage.getItem('gh_feed')); } catch {}
+  if (Array.isArray(cached)) mergeGitHub(cached);
+  else fetch('https://api.github.com/users/msuryawanshi05/events/public?per_page=10')
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(events => {
+      // API order isn't guaranteed chronological
+      const gh = events.sort((a, b) => b.created_at.localeCompare(a.created_at)).map(e => ({
+        type: 'info',
+        time: new Date(e.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }),
+        msg: formatEvent(e),
+      }));
+      try { sessionStorage.setItem('gh_feed', JSON.stringify(gh)); } catch {}
+      mergeGitHub(gh);
+    })
+    .catch(() => {}); // API down or rate-limited: keep cycling the hardcoded entries
+
   for (let i = 0; i < 4; i++) addLine();
   setInterval(addLine, 3200);
 })();
 
 const REPOS = [
-  { repo: 'SOC-for-Lab-',                     badgeId: 'badge-soc'  },
   { repo: 'Portable-Log-Analysis-Tool',       badgeId: 'badge-log'  },
   { repo: 'IP-Leak-Defense-System-StoryShip', badgeId: 'badge-ship' },
   { repo: 'Project-f1',                       badgeId: 'badge-f1'   },
@@ -741,11 +783,25 @@ function initXterm() {
   });
 }
 
-try {
-  initXterm();
-} catch (err) {
-  console.warn('initXterm error:', err);
-}
+// Load CDN scripts only when their section is about to scroll into view
+const loadScript = (src) => new Promise((resolve, reject) => {
+  const s = document.createElement('script');
+  s.src = src; s.onload = resolve; s.onerror = reject;
+  document.head.appendChild(s);
+});
+const whenNear = (el, fn) => {
+  if (!el) return;
+  const io = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) { io.disconnect(); fn(); }
+  }, { rootMargin: '400px' });
+  io.observe(el);
+};
+
+whenNear(document.getElementById('xterm-container'), () =>
+  Promise.all([
+    loadScript('https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js'),
+    loadScript('https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.min.js'),
+  ]).then(initXterm).catch(err => console.warn('initXterm error:', err)));
 
 // -- SKILLS RADAR CHART (Chart.js) -------------------------------------------
 // Data from PORTFOLIO_CONFIG.skills.radar in config.js
@@ -816,11 +872,9 @@ function initSkillsRadar() {
   });
 }
 
-try {
-  initSkillsRadar();
-} catch (err) {
-  console.warn('initSkillsRadar error:', err);
-}
+whenNear(document.getElementById('skills-radar'), () =>
+  loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js')
+    .then(initSkillsRadar).catch(err => console.warn('initSkillsRadar error:', err)));
 
 // -- TERMINAL BOOT ENTRANCE & PAGE DATA REVEAL ----------------------------
 (function heroEntrance() {
@@ -856,22 +910,22 @@ try {
     setTimeout(() => {
       if (fillBar) fillBar.style.width = '68%';
       if (statusText) statusText.textContent = 'INITIALIZING SIEM & SOC TELEMETRY...';
-    }, 500);
+    }, 1200);
 
     // Step 3: Security integrity verification
     setTimeout(() => {
       if (fillBar) fillBar.style.width = '92%';
       if (statusText) statusText.textContent = 'VERIFYING SECURITY INTEGRITY...';
-    }, 1050);
+    }, 2400);
 
     // Step 4: Access granted
     setTimeout(() => {
       if (fillBar) fillBar.style.width = '100%';
       if (statusText) statusText.textContent = 'SYSTEM_READY · ACCESS GRANTED';
-    }, 1500);
+    }, 3300);
 
     // Step 5: Fade out boot screen
-    setTimeout(finishBoot, 1850);
+    setTimeout(finishBoot, 4000);
   };
 
   if (document.readyState === 'loading') {
@@ -880,8 +934,8 @@ try {
     setTimeout(runBootSequence, 50);
   }
 
-  // Safety fallback: dismiss boot screen after 3s maximum
-  setTimeout(finishBoot, 3000);
+  // Safety fallback: dismiss boot screen after 5s maximum
+  setTimeout(finishBoot, 5000);
 })();
 
 // -- CURSOR GLOW --------------------------------------------------------------
@@ -1043,26 +1097,36 @@ const certModal   = document.getElementById('cert-modal');
 const certTitle   = document.getElementById('cert-title');
 const certClose   = document.getElementById('cert-close');
 const certFrame   = document.getElementById('cert-frame');
+const certOpen    = document.getElementById('cert-open');
+let lastCertTrigger = null;
 
 window.openCert = (file, label) => {
   if (!certOverlay) return;
+  lastCertTrigger = document.activeElement;
   certTitle.textContent = label || 'Certificate';
   certFrame.src = file;
+  if (certOpen) certOpen.href = file; // mobile browsers don't render PDFs in iframes
   certOverlay.classList.add('active');
   certOverlay.setAttribute('aria-hidden', 'false');
+  certClose?.focus();
 };
 
-certClose?.addEventListener('click', () => {
+const closeCert = () => {
   certOverlay.classList.remove('active');
+  certOverlay.setAttribute('aria-hidden', 'true');
   certFrame.src = '';
-});
+  lastCertTrigger?.focus();
+};
+
+certClose?.addEventListener('click', closeCert);
 certOverlay?.addEventListener('click', e => {
-  if (e.target === certOverlay) { certOverlay.classList.remove('active'); certFrame.src = ''; }
+  if (e.target === certOverlay) closeCert();
 });
 
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
-  if (certOverlay?.classList.contains('active')) { certOverlay.classList.remove('active'); certFrame.src = ''; }
+  if (certOverlay?.classList.contains('active')) closeCert();
+  else if (navLinksEl?.classList.contains('mobile-open')) navToggle.click();
   else if (proofZoom?.style.display === 'flex') backToGrid();
   else if (proofOverlay?.classList.contains('active')) closeProof();
 });

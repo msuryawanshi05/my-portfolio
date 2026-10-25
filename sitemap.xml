@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://msuryawanshi.dev/</loc>
+    <loc>https://msuryawanshi05.antideploy.app/</loc>
     <lastmod>2026-08-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://msuryawanshi.dev/security.txt</loc>
+    <loc>https://msuryawanshi05.antideploy.app/security.txt</loc>
     <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://msuryawanshi.dev/humans.txt</loc>
+    <loc>https://msuryawanshi05.antideploy.app/humans.txt</loc>
     <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://msuryawanshi.dev/pgp-key.txt</loc>
+    <loc>https://msuryawanshi05.antideploy.app/pgp-key.txt</loc>
     <lastmod>2026-08-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

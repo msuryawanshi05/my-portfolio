@@ -12,11 +12,11 @@
 
   <!-- OpenGraph / Facebook / LinkedIn / Discord -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://msuryawanshi.dev/" />
+  <meta property="og:url" content="https://msuryawanshi05.antideploy.app/" />
   <meta property="og:title" content="Mukul Suryawanshi | Security Engineer · Tool Builder · CTF Player" />
   <meta property="og:description"
     content="Offensive mindset. Defensive build. Security tooling, SIEM/SOC engineering, CTF writeups, and forensics." />
-  <meta property="og:image" content="https://msuryawanshi.dev/assets/og-card.png" />
+  <meta property="og:image" content="https://msuryawanshi05.antideploy.app/assets/og-card.png" />
   <meta property="og:site_name" content="Mukul Suryawanshi Portfolio" />
 
   <!-- Twitter / X -->
@@ -26,11 +26,14 @@
   <meta name="twitter:title" content="Mukul Suryawanshi | Security Engineer · Tool Builder · CTF Player" />
   <meta name="twitter:description"
     content="Offensive mindset. Defensive build. Security tooling, SIEM/SOC engineering, CTF writeups, and forensics." />
-  <meta name="twitter:image" content="https://msuryawanshi.dev/assets/og-card.png" />
+  <meta name="twitter:image" content="https://msuryawanshi05.antideploy.app/assets/og-card.png" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%2306b6d4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
 
+  <link rel="dns-prefetch" href="https://api.github.com" />
+  <link rel="preconnect" href="https://api.github.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -39,8 +42,6 @@
   <link rel="stylesheet" href="style.css" />
   <!-- xterm.js: real terminal emulator -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
-  <!-- Chart.js: skills radar chart -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 
 <body>
@@ -66,21 +67,16 @@
     (function() {
       var bs = document.getElementById('boot-screen');
       if (!bs) return;
-      if (sessionStorage.getItem('portfolio_boot_seen')) {
-        bs.remove();
-        return;
-      }
       var dismissed = false;
       function dismiss() {
         if (dismissed) return;
         dismissed = true;
-        sessionStorage.setItem('portfolio_boot_seen', 'true');
         bs.classList.add('fade-out');
         setTimeout(function() { if (bs && bs.parentNode) bs.remove(); }, 400);
       }
       bs.addEventListener('click', dismiss);
       window.addEventListener('keydown', dismiss, { once: true });
-      setTimeout(dismiss, 1200);
+      setTimeout(dismiss, 4000);
     })();
   </script>
 
@@ -97,7 +93,6 @@
   <!-- NAV -->
   <nav id="navbar" aria-label="Main Navigation">
     <div class="nav-inner">
-      <a href="#" class="nav-brand" aria-label="Mukul Suryawanshi Home">Mukul<span class="brand-dot">.</span>S</a>
       <ul class="nav-links" id="nav-links">
         <li><a href="#terminal-section" id="nav-terminal-btn">Terminal</a></li>
         <li><a href="#about">About</a></li>
@@ -147,7 +142,7 @@
           <span class="hs-key">availability</span><span class="hs-sep">:</span><span class="hs-val"> available_for_hire</span><span class="hs-cursor"></span>
         </div>
       </div>
-      <h1 class="hero-name">Mukul.S</h1>
+      <h1 class="hero-name">Mukul Suryawanshi</h1>
       <p class="hero-tagline">Offensive mindset. Defensive build.</p>
       <p class="hero-sub">Security Engineer &middot; Tool Builder &middot; CTF Player</p>
       <div class="hero-btns">
@@ -207,18 +202,6 @@
             <span class="stat-label">ICYS CTF</span>
             <span class="stat-sub">National Placement</span>
           </div>
-          <a class="stat-card glass-card" id="stat-thm-card"
-            href="https://tryhackme.com/p/msuryawanshi05" target="_blank" rel="noopener"
-            title="View TryHackMe profile" style="text-decoration:none;cursor:pointer">
-            <span class="stat-num" id="stat-thm">Top 10%</span>
-            <span class="stat-label">TryHackMe</span>
-            <span class="stat-sub">Global Percentile &middot; &#8599;</span>
-          </a>
-          <div class="stat-card glass-card">
-            <span class="stat-num" id="stat-machines">25+</span>
-            <span class="stat-label">Machines Pwned</span>
-            <span class="stat-sub">VulnHub &amp; Labs</span>
-          </div>
           <a class="stat-card glass-card" id="stat-htb-card"
             href="https://profile.hackthebox.com/profile/019fe6cd-1983-7008-9b4c-52c9297028e7?utm_medium=copy_url" target="_blank" rel="noopener"
             title="View HackTheBox profile" style="text-decoration:none;cursor:pointer">
@@ -226,12 +209,17 @@
             <span class="stat-label">HackTheBox</span>
             <span class="stat-sub">Competitive Labs &middot; &#8599;</span>
           </a>
-          <a class="stat-card glass-card" id="stat-lc-card"
-            href="https://leetcode.com/u/msuryawanshi05/" target="_blank" rel="noopener"
-            title="View LeetCode profile" style="text-decoration:none;cursor:pointer">
-            <span class="stat-num" id="stat-leetcode">150+</span>
-            <span class="stat-label">LeetCode Solved</span>
-            <span class="stat-sub">Data Structures &amp; Dev &middot; &#8599;</span>
+          <div class="stat-card glass-card">
+            <span class="stat-num" id="stat-machines">25+</span>
+            <span class="stat-label">Machines Pwned</span>
+            <span class="stat-sub">VulnHub &amp; Labs</span>
+          </div>
+          <a class="stat-card glass-card" id="stat-thm-card"
+            href="https://tryhackme.com/p/msuryawanshi05" target="_blank" rel="noopener"
+            title="View TryHackMe profile" style="text-decoration:none;cursor:pointer">
+            <span class="stat-num" id="stat-thm">Top 10%</span>
+            <span class="stat-label">TryHackMe</span>
+            <span class="stat-sub">Global Percentile &middot; &#8599;</span>
           </a>
         </div>
       </div>
@@ -344,9 +332,9 @@
           </div>
           <div class="project-card-header">
             <h3 class="project-name">Distributed SOC for Lab</h3>
-            <span class="gh-badge gh-active" id="badge-soc">Checking...</span>
+            <span class="gh-badge gh-defensive">Defensive</span>
           </div>
-          <p class="project-desc">Distributed Security Operations Center (SOC) designed for isolated and multi-node lab environments with unified endpoint telemetry across <strong>Windows</strong>, <strong>Linux</strong>, and <strong>macOS</strong>. Ingests and normalizes 50,000+ daily security events using Wazuh SIEM and Syslog. Features custom Suricata detection rules, maintaining 98%+ alert fidelity across simulated multi-stage attacks including privilege escalation, credential dumping, and lateral movement.</p>
+          <p class="project-desc">Custom SOC platform built in Python for college lab monitoring. Deployed lightweight agents on <strong>Linux</strong>, <strong>macOS</strong>, and <strong>Windows</strong> lab machines; agents stream system events over TCP to a central manager. A JSON-configurable rule engine matches patterns and deduplicates alerts. FastAPI serves the dashboard with per-teacher auth, severity filters, alert acknowledgement, and one-click remote process termination. SQLite backend with pruning keeps storage bounded. Teacher analytics panel generates local AI-style class summaries via SSE stream. Built as a fork from an existing base, then extended with the FastAPI layer, teacher auth system, and rule hot-reload.</p>
           <div class="project-tags">
             <span class="tech-tag">Wazuh SIEM</span>
             <span class="tech-tag">Distributed SOC</span>
@@ -470,7 +458,7 @@
       <div class="ctf-feed-wrapper">
         <div class="ctf-feed-header">
           <span class="feed-pulse"></span>
-          LIVE ACTIVITY FEED - Lab &amp; CTF Environment
+          ACTIVITY FEED - GitHub
         </div>
         <div id="ctf-feed"></div>
       </div>
@@ -482,6 +470,33 @@
     <div class="container">
       <h2 class="section-title">Security Experience</h2>
       <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass-card timeline-current">
+            <div class="timeline-header">
+              <div>
+                <span class="soc-tag">[RESEARCH]</span>
+                <h3 class="timeline-role">Research Intern</h3>
+                <span class="timeline-company">ASTRA Lab, IIT Madras</span>
+              </div>
+              <span class="timeline-date"><span class="feed-pulse" aria-hidden="true"></span> 2026-10 / Present</span>
+            </div>
+            <ul class="timeline-points">
+              <li>Researching Command and Control (C2) architectures and modern Endpoint Detection and Response (EDR)
+                mechanisms, evaluating how enterprise systems detect covert in-memory execution and evasion techniques</li>
+              <li>Developing automated telemetry validation pipelines and isolated sandbox environments to analyze
+                host-level behavioral anomalies and extract Indicators of Compromise (IOCs)</li>
+            </ul>
+            <div class="timeline-tags">
+              <span class="tech-tag">C2 Frameworks</span>
+              <span class="tech-tag">EDR</span>
+              <span class="tech-tag">Memory Forensics</span>
+              <span class="tech-tag">IOC Extraction</span>
+              <span class="tech-tag">Sandbox Analysis</span>
+            </div>
+          </div>
+        </div>
+
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-card glass-card">
@@ -547,7 +562,7 @@
         <!-- 1. Certified in Cybersecurity (CC) - ISC2 -->
         <div class="badge-card glass-card">
           <div class="badge-icon">
-            <img src="assets/Logos/ISC2_logo.png" alt="ISC2" class="org-logo-img">
+            <img src="assets/Logos/ISC2_logo.png" loading="lazy" alt="ISC2" class="org-logo-img">
           </div>
           <div class="badge-content">
             <span class="badge-title">Certified in Cybersecurity (CC)</span>
@@ -581,8 +596,8 @@
             <span class="badge-title">ICYS CTF - 3rd Place</span>
             <span class="badge-sub">International Cyber Youth Summit &middot; Oct 2025</span>
             <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/ICYS.pdf','ICYS CTF Certificate')" href="javascript:void(0)">Certificate</a>
-              <a class="proof-thumb-btn" onclick="openProof('icys')" href="javascript:void(0)">View Photos</a>
+              <button type="button" class="cert-btn" onclick="openCert('assets/Certify/ICYS.pdf','ICYS CTF Certificate')">Certificate</button>
+              <button type="button" class="proof-thumb-btn" onclick="openProof('icys')">View Photos</button>
             </div>
           </div>
         </div>
@@ -590,13 +605,13 @@
         <!-- 4. Certified API Security Analyst (CASA) - APISec University -->
         <div class="badge-card glass-card purple">
           <div class="badge-icon">
-            <img src="assets/Logos/APIsec_logo.png" alt="APISec University" class="org-logo-img">
+            <img src="assets/Logos/APIsec_logo.png" loading="lazy" alt="APISec University" class="org-logo-img">
           </div>
           <div class="badge-content">
             <span class="badge-title">Certified API Security Analyst (CASA)</span>
             <span class="badge-sub">APISec University &middot; Apr 2026</span>
             <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/CASA_Exam.pdf','CASA Certificate')" href="javascript:void(0)">Certificate</a>
+              <button type="button" class="cert-btn" onclick="openCert('assets/Certify/CASA_Exam.pdf','CASA Certificate')">Certificate</button>
             </div>
           </div>
         </div>
@@ -604,13 +619,13 @@
         <!-- 5. Cryptography & Network Security (CNS) - NPTEL -->
         <div class="badge-card glass-card">
           <div class="badge-icon">
-            <img src="assets/Logos/Nptel_logo.png" alt="NPTEL" class="org-logo-img">
+            <img src="assets/Logos/Nptel_logo.png" loading="lazy" alt="NPTEL" class="org-logo-img">
           </div>
           <div class="badge-content">
             <span class="badge-title">Cryptography &amp; Network Security</span>
             <span class="badge-sub">NPTEL &middot; Apr 2025</span>
             <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/Cryptography and Network Security.pdf','NPTEL Certificate')" href="javascript:void(0)">Certificate</a>
+              <button type="button" class="cert-btn" onclick="openCert('assets/Certify/Cryptography and Network Security.pdf','NPTEL Certificate')">Certificate</button>
             </div>
           </div>
         </div>
@@ -618,13 +633,13 @@
         <!-- 6. Geo-data Sharing & Cybersecurity - ISRO IIRS -->
         <div class="badge-card glass-card gold">
           <div class="badge-icon">
-            <img src="assets/Logos/Isro_IIrs_logo.png" alt="ISRO IIRS" class="org-logo-img">
+            <img src="assets/Logos/Isro_IIrs_logo.png" loading="lazy" alt="ISRO IIRS" class="org-logo-img">
           </div>
           <div class="badge-content">
             <span class="badge-title">Geo-data Sharing &amp; Cybersecurity</span>
             <span class="badge-sub">ISRO - IIRS Outreach &middot; Dec 2024</span>
             <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/IIRS GEOSAT.pdf','ISRO IIRS Certificate')" href="javascript:void(0)">Certificate</a>
+              <button type="button" class="cert-btn" onclick="openCert('assets/Certify/IIRS GEOSAT.pdf','ISRO IIRS Certificate')">Certificate</button>
             </div>
           </div>
         </div>
@@ -651,13 +666,13 @@
         <!-- 8. 2nd Prize - Engineers Day Showcase -->
         <div class="badge-card glass-card gold">
           <div class="badge-icon">
-            <img src="assets/Logos/SIH_Logo.png" alt="SIH" class="org-logo-img">
+            <img src="assets/Logos/SIH_Logo.png" loading="lazy" alt="SIH" class="org-logo-img">
           </div>
           <div class="badge-content">
             <span class="badge-title">2nd Prize - Engineers Day</span>
             <span class="badge-sub">Project Showcase (50+ Entries) &middot; Oct 2025</span>
             <div class="badge-proof-links">
-              <a class="proof-thumb-btn" onclick="openProof('sih')" href="javascript:void(0)">View Photos</a>
+              <button type="button" class="proof-thumb-btn" onclick="openProof('sih')">View Photos</button>
             </div>
           </div>
         </div>
@@ -665,14 +680,14 @@
         <!-- 9. Seasides InfoSec 2K26 Conference -->
         <div class="badge-card glass-card">
           <div class="badge-icon">
-            <img src="assets/Logos/Seasides_logo.webp" alt="Seasides Goa" class="org-logo-img">
+            <img src="assets/Logos/Seasides_logo.webp" loading="lazy" alt="Seasides Goa" class="org-logo-img">
           </div>
           <div class="badge-content">
             <span class="badge-title">Seasides InfoSec 2K26</span>
             <span class="badge-sub">16+ Hours Advanced Workshops &middot; Feb 2026</span>
             <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/Seasides_Goa.pdf','Seasides Certificate')" href="javascript:void(0)">Certificate</a>
-              <a class="proof-thumb-btn" onclick="openProof('seasides')" href="javascript:void(0)">View Photos</a>
+              <button type="button" class="cert-btn" onclick="openCert('assets/Certify/Seasides_Goa.pdf','Seasides Certificate')">Certificate</button>
+              <button type="button" class="proof-thumb-btn" onclick="openProof('seasides')">View Photos</button>
             </div>
           </div>
         </div>
@@ -680,14 +695,14 @@
         <!-- 10. EncipherX 4.0 Challenge Lead -->
         <div class="badge-card glass-card">
           <div class="badge-icon">
-            <img src="assets/Logos/Encipherx_logo.png" alt="EncipherX" class="extra-logo-img">
+            <img src="assets/Logos/Encipherx_logo.png" loading="lazy" alt="EncipherX" class="extra-logo-img">
           </div>
           <div class="badge-content">
             <span class="badge-title">EncipherX 4.0 Author &amp; Lead</span>
             <span class="badge-sub">24-Hr National CTF (150+ Teams) &middot; 2025</span>
             <div class="badge-proof-links">
-              <a class="cert-btn" onclick="openCert('assets/Certify/EncipherX.pdf','EncipherX Certificate')" href="javascript:void(0)">Certificate</a>
-              <a class="proof-thumb-btn" onclick="openProof('encipherx')" href="javascript:void(0)">View Photos</a>
+              <button type="button" class="cert-btn" onclick="openCert('assets/Certify/EncipherX.pdf','EncipherX Certificate')">Certificate</button>
+              <button type="button" class="proof-thumb-btn" onclick="openProof('encipherx')">View Photos</button>
             </div>
           </div>
         </div>
@@ -715,42 +730,42 @@
 
         <div class="extra-card glass-card">
           <div class="extra-icon">
-            <img src="assets/Logos/Encipherx_logo.png" alt="EncipherX" class="extra-logo-img">
+            <img src="assets/Logos/Encipherx_logo.png" loading="lazy" alt="EncipherX" class="extra-logo-img">
           </div>
           <h3>EncipherX 4.0</h3>
           <p>Android Challenge Lead &amp; Media Head for a 24-hour national CTF that drew 150+ competing teams.
             Architected Java-based Android exploitation challenges and drove end-to-end media operations.</p>
           <div class="extra-actions">
             <span class="extra-tag">Leadership</span>
-            <a class="proof-thumb-btn" onclick="openProof('encipherx')" href="javascript:void(0)">View Photos</a>
-            <a class="cert-btn" onclick="openCert('assets/Certify/EncipherX.pdf','EncipherX Certificate')" href="javascript:void(0)">Certificate</a>
+            <button type="button" class="proof-thumb-btn" onclick="openProof('encipherx')">View Photos</button>
+            <button type="button" class="cert-btn" onclick="openCert('assets/Certify/EncipherX.pdf','EncipherX Certificate')">Certificate</button>
           </div>
         </div>
 
         <div class="extra-card glass-card">
           <div class="extra-icon">
-            <img src="assets/Logos/Seasides_logo.webp" alt="Seasides" class="extra-logo-img">
+            <img src="assets/Logos/Seasides_logo.webp" loading="lazy" alt="Seasides" class="extra-logo-img">
           </div>
           <h3>Seasides InfoSec 2K26</h3>
           <p>Attended Seasides Information Security Conference in Goa. Workshops covered exploit writing, AI agent &amp;
             MCP server hacking, AD red teaming, and hardware security (Bluetooth, RF cloning, ATtiny85 badge).</p>
           <div class="extra-actions">
             <span class="extra-tag">Conference</span>
-            <a class="proof-thumb-btn" onclick="openProof('seasides')" href="javascript:void(0)">View Photos</a>
-            <a class="cert-btn" onclick="openCert('assets/Certify/Seasides_Goa.pdf','Seasides Certificate')" href="javascript:void(0)">Certificate</a>
+            <button type="button" class="proof-thumb-btn" onclick="openProof('seasides')">View Photos</button>
+            <button type="button" class="cert-btn" onclick="openCert('assets/Certify/Seasides_Goa.pdf','Seasides Certificate')">Certificate</button>
           </div>
         </div>
 
         <div class="extra-card glass-card">
           <div class="extra-icon">
-            <img src="assets/Logos/Web3_logo.png" alt="Web3" class="extra-logo-img">
+            <img src="assets/Logos/Web3_logo.png" loading="lazy" alt="Web3" class="extra-logo-img">
           </div>
           <h3>Web3 Hackathon 2025</h3>
           <p>Led digital outreach and conducted a foundational blockchain workshop for a sustainability-themed hackathon
             driving 100+ participant turnout. Coordinated event logistics and social media campaigns.</p>
           <div class="extra-actions">
             <span class="extra-tag">Hackathon</span>
-            <a class="proof-thumb-btn" onclick="openProof('web3')" href="javascript:void(0)">View Photos</a>
+            <button type="button" class="proof-thumb-btn" onclick="openProof('web3')">View Photos</button>
           </div>
         </div>
 
@@ -811,6 +826,7 @@
         </svg>
         Maharashtra, India
       </p>
+      <p>Last updated <time datetime="2026-10">Oct 2026</time></p>
     </div>
   </footer>
 
@@ -841,19 +857,18 @@
 
   <!-- CERT VIEWER POPUP -->
   <div id="cert-overlay" aria-hidden="true">
-    <div id="cert-modal">
+    <div id="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-title">
       <div id="cert-header">
         <span id="cert-title">Certificate</span>
+        <a id="cert-open" href="" target="_blank" rel="noopener">Open PDF</a>
         <button id="cert-close" aria-label="Close">&times;</button>
       </div>
       <iframe id="cert-frame" src="" title="Certificate"></iframe>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.min.js"></script>
-  <script src="config.js"></script>
-  <script src="main.js"></script>
+  <script src="config.js" defer></script>
+  <script src="main.js" defer></script>
 </body>
 
 </html>

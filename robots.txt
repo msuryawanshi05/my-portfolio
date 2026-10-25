@@ -14,7 +14,7 @@ Allow: /humans.txt
 Disallow: /.git/
 
 # XML Sitemap Location
-Sitemap: https://msuryawanshi.dev/sitemap.xml
+Sitemap: https://msuryawanshi05.antideploy.app/sitemap.xml
 
 # -----------------------------------------------------------------------------
 # CTF EASTER EGG & SECURITY NOTICE:
