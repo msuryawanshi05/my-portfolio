@@ -186,7 +186,7 @@
       <div class="about-grid">
         <div class="about-text glass-card">
           <p>B.Tech Computer Science (Cybersecurity) undergraduate at St. Vincent Pallotti College of Engineering and Technology, Nagpur. I build security tooling, analyze systems at the OS and protocol level, and break environments to understand how to defend them properly.</p>
-          <p>Awarded <strong>2nd Prize at the Engineers Day Project Showcase</strong> for engineering an air-gapped, USB-deployable forensic log analysis tool with cryptographic integrity checks.</p>
+          <p>Awarded <strong>Best Project Award</strong> across all engineering departments for <strong>ThreatFusion AI</strong> (autonomous SOC copilot with Neo4j temporal graph memory, copyright registered and published in JIES), alongside <strong>2nd Prize at the Engineers Day Project Showcase</strong> for offline air-gapped forensic log analysis.</p>
           <p>Operating across both offensive and defensive disciplines: auditing web applications against the OWASP Top 10, escalating privileges in active lab networks, architecting CTF challenges, and building distributed telemetry pipelines.</p>
           <p style="margin-top: 0.5rem; color: var(--cyan-l); font-style: italic;">"The best defenders think like attackers." That principle drives everything I build.</p>
         </div>
@@ -321,6 +321,54 @@
     <div class="container">
       <h2 class="section-title">Featured Projects</h2>
       <div class="projects-grid">
+        <!-- FLAGSHIP: ThreatFusion AI -->
+        <div class="project-card glass-card featured full-width">
+          <div class="project-featured-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--gold)"
+              style="display:inline;vertical-align:middle;margin-right:4px">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            Flagship Project &middot; Best Project Award (Final Year &middot; All Depts)
+          </div>
+          <div class="project-card-header">
+            <h3 class="project-name">ThreatFusion AI - Autonomous SOC Copilot &amp; Graph Memory</h3>
+            <div class="project-header-badges">
+              <span class="gh-badge gh-award">Best Project Award</span>
+              <span class="gh-badge gh-defensive">JIES Journal Published</span>
+              <span class="gh-badge gh-active" id="badge-threatfusion">Active Dev</span>
+            </div>
+          </div>
+          <p class="project-desc">Autonomous security investigation copilot orchestrating a 9-stage <strong>LangGraph</strong> pipeline (Triage &rarr; Investigation &rarr; Correlation &rarr; Guardrails) that normalizes raw telemetry (Wazuh, Sysmon, Zeek) into vendor-neutral <strong>OCSF</strong> and <strong>STIX 2.1</strong> standards. Correlates isolated events into multi-hop attack campaigns across a 24-hour window using a <strong>Neo4j Temporal Knowledge Graph</strong> with time-bounded, confidence-weighted edges. Enforces deterministic safety guardrails, cryptographic Human-in-the-Loop (HITL) action-hash binding, and a tamper-evident <strong>PostgreSQL</strong> audit trail backed by <strong>298 passing tests</strong> (strict MyPy across 75 files). <strong>Won Best Project Award across all engineering departments &middot; Government of India Copyright (Diary No. LD-43804/2026-CO) &middot; Published in JIES (DOI: 10.63686/jies.v2i4040).</strong></p>
+          <div class="project-tags">
+            <span class="tech-tag">Python &amp; FastAPI</span>
+            <span class="tech-tag">LangGraph</span>
+            <span class="tech-tag">Neo4j Temporal Graph</span>
+            <span class="tech-tag">OCSF &amp; STIX 2.1</span>
+            <span class="tech-tag">MITRE ATT&amp;CK</span>
+            <span class="tech-tag">Cytoscape.js</span>
+            <span class="tech-tag">Deterministic Guardrails</span>
+            <span class="tech-tag">PostgreSQL Audit Ledger</span>
+          </div>
+          <div class="project-links">
+            <a id="proj-threatfusion-gh" class="project-link" href="https://github.com/msuryawanshi05/ThreatFusion-AI" target="_blank" rel="noopener noreferrer">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              GitHub
+            </a>
+            <a id="proj-threatfusion-doi" class="project-link project-link-paper" href="https://doi.org/10.63686/jies.v2i4040" target="_blank" rel="noopener noreferrer">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              JIES Paper (DOI)
+            </a>
+            <button type="button" class="project-link project-link-award" onclick="openCert('assets/Certify/ThreatFusion_AI_Copyright.pdf','ThreatFusion AI Copyright Receipt')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M14.83 14.83a4 4 0 1 1 0-5.66"></path></svg>
+              Copyright Receipt
+            </button>
+            <button type="button" class="project-link" onclick="openCert('assets/Certify/ThreatFusion_AI_Paper.pdf','ThreatFusion AI Research Paper')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              Read Paper PDF
+            </button>
+          </div>
+        </div>
+
 
         <div class="project-card glass-card featured full-width">
           <div class="project-featured-badge">
@@ -659,6 +707,22 @@
             <span class="badge-sub">Red Hat Academy &middot; Mar 2026</span>
             <div class="badge-proof-links">
               <a class="cert-btn" href="https://www.credly.com/badges/1a32036b-df35-4726-b047-eaade6d2c31a/public_url" target="_blank" rel="noopener noreferrer">Credly Badge</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Best Project Award - ThreatFusion AI (All Engineering Depts) -->
+        <div class="badge-card glass-card gold">
+          <div class="badge-icon">
+            <span class="badge-mono gold-mono">BEST<br>PROJ</span>
+          </div>
+          <div class="badge-content">
+            <span class="badge-title">Best Project Award &middot; All Depts</span>
+            <span class="badge-sub">Final Year Capstone &middot; JIES Journal &middot; 2026</span>
+            <div class="badge-proof-links">
+              <button type="button" class="cert-btn" onclick="openCert('assets/Certify/ThreatFusion_AI_Copyright.pdf','ThreatFusion AI Copyright Receipt')">Copyright</button>
+              <button type="button" class="cert-btn" onclick="openCert('assets/Certify/ThreatFusion_AI_Paper.pdf','ThreatFusion AI Research Paper')">Paper PDF</button>
+              <a class="cert-btn" href="https://doi.org/10.63686/jies.v2i4040" target="_blank" rel="noopener noreferrer">JIES DOI</a>
             </div>
           </div>
         </div>

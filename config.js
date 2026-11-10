@@ -38,6 +38,18 @@ const PORTFOLIO_CONFIG = {
   // -- PROJECTS (add live/demo URL, leave '' to hide Demo button) -------------
   projects: [
     {
+      id:          'threatfusion',
+      name:        'ThreatFusion AI - Agentic SOC Copilot & Graph Memory',
+      github:      'https://github.com/msuryawanshi05/ThreatFusion-AI',
+      live:        '',
+      paper:       'https://doi.org/10.63686/jies.v2i4040',
+      show:        true,
+      featured:    true,
+      award:       'Best Project Award - All Depts',
+      copyright:   'Govt of India (LD-43804/2026-CO)',
+      description: 'Autonomous security investigation copilot and multi-agent pipeline using FastAPI, LangGraph, and Neo4j temporal graph memory. Normalizes telemetry (Wazuh, Sysmon, Zeek) into vendor-neutral OCSF and STIX 2.1 standards, correlates multi-hop attack campaigns across a 24-hour window, and enforces deterministic safety guardrails with human-in-the-loop approvals and hash-chained audit trails. Won Best Project Award across all engineering departments, copyright registered, and published in JIES (DOI: 10.63686/jies.v2i4040).',
+    },
+    {
       id:          'soc',
       name:        'Distributed SOC for Lab',
       github:      'https://github.com/msuryawanshi05/SOC-for-Lab-',
@@ -80,6 +92,8 @@ const PORTFOLIO_CONFIG = {
     { file: 'assets/Certify/CASA_Exam.pdf',                       label: 'CASA',          show: true },
     { file: 'assets/Certify/Cryptography and Network Security.pdf',label: 'NPTEL Crypto',  show: true },
     { file: 'assets/Certify/IIRS GEOSAT.pdf',                     label: 'ISRO IIRS',     show: true },
+    { file: 'assets/Certify/ThreatFusion_AI_Copyright.pdf',       label: 'ThreatFusion Copyright', show: true },
+    { file: 'assets/Certify/ThreatFusion_AI_Paper.pdf',           label: 'JIES Journal Paper',     show: true },
     { file: 'https://www.credly.com/badges/1a32036b-df35-4726-b047-eaade6d2c31a/public_url', label: 'OpenShift DO180', show: true },
     { file: 'assets/Certify/Seasides_Goa.pdf',                    label: 'Seasides 2K26', show: true },
     { file: 'assets/Certify/EncipherX.pdf',                       label: 'EncipherX',     show: true },
