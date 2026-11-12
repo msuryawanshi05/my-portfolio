@@ -8,6 +8,9 @@
   <meta name="description"
     content="Offensive mindset. Defensive build. Portfolio of Mukul Suryawanshi: Security Engineer, Tool Builder, and CTF Player. Specialized in SIEM, SOC tooling, air-gapped forensics, and vulnerability analysis." />
   <meta name="author" content="Mukul Suryawanshi" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="keywords" content="Mukul Suryawanshi, Security Engineer, SOC Analyst, ThreatFusion AI, StoryShip, Distributed SOC for Lab, Cybersecurity Portfolio, OCSF, LangGraph, Neo4j, SIEM, CTF, Project F1" />
+  <link rel="canonical" href="https://msuryawanshi05.antideploy.app/" />
   <meta name="theme-color" content="#0a0a0f" />
 
   <!-- OpenGraph / Facebook / LinkedIn / Discord -->
@@ -38,47 +41,44 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet" />
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet" />
+  </noscript>
   <link rel="stylesheet" href="style.css" />
-  <!-- xterm.js: real terminal emulator -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
+  <!-- xterm.js: real terminal emulator (deferred non-blocking stylesheet) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" media="print" onload="this.media='all'" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mukul Suryawanshi",
+    "url": "https://msuryawanshi05.antideploy.app/",
+    "jobTitle": "Security Engineer & Tool Builder",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    },
+    "sameAs": [
+      "https://github.com/msuryawanshi05",
+      "https://linkedin.com/in/msuryawanshi05",
+      "https://x.com/msuryawanshi_05",
+      "https://leetcode.com/u/msuryawanshi05/",
+      "https://tryhackme.com/p/msuryawanshi05"
+    ],
+    "knowsAbout": ["Cybersecurity", "SOC Operations", "SIEM", "Threat Intelligence", "OCSF", "FastAPI", "Digital Forensics"]
+  }
+  </script>
 </head>
 
 <body>
   <!-- SKIP TO CONTENT (A11Y) -->
   <a href="#main" class="skip-link">Skip to content</a>
-
-  <!-- TERMINAL BOOT ENTRANCE SCREEN -->
-  <div id="boot-screen" aria-hidden="true">
-    <div class="boot-container">
-      <div class="boot-header">
-        <span class="boot-prompt">mukul@portfolio:~$</span> system_init --verbose
-      </div>
-      <div class="boot-bar-wrapper">
-        <div class="boot-bar-fill"></div>
-      </div>
-      <div class="boot-status">
-        <span class="boot-pulse"></span>
-        <span id="boot-status-text">INITIALIZING CORE SECURITY MODULES...</span>
-      </div>
-    </div>
-  </div>
-  <script>
-    (function() {
-      var bs = document.getElementById('boot-screen');
-      if (!bs) return;
-      var dismissed = false;
-      function dismiss() {
-        if (dismissed) return;
-        dismissed = true;
-        bs.classList.add('fade-out');
-        setTimeout(function() { if (bs && bs.parentNode) bs.remove(); }, 400);
-      }
-      bs.addEventListener('click', dismiss);
-      window.addEventListener('keydown', dismiss, { once: true });
-      setTimeout(dismiss, 4000);
-    })();
-  </script>
 
 <!--
   +-----------------------------------------------------------------+
@@ -354,6 +354,10 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               GitHub
             </a>
+            <a id="proj-threatfusion-live" class="project-link project-link-live" href="demos/threatfusion/" target="_blank" rel="noopener noreferrer">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              Demo
+            </a>
             <a id="proj-threatfusion-doi" class="project-link project-link-paper" href="https://doi.org/10.63686/jies.v2i4040" target="_blank" rel="noopener noreferrer">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
               JIES Paper (DOI)
@@ -396,7 +400,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               GitHub
             </a>
-            <a id="proj-soc-live" class="project-link project-link-live" href="https://soc-lab.antideploy.app" target="_blank" rel="noopener noreferrer">
+            <a id="proj-soc-live" class="project-link project-link-live" href="demos/soc-lab/" target="_blank" rel="noopener noreferrer">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
               Demo
             </a>
@@ -448,7 +452,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               GitHub
             </a>
-            <a id="proj-ship-live" class="project-link project-link-live" href="https://storyship.antideploy.app" target="_blank" rel="noopener noreferrer">
+            <a id="proj-ship-live" class="project-link project-link-live" href="demos/storyship/" target="_blank" rel="noopener noreferrer">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
               Demo
             </a>

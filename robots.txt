@@ -5,6 +5,7 @@
 
 User-agent: *
 Allow: /
+Allow: /demos/
 Allow: /assets/
 Allow: /security.txt
 Allow: /.well-known/security.txt

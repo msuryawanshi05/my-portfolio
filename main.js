@@ -142,9 +142,13 @@ document.querySelectorAll('.badge-card, .project-card').forEach(card => {
 (function initParticles() {
   const canvas = document.getElementById('particle-canvas');
   if (!canvas) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    canvas.style.display = 'none';
+    return;
+  }
   const ctx = canvas.getContext('2d');
   let W, H, particles;
-  const COUNT = 65, MAX_DIST = 130, SPEED = 0.35;
+  const COUNT = window.innerWidth < 768 ? 22 : 44, MAX_DIST = 125, MAX_DIST_SQ = MAX_DIST * MAX_DIST, SPEED = 0.35;
 
   const resize = () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; };
 
@@ -180,6 +184,10 @@ document.querySelectorAll('.badge-card, .project-card').forEach(card => {
   });
 
   const draw = () => {
+    if (document.hidden) {
+      requestAnimationFrame(draw);
+      return;
+    }
     ctx.clearRect(0, 0, W, H);
 
     for (let i = particles.length - 1; i >= 0; i--) {
@@ -200,8 +208,9 @@ document.querySelectorAll('.badge-card, .project-card').forEach(card => {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < MAX_DIST) {
+        const distSq = dx * dx + dy * dy;
+        if (distSq < MAX_DIST_SQ) {
+          const dist = Math.sqrt(distSq);
           const fade = (particles[i].life ?? 1) * (particles[j].life ?? 1);
           const isSpawnedLink = particles[i].spawned || particles[j].spawned;
           ctx.strokeStyle = isSpawnedLink
@@ -884,66 +893,12 @@ whenNear(document.getElementById('skills-radar'), () =>
   loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js')
     .then(initSkillsRadar).catch(err => console.warn('initSkillsRadar error:', err)));
 
-// -- TERMINAL BOOT ENTRANCE & PAGE DATA REVEAL ----------------------------
+// -- HERO ENTRANCE & IMMEDIATE REVEAL -------------------------------------
 (function heroEntrance() {
   const bootScreen = document.getElementById('boot-screen');
-  if (!bootScreen) return;
-  const fillBar = document.querySelector('.boot-bar-fill');
-  const statusText = document.getElementById('boot-status-text');
-
-  let finished = false;
-  const finishBoot = () => {
-    if (finished) return;
-    finished = true;
-    bootScreen.classList.add('fade-out');
-
-    const heroName = document.querySelector('.hero-name');
-    if (heroName) heroName.classList.add('glitch-once');
-
-    const scanline = document.createElement('div');
-    scanline.className = 'scanline-sweep';
-    document.body.appendChild(scanline);
-    setTimeout(() => scanline.remove(), 2600);
-
-    setTimeout(() => {
-      if (bootScreen && bootScreen.parentNode) bootScreen.remove();
-    }, 600);
-  };
-
-  const runBootSequence = () => {
-    // Step 1: Start loading progress bar
-    if (fillBar) fillBar.style.width = '35%';
-
-    // Step 2: Initialize defensive modules
-    setTimeout(() => {
-      if (fillBar) fillBar.style.width = '68%';
-      if (statusText) statusText.textContent = 'INITIALIZING SIEM & SOC TELEMETRY...';
-    }, 1200);
-
-    // Step 3: Security integrity verification
-    setTimeout(() => {
-      if (fillBar) fillBar.style.width = '92%';
-      if (statusText) statusText.textContent = 'VERIFYING SECURITY INTEGRITY...';
-    }, 2400);
-
-    // Step 4: Access granted
-    setTimeout(() => {
-      if (fillBar) fillBar.style.width = '100%';
-      if (statusText) statusText.textContent = 'SYSTEM_READY · ACCESS GRANTED';
-    }, 3300);
-
-    // Step 5: Fade out boot screen
-    setTimeout(finishBoot, 4000);
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(runBootSequence, 50));
-  } else {
-    setTimeout(runBootSequence, 50);
-  }
-
-  // Safety fallback: dismiss boot screen after 5s maximum
-  setTimeout(finishBoot, 5000);
+  if (bootScreen && bootScreen.parentNode) bootScreen.remove();
+  const heroName = document.querySelector('.hero-name');
+  if (heroName) heroName.classList.add('glitch-once');
 })();
 
 // -- CURSOR GLOW --------------------------------------------------------------
